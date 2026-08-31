@@ -1,0 +1,45 @@
+# The six family calendars and how items route to them.
+#
+# IDs: fill in after creating the calendars on sean.michael.walker@gmail.com.
+# Ask Claude to "list calendars and populate calendars.yaml" and it will drop
+# the real IDs in here (they look like ...@group.calendar.google.com).
+
+calendars:
+  Sean:   { id: "TODO" }
+  Jen:    { id: "TODO" }
+  Hudson: { id: "TODO" }
+  Reston: { id: "TODO" }
+  Family: { id: "TODO" }
+  Other:  { id: "TODO" }
+
+# Where a resolved item lands, based on who it concerns.
+# Evaluated top to bottom; first match wins.
+routing:
+  # concerns exactly one child -> that child's calendar
+  - when: single_child
+    to: [child]
+
+  # concerns both/all children -> each child's own calendar,
+  # so every kid's view is complete (use [Family] instead if you'd rather
+  # keep shared items in one place)
+  - when: multi_child
+    to: [each_child]
+
+  # concerns a parent specifically (e.g. a conference for Jen)
+  - when: parent
+    to: [parent]
+
+  # whole-family or school-wide notice
+  - when: family
+    to: [Family]
+
+  # couldn't classify with confidence
+  - when: fallback
+    to: [Other]
+
+# Event styling
+event:
+  # Prefix each event title with the person so it's readable on a shared view.
+  title_prefix: true          # "[Hudson] Geography project due"
+  # Minutes before the event/due date to fire a reminder (all-day -> day before).
+  reminders_minutes: [1440]   # 1 day

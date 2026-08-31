@@ -1,0 +1,26 @@
+# How cautious the dashboard is, and where it reports.
+
+ingest:
+  # Gmail search the reader runs each cycle (connector reads sean@uniteideas.com).
+  query: "label:School newer_than:3d"
+  # Messages already folded into the ledger are skipped by ID regardless.
+
+autopost:
+  # An item posts to a calendar automatically only when ALL are true:
+  min_confidence: 0.80
+  require_matched_person: true   # we know which child/parent it's about
+  require_concrete_date: true    # a real due/event date, not "this month"
+  # Anything failing these is HELD and listed in the digest for approval.
+
+digest:
+  destination: slack        # slack | email
+  # For slack: channel name or ID. For email: recipient address.
+  target: "TODO"
+  # When to run (local time). Phase 1 can run read-only; Phase 2 posts.
+  schedule_cron: "0 6 * * *"     # 6:00 AM daily
+  timezone: "America/Los_Angeles"
+
+resolve:
+  # Two mentions are treated as the SAME item when they share a child/class,
+  # overlap in theme, and their dates fall within this many days of each other.
+  merge_date_window_days: 10

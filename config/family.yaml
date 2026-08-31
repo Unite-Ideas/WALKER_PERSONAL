@@ -1,0 +1,30 @@
+# Who's who, and how to tell which child an email is about.
+# The parser uses `classes` to turn "email from Mrs. Reyes" into
+# "this concerns Hudson".
+
+people:
+  sean:   { role: parent, calendar: Sean }
+  jen:    { role: parent, calendar: Jen }
+  hudson: { role: child,  calendar: Hudson, grade: "TODO", school: "TODO" }
+  reston: { role: child,  calendar: Reston, grade: "TODO", school: "TODO" }
+
+# One block per class/teacher. A message matches a child when its sender or
+# body matches any `senders`/`keywords` here. Fill these in from real school
+# emails — you can paste a couple of examples and Claude will populate them.
+classes:
+  - child: hudson
+    teacher: "TODO"            # e.g. "Mrs. Reyes"
+    class_name: "TODO"         # e.g. "3rd Grade - Room 12"
+    senders: []                # e.g. ["reyes@school.org", "@school.org"]
+    keywords: []               # e.g. ["Room 12", "Reyes", "3rd grade"]
+
+  - child: reston
+    teacher: "TODO"
+    class_name: "TODO"
+    senders: []
+    keywords: []
+
+# When a message doesn't match any class above:
+#   review -> hold it in the digest and ask
+#   other  -> route to the Other calendar
+unmatched: review
