@@ -39,17 +39,22 @@ INGEST  →  EXTRACT  →  RESOLVE/MERGE  →  ROUTE  →  PUBLISH  →  DIGEST
 
 ## Accounts (important)
 
-Three Google accounts are involved. Each Claude connector logs into one.
+Two Google accounts are involved. Each Claude connector logs into one.
 
 | Role | Account |
 |------|---------|
-| Ingest inbox (both parents forward school mail here) | `walkerfamilyspace@gmail.com` |
-| Claude **Gmail** connector reads | `sean@uniteideas.com` |
-| Claude **Calendar** connector writes | `sean.michael.walker@gmail.com` |
+| School mail arrives here; **Calendar** connector writes here | `sean.michael.walker@gmail.com` |
+| Claude **Gmail** connector reads here | `sean@uniteideas.com` |
 
-**Email bridge:** `walkerfamilyspace` auto-forwards school mail into
+**Email bridge:** `sean.michael.walker` auto-forwards school mail into
 `sean@uniteideas.com` under a **`School`** label that skips the inbox. The
-dashboard reads `label:School`.
+dashboard reads `label:School`. (If Jen receives school mail at a separate
+address later, she forwards it to `sean.michael.walker` and the same rule
+carries it through.)
+
+The `walkerfamilyspace@gmail.com` account isn't used — it was an early idea,
+now unnecessary since the school mail and the calendars already share one
+account.
 
 **Calendars:** the six calendars (`Sean`, `Jen`, `Hudson`, `Reston`, `Family`,
 `Other`) must be owned by — or shared with "Make changes to events" to —
@@ -88,5 +93,5 @@ state/
       Claude populate `config/calendars.yaml` with their IDs.
 - [ ] Fill the `classes:` section of `config/family.yaml` (teacher names,
       class names, sender addresses/domains) so mail routes to the right child.
-- [ ] Set up the `walkerfamilyspace → sean@uniteideas.com` forward + `School`
-      filter (both parents forward school mail to `walkerfamilyspace`).
+- [ ] Set up the `sean.michael.walker → sean@uniteideas.com` forward + `School`
+      filter (from the school's sender domain), skipping the inbox.
