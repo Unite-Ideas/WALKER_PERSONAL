@@ -5,24 +5,29 @@
 people:
   sean:   { role: parent, calendar: Sean }
   jen:    { role: parent, calendar: Jennifer }
-  hudson: { role: child,  calendar: Hudson, grade: "TODO", school: "TODO" }
-  reston: { role: child,  calendar: Reston, grade: "TODO", school: "TODO" }
+  hudson: { role: child,  calendar: Hudson, grade: 2, school: "New Covenant Academy" }
+  reston: { role: child,  calendar: Reston, grade: 4, school: "New Covenant Academy" }
 
 # One block per class/teacher. A message matches a child when its sender or
-# body matches any `senders`/`keywords` here. Fill these in from real school
-# emails — you can paste a couple of examples and Claude will populate them.
+# body matches any `senders`/`keywords` here.
+# NOTE: exact teacher/connector `senders:` addresses aren't captured yet — they
+# live in the original message headers. As real forwards flow through with
+# headers intact, fill these in. Keyword matching (grade + teacher name) already
+# routes reliably in the meantime.
 classes:
-  - child: hudson
-    teacher: "TODO"            # e.g. "Mrs. Reyes"
-    class_name: "TODO"         # e.g. "3rd Grade - Room 12"
-    senders: []                # e.g. ["reyes@school.org", "@school.org"]
-    keywords: []               # e.g. ["Room 12", "Reyes", "3rd grade"]
+  - child: hudson              # 2nd grade
+    teacher: "Mrs. Gillette"
+    class_name: "2nd Grade"
+    connectors: ["Jaclyn Boatright"]
+    senders: []                # e.g. ["gillette@ncawarriors.org"] — capture from headers
+    keywords: ["Mrs. Gillette", "Gillette", "2nd Grade", "Second Grade"]
 
-  - child: reston
-    teacher: "TODO"
-    class_name: "TODO"
-    senders: []
-    keywords: []
+  - child: reston              # 4th grade
+    teacher: "Mrs. Flatness"
+    class_name: "4th Grade"
+    connectors: ["Gail Rogers"]
+    senders: []                # capture from headers
+    keywords: ["Mrs. Flatness", "Flatness", "4th Grade", "Fourth Grade"]
 
 # When a message doesn't match any class above:
 #   review -> hold it in the digest and ask
