@@ -85,10 +85,11 @@ Calendar connector and set `status: posted`, storing each
 `status: held`.
 
 ### 6. Digest
-Send one summary to `policy.yaml > digest.destination`: **Posted** (what went on
-which calendar) and **Held — needs you** (what's waiting and why: low
-confidence, vague date, or unmatched child), each with its source quotes so it
-can be judged without opening the email.
+Send one summary to **every channel** in `policy.yaml > digest.channels` (email
+via the Gmail connector; Slack via a DM to the `target` user ID). Two sections:
+**Posted** (what went on which calendar) and **Held — needs you** (what's
+waiting and why: low confidence, vague date, or unmatched child), each with its
+source quotes so it can be judged without opening the email.
 
 ### 7. Persist
 Update `state/ledger.json`: add processed message IDs, upsert items with their

@@ -17,9 +17,13 @@ autopost:
   # Anything failing these is HELD and listed in the digest for approval.
 
 digest:
-  destination: slack        # slack | email
-  # For slack: channel name or ID. For email: recipient address.
-  target: "TODO"
+  # The digest goes to every channel listed here.
+  channels:
+    - type: email
+      target: "sean@uniteideas.com"   # sent via Gmail connector; change if you'd
+                                       # rather receive it at a personal address
+    - type: slack
+      target: "U0725BBE7BM"           # Sean's Slack DM (channel D071QTPNRB9)
   # When to run (local time). Phase 1 can run read-only; Phase 2 posts.
   schedule_cron: "0 6 * * *"     # 6:00 AM daily
   timezone: "America/Chicago"
