@@ -4,7 +4,7 @@
 
 people:
   sean:   { role: parent, calendar: Sean }
-  jen:    { role: parent, calendar: Jen }
+  jen:    { role: parent, calendar: Jennifer }
   hudson: { role: child,  calendar: Hudson, grade: "TODO", school: "TODO" }
   reston: { role: child,  calendar: Reston, grade: "TODO", school: "TODO" }
 

@@ -1,16 +1,15 @@
 # The six family calendars and how items route to them.
-#
-# IDs: fill in after creating the calendars on sean.michael.walker@gmail.com.
-# Ask Claude to "list calendars and populate calendars.yaml" and it will drop
-# the real IDs in here (they look like ...@group.calendar.google.com).
+# IDs populated 2026-09-10 from sean.michael.walker@gmail.com (all America/Chicago).
+# Note: an older UTC "Family" calendar also exists on the account; we use the
+# newer Central-time one below to keep the set consistent.
 
 calendars:
-  Sean:   { id: "TODO" }
-  Jen:    { id: "TODO" }
-  Hudson: { id: "TODO" }
-  Reston: { id: "TODO" }
-  Family: { id: "TODO" }
-  Other:  { id: "TODO" }
+  Sean:     { id: "9e08cf143cf171c51c5ed2aed70960bb7c490b9c90c00f174c7afb010f0e465f@group.calendar.google.com" }
+  Jennifer: { id: "11564b6c974d1b759e8e9520d5e4308b345f8f74702485fab379ede92b34efa2@group.calendar.google.com" }
+  Hudson:   { id: "821007b919fce2246d069e8ebba9017fefe1baef5f1726272251cd31aee75d96@group.calendar.google.com" }
+  Reston:   { id: "d9ac8d1ee7e61dea34ccdf52905ce578b08c9703f4555609d2b08874ff186852@group.calendar.google.com" }
+  Family:   { id: "7cfe9c5f3facffa995708caff35e2f27f78e858b51a09f70caa768a68ba3677b@group.calendar.google.com" }
+  Other:    { id: "bca47e91a93a827254f5b5623e6c2b63a6df10c08e2f08a7992ed4165ba3929d@group.calendar.google.com" }
 
 # Where a resolved item lands, based on who it concerns.
 # Evaluated top to bottom; first match wins.

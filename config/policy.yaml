@@ -18,7 +18,7 @@ digest:
   target: "TODO"
   # When to run (local time). Phase 1 can run read-only; Phase 2 posts.
   schedule_cron: "0 6 * * *"     # 6:00 AM daily
-  timezone: "America/Los_Angeles"
+  timezone: "America/Chicago"
 
 resolve:
   # Two mentions are treated as the SAME item when they share a child/class,
