@@ -18,16 +18,20 @@ classes:
   - child: hudson              # 2nd grade
     teacher: "Mrs. Gillette"
     class_name: "2nd Grade"
-    connectors: ["Jaclyn Boatright"]
-    senders: []                # e.g. ["gillette@ncawarriors.org"] — capture from headers
+    connectors: ["Jaclyn Boatright"]      # connectors may email from personal addresses
+    senders: ["@newcovenant.net"]         # school domain (also via nca-mo.client.factsmgt.com)
     keywords: ["Mrs. Gillette", "Gillette", "2nd Grade", "Second Grade"]
 
   - child: reston              # 4th grade
     teacher: "Mrs. Flatness"
     class_name: "4th Grade"
     connectors: ["Gail Rogers"]
-    senders: []                # capture from headers
+    senders: ["@newcovenant.net"]
     keywords: ["Mrs. Flatness", "Flatness", "4th Grade", "Fourth Grade"]
+
+# Shared specials that email all grades (matched to a child by grade in the body):
+#   - Music: Mrs. Christy Batson (cbatson@newcovenant.net), Jr K-4th
+
 
 # When a message doesn't match any class above:
 #   review -> hold it in the digest and ask
