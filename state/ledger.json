@@ -150,9 +150,9 @@
       "people": ["reston"],
       "class": "Music - Batson (Jr K-4th)",
       "title": "Honor Choir auditions (optional)",
-      "description": "Optional; recorded at recess starting ~wk of Sept 15; only selected students' parents emailed. HELD — no fixed date.",
+      "description": "Optional; recorded at recess. DISMISSED — Reston not interested (confirmed with Sean 2026-09-10). Do not resurface.",
       "due_date": null,
-      "status": "held",
+      "status": "dismissed",
       "confidence": 0.5,
       "source_emails": [{"message_id": "1a08c63ed0706b4c", "quote": "I will start recording students that want to audition starting next week"}],
       "calendar_event_ids": {}
