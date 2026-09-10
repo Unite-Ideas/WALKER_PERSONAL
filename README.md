@@ -46,11 +46,14 @@ Two Google accounts are involved. Each Claude connector logs into one.
 | School mail arrives here; **Calendar** connector writes here | `sean.michael.walker@gmail.com` |
 | Claude **Gmail** connector reads here | `sean@uniteideas.com` |
 
-**Email bridge:** `sean.michael.walker` auto-forwards school mail into
-`sean@uniteideas.com` under a **`School`** label that skips the inbox. The
-dashboard reads `label:School`. (If Jen receives school mail at a separate
-address later, she forwards it to `sean.michael.walker` and the same rule
-carries it through.)
+**Email bridge:** school mail is sent to the **`sean+school@uniteideas.com`**
+plus-address — either auto-forwarded from `sean.michael.walker` or forwarded by
+hand. It lands in `sean@uniteideas.com`, and the dashboard finds it by that
+address (`deliveredto:`/`to:`), so **no Gmail label is required**. A label is
+optional and, if wanted, must be created as a filter *inside* the
+`sean@uniteideas.com` account (filters only act on the account you're signed
+into). (If Jen receives school mail at a separate address later, she forwards it
+to the same plus-address.)
 
 The `walkerfamilyspace@gmail.com` account isn't used — it was an early idea,
 now unnecessary since the school mail and the calendars already share one
@@ -94,7 +97,7 @@ state/
 - [ ] Fill the `classes:` section of `config/family.yaml` (teacher names,
       class names, sender addresses/domains) so mail routes to the right child.
       *(Send a sample school email and Claude fills this in.)*
-- [ ] Set up the `sean.michael.walker → sean@uniteideas.com` forward + `School`
-      filter (from the school's sender domain), skipping the inbox.
-      *(You-side Gmail setting — required before Claude can read any school mail.)*
+- [x] Forward school mail to `sean+school@uniteideas.com` (manual works; auto-
+      forward from `sean.michael.walker` pending Google confirmation). No label
+      needed — dashboard keys on the plus-address. *(Confirmed reading 2026-09-10.)*
 - [ ] Choose the digest destination in `config/policy.yaml` (Slack or email).

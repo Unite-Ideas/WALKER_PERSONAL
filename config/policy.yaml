@@ -2,7 +2,11 @@
 
 ingest:
   # Gmail search the reader runs each cycle (connector reads sean@uniteideas.com).
-  query: "label:School newer_than:3d"
+  # School mail is addressed to the sean+school@uniteideas.com plus-address
+  # (auto-forward from sean.michael.walker, or a manual forward). No Gmail label
+  # needed — the plus-address is the signal. `deliveredto:` catches auto-forwards;
+  # `to:` catches manual forwards.
+  query: "(deliveredto:sean+school@uniteideas.com OR to:sean+school@uniteideas.com) newer_than:3d"
   # Messages already folded into the ledger are skipped by ID regardless.
 
 autopost:

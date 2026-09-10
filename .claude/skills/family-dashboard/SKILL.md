@@ -44,8 +44,9 @@ IDs, routing, and thresholds. Never hardcode names or IDs.
 
 ### 1. Ingest
 Run the Gmail search from `policy.yaml > ingest.query` (the connector reads
-`sean@uniteideas.com`; school mail arrives there under the `School` label via
-a forward from `sean.michael.walker@gmail.com`). Fetch **full threads** — the whole point is
+`sean@uniteideas.com`; school mail arrives addressed to the
+`sean+school@uniteideas.com` plus-address via forward from
+`sean.michael.walker@gmail.com`). Fetch **full threads** — the whole point is
 that meaning is spread across the message. Skip any `message_id` already in
 `ledger.processed_message_ids`.
 
