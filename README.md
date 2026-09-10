@@ -89,9 +89,12 @@ state/
 
 ## Status: Phase 0 — needs from Sean
 
-- [ ] Create the six calendars on `sean.michael.walker@gmail.com`, then have
-      Claude populate `config/calendars.yaml` with their IDs.
+- [x] Create the six calendars on `sean.michael.walker@gmail.com` and populate
+      `config/calendars.yaml` with their IDs. *(Done 2026-09-10, Central time.)*
 - [ ] Fill the `classes:` section of `config/family.yaml` (teacher names,
       class names, sender addresses/domains) so mail routes to the right child.
+      *(Send a sample school email and Claude fills this in.)*
 - [ ] Set up the `sean.michael.walker → sean@uniteideas.com` forward + `School`
       filter (from the school's sender domain), skipping the inbox.
+      *(You-side Gmail setting — required before Claude can read any school mail.)*
+- [ ] Choose the digest destination in `config/policy.yaml` (Slack or email).
