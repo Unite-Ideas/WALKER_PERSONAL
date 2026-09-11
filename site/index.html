@@ -1,0 +1,553 @@
+<title>Walker Family Board</title>
+<style>
+  :root{
+    --bg:#F4F5F2; --surface:#FFFFFF; --surface-2:#FBFBF9;
+    --ink:#211F1B; --muted:#6B6F71; --faint:#9A9E9D;
+    --border:#E6E7E2; --border-strong:#D6D8D1;
+    --brand:#0E7C7B;
+    --hudson:#0E9E9C; --reston:#DC8A21; --sean:#3B6FD4;
+    --jen:#9C4FB0; --family:#3E9E5B; --other:#7C858C;
+    --warn:#C6501F; --warn-bg:#FBEDE5;
+    --shadow:0 1px 2px rgba(20,20,15,.04),0 8px 24px rgba(20,20,15,.05);
+    --radius:18px;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --bg:#15171A; --surface:#1E2125; --surface-2:#23262B;
+    --ink:#ECEBE6; --muted:#9CA1A7; --faint:#6C7278;
+    --border:#2C3036; --border-strong:#3A3F46;
+    --brand:#2BC4C0;
+    --hudson:#33C4C1; --reston:#F0A63E; --sean:#6E9BF0;
+    --jen:#C579D8; --family:#5BC47C; --other:#98A2AA;
+    --warn:#F0864F; --warn-bg:#2E2019;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }}
+  :root[data-theme="dark"]{
+    --bg:#15171A; --surface:#1E2125; --surface-2:#23262B;
+    --ink:#ECEBE6; --muted:#9CA1A7; --faint:#6C7278;
+    --border:#2C3036; --border-strong:#3A3F46;
+    --brand:#2BC4C0;
+    --hudson:#33C4C1; --reston:#F0A63E; --sean:#6E9BF0;
+    --jen:#C579D8; --family:#5BC47C; --other:#98A2AA;
+    --warn:#F0864F; --warn-bg:#2E2019;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  html{font-size:16px}                 /* base for rem — scaled up on 4K below */
+  body{background:var(--bg);color:var(--ink);font-family:"Figtree",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;font-size:1rem}
+  .wrap{max-width:min(96vw,3600px);margin:0 auto;padding-block:clamp(20px,2.2vw,40px);padding-left:clamp(16px,2.6vw,56px);padding-right:clamp(16px,2.6vw,56px)}
+  h1,h2,h3{font-family:"Bricolage Grotesque","Figtree",system-ui,sans-serif;margin:0;text-wrap:balance;letter-spacing:-.01em}
+
+  .top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 24px;padding-bottom:18px;border-bottom:2px solid var(--border-strong)}
+  .brand{display:flex;flex-direction:column;gap:4px}
+  .eyebrow{font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand)}
+  .brand h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:1}
+  .today-badge{text-align:right}
+  .today-badge .date{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:clamp(1.3rem,3vw,2rem);line-height:1.05}
+  .today-badge .clock{font-variant-numeric:tabular-nums;color:var(--muted);font-size:clamp(1rem,2vw,1.25rem);font-weight:600}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:flex-end;margin-top:10px;flex-wrap:wrap}
+  .btn{font:inherit;font-weight:700;font-size:.95rem;color:#fff;background:var(--brand);border:0;border-radius:11px;padding:9px 15px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:var(--shadow)}
+  .btn:hover{filter:brightness(1.06)}
+  .btn:disabled{opacity:.6;cursor:default}
+  .btn:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+  .btn .sp{width:14px;height:14px;border:2px solid rgba(255,255,255,.45);border-top-color:#fff;border-radius:99px;display:none}
+  .btn.loading .sp{display:inline-block;animation:spin .7s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){.btn.loading .sp{animation:none}}
+  .live{font-size:.85rem;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+  .live.ok{color:var(--family)}
+  .live.err{color:var(--warn)}
+
+  /* tabs */
+  .tabsrow{display:flex;justify-content:center;margin-top:22px}
+  .tabs{display:inline-flex;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:3px;gap:2px}
+  .tab{font:inherit;font-weight:700;font-size:.92rem;border:0;background:transparent;color:var(--muted);padding:8px 18px;border-radius:9px;cursor:pointer}
+  .tab.active{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+  .tab:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+  .grid{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(16px,2vw,26px);margin-top:20px;align-items:start}
+  .col{display:flex;flex-direction:column;gap:clamp(16px,2vw,26px)}
+  @media (max-width:820px){.grid{grid-template-columns:1fr}}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .card-h{display:flex;align-items:center;gap:10px;padding:16px 20px 0}
+  .card-h h2{font-size:1.05rem;font-weight:800;letter-spacing:.02em;text-transform:uppercase}
+  .card-h .count{margin-left:auto;font-size:.85rem;font-weight:700;color:var(--faint);font-variant-numeric:tabular-nums}
+  .card-b{padding:14px 20px 20px;display:flex;flex-direction:column;gap:10px}
+
+  .today-card .card-h h2{color:var(--brand)}
+  .row{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-radius:14px;background:var(--surface-2);border:1px solid var(--border)}
+  .row .stripe{width:5px;align-self:stretch;border-radius:99px;background:var(--p);flex:none}
+  .row .body{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+  .row .title{font-weight:700;font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.2}
+  .row .meta{color:var(--muted);font-size:.95rem}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:800;letter-spacing:.02em;padding:4px 10px;border-radius:99px;color:#fff;background:var(--p);white-space:nowrap;align-self:flex-start}
+  .tag{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border:1px solid var(--border-strong);border-radius:6px;padding:2px 7px}
+
+  .learn .card-h h2{color:var(--hudson)}
+  .words{display:flex;flex-wrap:wrap;gap:8px}
+  .word{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:clamp(1rem,1.5vw,1.15rem);padding:7px 13px;border-radius:10px;background:var(--surface-2);border:1px solid var(--border)}
+  .verse{margin-top:4px;padding:16px 18px;border-radius:14px;background:linear-gradient(180deg,var(--surface-2),var(--surface));border:1px solid var(--border)}
+  .verse .ref{font-size:.8rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--family)}
+  .verse .txt{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(1.1rem,1.8vw,1.35rem);line-height:1.3;margin-top:6px}
+  .sub{font-size:.85rem;color:var(--muted);font-weight:600}
+
+  .mini{display:flex;gap:12px;align-items:baseline;padding:11px 0;border-bottom:1px dashed var(--border)}
+  .mini:last-child{border-bottom:0}
+  .mini .when{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;color:var(--ink);font-size:1rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .mini .what{flex:1}
+  .mini .what .t{font-weight:700}
+  .mini .what .n{color:var(--muted);font-size:.88rem}
+  .dot{width:9px;height:9px;border-radius:99px;background:var(--p);flex:none;transform:translateY(6px)}
+
+  .attn .card-h h2{color:var(--warn)}
+  .attn .row{background:var(--warn-bg);border-color:transparent}
+  .attn .why{color:var(--warn);font-weight:600;font-size:.92rem}
+  .empty{padding:18px 4px;color:var(--muted);font-weight:600}
+
+  /* month calendar */
+  .cal-head{display:flex;align-items:center;gap:12px;padding:4px 4px 16px}
+  .cal-head h2{font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:800}
+  .cal-head .spacer{flex:1}
+  .navbtn{font:inherit;font-weight:800;font-size:1.05rem;line-height:1;color:var(--ink);background:var(--surface-2);border:1px solid var(--border);border-radius:10px;width:38px;height:38px;cursor:pointer;display:grid;place-items:center}
+  .navbtn:hover{border-color:var(--border-strong)}
+  .navbtn.wide{width:auto;padding:0 14px;font-size:.9rem}
+  .navbtn:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+  .dow{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px}
+  .dow span{font-size:.72rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:center}
+  .weeks{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+  .cell{min-height:104px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:7px 7px 9px;display:flex;flex-direction:column;gap:4px;overflow:hidden}
+  .cell.out{opacity:.4}
+  .cell .dnum{font-weight:800;font-size:.85rem;font-variant-numeric:tabular-nums;color:var(--muted);align-self:flex-start;line-height:1}
+  .cell.today{border-color:var(--brand);box-shadow:inset 0 0 0 1px var(--brand)}
+  .cell.today .dnum{background:var(--brand);color:#fff;border-radius:99px;min-width:22px;height:22px;padding:0 5px;display:grid;place-items:center}
+  .pill{font-size:.72rem;font-weight:700;color:#fff;background:var(--p);border-radius:6px;padding:2px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35}
+  .pill .pt{opacity:.85;font-weight:800}
+  .more{font-size:.7rem;font-weight:800;color:var(--muted);padding-left:2px}
+  @media (max-width:640px){
+    .cell{min-height:62px;padding:5px 4px 6px;gap:2px;border-radius:9px}
+    .cell .dnum{font-size:.72rem}
+    .pill{font-size:0;padding:0;height:6px;border-radius:99px}
+    .pill .pt{display:none}
+    .more{font-size:.6rem}
+  }
+
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;padding-top:18px;border-top:1px solid var(--border)}
+  .who{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.9rem}
+  .who .sw{width:14px;height:14px;border-radius:5px;background:var(--p)}
+  .who small{color:var(--muted);font-weight:600}
+  .foot{margin-top:16px;color:var(--faint);font-size:.82rem;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+  .foot b{color:var(--muted);font-weight:700}
+
+  /* ---- fill a big landscape screen (TV / monitor) ---- */
+  @media (min-width:1000px) and (min-height:560px){
+    .wrap{min-height:100dvh;display:flex;flex-direction:column}
+    .tabsrow{flex:none}
+    #board-view:not([hidden]){flex:1;display:flex;flex-direction:column;justify-content:center}
+    #month-view:not([hidden]){flex:1;display:flex;flex-direction:column;min-height:0}
+    #month-view .card{flex:1;display:flex;flex-direction:column;min-height:0;margin-top:16px}
+    #month-view .card-b{flex:1;display:flex;flex-direction:column;min-height:0;gap:0}
+    #month-view .weeks{flex:1;grid-template-rows:repeat(6,1fr);min-height:0;gap:8px}
+    #month-view .cell{min-height:0}
+    #month-view .cell .dnum{font-size:1rem}
+    #month-view .pill{font-size:.82rem;padding:3px 8px}
+    #month-view .dow span{font-size:.78rem}
+    .legend,.foot{flex:none}
+  }
+
+  /* ---- scale everything up on big / 4K panels (type is rem-based) ---- */
+  @media (min-width:1920px){ html{font-size:18px} }
+  @media (min-width:2560px){ html{font-size:22px} }
+  @media (min-width:3400px){ html{font-size:27px} }
+  /* on very wide panels give the month cells a little more breathing room */
+  @media (min-width:2560px){
+    #month-view .weeks{gap:12px}
+    #month-view .cell{padding:11px 12px 13px;border-radius:16px}
+  }
+
+  /* ---- clickable affordance + detail modal ---- */
+  .clik{cursor:pointer;transition:transform .12s ease,border-color .12s ease}
+  .row.clik:hover,.mini.clik:hover{border-color:var(--border-strong)}
+  .row.clik:hover{transform:translateY(-1px)}
+  .pill.clik:hover{filter:brightness(1.08)}
+  .clik:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){.clik{transition:none}.row.clik:hover{transform:none}}
+
+  .modal{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:20px}
+  .modal .backdrop{position:absolute;inset:0;background:rgba(14,16,19,.5);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);opacity:0;transition:opacity .2s ease}
+  .modal.open .backdrop{opacity:1}
+  .sheet{position:relative;z-index:1;background:var(--surface);border:1px solid var(--border);border-radius:22px;box-shadow:0 30px 90px rgba(0,0,0,.4);width:min(640px,100%);max-height:88dvh;overflow:auto;padding:30px 32px;transform:scale(.9);opacity:0;transition:transform .22s cubic-bezier(.2,.85,.25,1),opacity .2s ease}
+  .modal.open .sheet{transform:scale(1);opacity:1}
+  @media (prefers-reduced-motion:reduce){.modal .backdrop,.sheet{transition:opacity .12s ease}.sheet{transform:none}}
+  .m-close{position:absolute;top:15px;right:15px;width:36px;height:36px;border-radius:99px;border:1px solid var(--border);background:var(--surface-2);color:var(--muted);font-size:1rem;font-weight:700;cursor:pointer;line-height:1}
+  .m-close:hover{color:var(--ink);border-color:var(--border-strong)}
+  .m-close:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+  .m-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .m-class{color:var(--muted);font-weight:600;font-size:.92rem}
+  .m-title{font-size:clamp(1.5rem,3vw,2.05rem);font-weight:800;line-height:1.12;padding-right:34px}
+  .m-when{color:var(--muted);font-weight:600;margin-top:7px;font-size:1.02rem}
+  .m-body{margin-top:20px;display:flex;flex-direction:column;gap:17px}
+  .m-lead{font-size:1.08rem;line-height:1.5;margin:0}
+  .m-sec h4{font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 9px}
+  .m-sec ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:7px;line-height:1.45}
+  .m-sec p{margin:0;line-height:1.5}
+  .m-callout{background:var(--surface-2);border:1px solid var(--border);border-left:4px solid var(--brand);border-radius:12px;padding:15px 17px;display:flex;flex-direction:column;gap:5px;line-height:1.45}
+  .m-callout b{color:var(--brand);font-size:.95rem}
+  .m-note{background:var(--warn-bg);color:var(--warn);border-radius:12px;padding:13px 15px;font-weight:600;line-height:1.4}
+  .m-src{color:var(--faint);font-size:.85rem;font-style:italic}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="eyebrow">New Covenant Academy · Family Board</span>
+      <h1>The Walkers</h1>
+    </div>
+    <div class="today-badge">
+      <div class="date" id="today">—</div>
+      <div class="clock" id="clock">—</div>
+      <div class="ctl">
+        <button id="update" class="btn" hidden><span class="sp"></span><span class="lb">↻ Update</span></button>
+        <span class="live" id="live"></span>
+      </div>
+    </div>
+  </header>
+
+  <div class="tabsrow">
+    <div class="tabs" role="tablist">
+      <button class="tab active" id="tab-board" role="tab">Board</button>
+      <button class="tab" id="tab-month" role="tab">Month</button>
+    </div>
+  </div>
+
+  <!-- BOARD VIEW -->
+  <div id="board-view">
+    <div class="grid">
+      <div class="col">
+        <section class="card today-card">
+          <div class="card-h"><h2>Today</h2><span class="count" id="today-count"></span></div>
+          <div class="card-b" id="today-list"></div>
+        </section>
+        <section class="card learn">
+          <div class="card-h"><h2>This Week · Learning</h2><span class="count" id="learn-who"></span></div>
+          <div class="card-b" id="learn"></div>
+        </section>
+      </div>
+      <div class="col">
+        <section class="card">
+          <div class="card-h"><h2>Coming Up</h2></div>
+          <div class="card-b" id="upcoming"></div>
+        </section>
+        <section class="card attn">
+          <div class="card-h"><h2>Needs You</h2><span class="count" id="attn-count"></span></div>
+          <div class="card-b" id="attention"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- MONTH VIEW -->
+  <div id="month-view" hidden>
+    <section class="card" style="margin-top:20px">
+      <div class="card-b">
+        <div class="cal-head">
+          <h2 id="cal-title">—</h2>
+          <span class="spacer"></span>
+          <button class="navbtn wide" id="cal-today">Today</button>
+          <button class="navbtn" id="cal-prev" aria-label="Previous month">‹</button>
+          <button class="navbtn" id="cal-next" aria-label="Next month">›</button>
+        </div>
+        <div class="dow"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+        <div class="weeks" id="weeks"></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="legend" id="legend"></div>
+  <div class="foot">
+    <span><b>Updated</b> from the 6 AM school-email run · tap <b>Update</b> for live calendars</span>
+    <span>·</span><span>Gmail → Google Calendar</span>
+  </div>
+</div>
+
+<div class="modal" id="modal" hidden>
+  <div class="backdrop"></div>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+</div>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@500;600;700;800&display=swap">
+
+<script>
+const people={
+  hudson:{name:"Hudson",sub:"2nd · Mrs. Gillette",c:"var(--hudson)"},
+  reston:{name:"Reston",sub:"4th · Mrs. Flatness",c:"var(--reston)"},
+  sean:{name:"Sean",sub:"",c:"var(--sean)"},
+  jen:{name:"Jen",sub:"",c:"var(--jen)"},
+  family:{name:"Family",sub:"",c:"var(--family)"},
+  other:{name:"Other",sub:"",c:"var(--other)"},
+};
+const CAL=[
+  {id:"9e08cf143cf171c51c5ed2aed70960bb7c490b9c90c00f174c7afb010f0e465f@group.calendar.google.com",p:"sean"},
+  {id:"11564b6c974d1b759e8e9520d5e4308b345f8f74702485fab379ede92b34efa2@group.calendar.google.com",p:"jen"},
+  {id:"821007b919fce2246d069e8ebba9017fefe1baef5f1726272251cd31aee75d96@group.calendar.google.com",p:"hudson"},
+  {id:"d9ac8d1ee7e61dea34ccdf52905ce578b08c9703f4555609d2b08874ff186852@group.calendar.google.com",p:"reston"},
+  {id:"7cfe9c5f3facffa995708caff35e2f27f78e858b51a09f70caa768a68ba3677b@group.calendar.google.com",p:"family"},
+  {id:"bca47e91a93a827254f5b5623e6c2b63a6df10c08e2f08a7992ed4165ba3929d@group.calendar.google.com",p:"other"},
+];
+
+// Known events from the last morning run (shown at rest; live Update replaces these).
+const D=(y,m,d,hh,mm)=>hh!=null?new Date(y,m-1,d,hh,mm):new Date(y,m-1,d);
+const bakedItems=[
+  {p:"hudson",title:"Spelling test — Ch. 3",meta:"Double consonants + dictation",d:D(2026,9,11),timed:false},
+  {p:"hudson",title:"Memory verse test",meta:"Exodus 4:12",d:D(2026,9,11),timed:false},
+  {p:"hudson",title:"Vocabulary test",meta:"8 words · multiple choice",d:D(2026,9,11),timed:false},
+  {p:"sean",title:"Parents Coffee Meet-Up",meta:"8:00–9:00 AM · Roots Coffee Bar",d:D(2026,9,11,8,0),timed:true,tag:"Parents"},
+  {p:"hudson",title:"Field trip — Fantastic Caverns",meta:"Lunch at Ritter Springs",d:D(2026,10,29),timed:false},
+];
+const learning={p:"hudson",chapter:"Ch. 3 · Double Consonants",
+  words:["hill","grass","cliff","bless","pizza","stuff","hammer","kitten","hidden","ribbon","two","Monday"],
+  verse:{ref:"Exodus 4:12",text:"Now go; I will help you speak and will teach you what to say."}};
+const attention=[
+  {p:"reston",t:"Book report",why:"Due date is inside the packet — need the date"},
+  {p:"hudson",t:"Social Studies test",why:"Confirm the date (first one, “Tuesday”)"},
+];
+
+const el=(h)=>{const t=document.createElement("template");t.innerHTML=h.trim();return t.content.firstElementChild;};
+const esc=(s)=>(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const chip=(p,label)=>`<span class="chip" style="--p:${people[p].c}">${esc(label||people[p].name)}</span>`;
+
+/* ---- context knowledge base, mined from the school emails ---- */
+const INFO={
+  spelling:{what:"Hudson writes the week's spelling words from memory. This week is Chapter 3 — words with double consonants.",
+    words:["hill","grass","cliff","bless","pizza","stuff","hammer","kitten","hidden","ribbon","two","Monday"],
+    format:["He writes each spelling word — spelling counts.",
+      "Then a dictation sentence: Mrs. Gillette reads a short sentence (only words he's already been tested on + K–2 sight words). He must spell every word right and add a capital letter and punctuation."],
+    vs:"Spelling test = can he WRITE the words correctly. The Vocabulary test is different — that one is multiple-choice about what reading words MEAN, no spelling required.",
+    help:"Practice writing the 12 words, then dictate a simple sentence for him to write with a capital and a period.",
+    source:"2nd Grade Weekly News (Mrs. Gillette), Sept 7–11"},
+  vocabulary:{what:"A reading-vocabulary test tied to the Wonders reading unit. It's about word MEANINGS, not spelling.",
+    format:["8 words, multiple-choice.",
+      "A vocabulary paper comes home each Monday or Tuesday with the 8 words and their definitions — that's the study sheet."],
+    vs:"Different from the Spelling test: here he matches words to their meanings (multiple-choice) and does NOT have to spell them. Spelling = writing the words; Vocabulary = knowing the definitions.",
+    help:"Go over the vocab paper that came home Mon/Tue — the 8 words and what each one means.",
+    source:"2nd Grade Weekly News (Mrs. Gillette)"},
+  verse:{ref:"Exodus 4:12",text:"Now go; I will help you speak and will teach you what to say.",
+    format:["Fill-in-the-blank — he writes the missing words of the verse.",
+      "Spelling does NOT count on this one. Memory verse tests are always on Fridays."],
+    help:"Recite Exodus 4:12 together a few times; focus on the words, not the spelling.",
+    source:"2nd Grade Weekly News (Mrs. Gillette)"},
+  socialStudies:{what:"Hudson's first Social Studies test.",
+    format:["Focus: the 5 people and the vocabulary words.",
+      "A study guide came home — review it, sign it, and return it for a grade (signed study guides are worth 10 points)."],
+    help:"Work through the study guide with him, sign it, send it back the next day.",
+    note:"Date still needs confirming — the newsletter just said “Tuesday.”",
+    source:"2nd Grade Weekly News (Mrs. Gillette)"},
+  fieldTrip:{what:"2nd grade's first field trip: Fantastic Caverns, with lunch at Ritter Springs Park.",
+    format:["Only 12 parents per class can attend the caverns (insurance limit) — a sign-up will come later.",
+      "All parents are welcome to join for LUNCH, and for the last field trip (George Washington Carver)."],
+    help:"Watch for the parent sign-up if you'd like one of the 12 caverns spots.",
+    source:"2nd Grade Weekly News (Mrs. Gillette)"},
+  coffee:{what:"Informal parent meet-up for Reston's grade — a chance to connect with other 4th-grade parents.",
+    format:["Right after car-line drop-off · 8–9 AM · Roots Coffee Bar.",
+      "Not required. Parents from all three 4th-grade classes are invited."],
+    source:"PIP Opportunity & Coffee Meet Up (Gail Rogers, Class Connector)"},
+  bookReport:{what:"Reston's book-report project (4th grade). A packet came home with the details.",
+    format:["The packet has the due date, the project instructions, and a form to fill out for presenting.",
+      "There's also separate info on the Book Club / Bible Book Report."],
+    note:"We still need the DUE DATE — it lives inside the packet, not the email. Grab it and I'll put it on the calendar.",
+    help:"Find the packet and check the date the report is due.",
+    source:"4th Grade Newsletter (Mrs. Flatness) + Book Report Information"},
+};
+function matchInfo(t){t=(t||"").toLowerCase();
+  if(t.includes("spelling"))return INFO.spelling;
+  if(t.includes("vocab"))return INFO.vocabulary;
+  if(t.includes("verse"))return INFO.verse;
+  if(t.includes("social studies"))return INFO.socialStudies;
+  if(t.includes("field trip")||t.includes("cavern"))return INFO.fieldTrip;
+  if(t.includes("coffee"))return INFO.coffee;
+  if(t.includes("book report"))return INFO.bookReport;
+  return null;
+}
+
+/* ---- detail modal (zoom-in, blurred backdrop) ---- */
+const modal=document.getElementById("modal"), sheet=document.getElementById("sheet");
+function clickable(node,item){
+  node.classList.add("clik");
+  node.setAttribute("role","button"); node.setAttribute("tabindex","0");
+  node.addEventListener("click",()=>openModal(item));
+  node.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openModal(item);}});
+}
+function openModal(item){
+  const info=matchInfo(item.title);
+  const p=people[item.p]||{name:"",sub:"",c:"var(--other)"};
+  const dateStr=item.d?item.d.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"}):"";
+  const meta=item.meta||[item.timed?shortTime(item.d):"",item.loc].filter(Boolean).join(" · ");
+  let body="";
+  if(info){
+    if(info.what) body+=`<p class="m-lead">${esc(info.what)}</p>`;
+    if(info.words) body+=`<div class="m-sec"><h4>The words</h4><div class="words">${info.words.map(w=>`<span class="word">${esc(w)}</span>`).join("")}</div></div>`;
+    if(info.ref) body+=`<div class="verse"><div class="ref">Memory Verse · ${esc(info.ref)}</div><div class="txt">“${esc(info.text)}”</div></div>`;
+    if(info.format) body+=`<div class="m-sec"><h4>How it works</h4><ul>${info.format.map(f=>`<li>${esc(f)}</li>`).join("")}</ul></div>`;
+    if(info.vs) body+=`<div class="m-callout"><b>Spelling vs. Vocabulary</b><span>${esc(info.vs)}</span></div>`;
+    if(info.help) body+=`<div class="m-sec"><h4>How to help at home</h4><p>${esc(info.help)}</p></div>`;
+    if(info.note) body+=`<div class="m-note">${esc(info.note)}</div>`;
+    if(info.source) body+=`<div class="m-src">From: ${esc(info.source)}</div>`;
+  } else if(item.desc){
+    body+=`<p class="m-lead" style="white-space:pre-line">${esc(item.desc)}</p>`;
+  } else {
+    body+=`<p class="m-lead">${esc(meta||"No extra details on this one yet.")}</p>`;
+  }
+  sheet.innerHTML=`<button class="m-close" aria-label="Close">✕</button>
+    <div class="m-head"><span class="chip" style="--p:${p.c}">${esc(p.name)}</span>${p.sub?`<span class="m-class">${esc(p.sub)}</span>`:""}</div>
+    <h2 class="m-title">${esc(item.title)}</h2>
+    <div class="m-when">${esc([dateStr,meta].filter(Boolean).join(" · "))}</div>
+    <div class="m-body">${body}</div>`;
+  sheet.querySelector(".m-close").addEventListener("click",closeModal);
+  sheet.scrollTop=0;
+  modal.hidden=false; requestAnimationFrame(()=>modal.classList.add("open"));
+  sheet.querySelector(".m-close").focus();
+}
+function closeModal(){
+  modal.classList.remove("open");
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches) modal.hidden=true;
+  else setTimeout(()=>{modal.hidden=true;},210);
+}
+modal&&modal.querySelector(".backdrop").addEventListener("click",closeModal);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&modal&&!modal.hidden)closeModal();});
+const sameDay=(a,b)=>a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();
+const shortTime=(d)=>d.toLocaleTimeString(undefined,{hour:"numeric",minute:d.getMinutes()?"2-digit":undefined}).replace(" ","").toLowerCase();
+
+let ITEMS=bakedItems.slice();     // current data source (baked, or live after Update)
+let viewMonth=new Date(new Date().getFullYear(),new Date().getMonth(),1);
+
+/* ---- static cards (don't change with live calendar) ---- */
+(function(){
+  document.getElementById("learn-who").textContent=people[learning.p].name;
+  document.getElementById("learn").appendChild(el(`<div>
+    <div class="sub" style="margin-bottom:8px">Spelling · ${esc(learning.chapter)} · test Friday</div>
+    <div class="words">${learning.words.map(w=>`<span class="word">${esc(w)}</span>`).join("")}</div>
+    <div class="verse"><div class="ref">Memory Verse · ${esc(learning.verse.ref)}</div>
+      <div class="txt">“${esc(learning.verse.text)}”</div></div></div>`));
+  const at=document.getElementById("attention");
+  attention.forEach(a=>{
+    const r=el(`<div class="row" style="--p:${people[a.p].c}">
+      <div class="stripe"></div><div class="body"><div class="title">${esc(a.t)}</div>
+      <div class="why">${esc(a.why)}</div></div>${chip(a.p)}</div>`);
+    clickable(r,{p:a.p,title:a.t,meta:a.why}); at.appendChild(r);
+  });
+  document.getElementById("attn-count").textContent=attention.length;
+  const lg=document.getElementById("legend");
+  Object.values(people).forEach(v=>lg.appendChild(el(
+    `<span class="who" style="--p:${v.c}"><span class="sw"></span>${esc(v.name)}${v.sub?` <small>${esc(v.sub)}</small>`:""}</span>`)));
+})();
+
+/* ---- board summary (Today + Coming Up) ---- */
+function renderSummary(items){
+  const now=new Date();
+  const today=items.filter(i=>sameDay(i.d,now));
+  const up=items.filter(i=>!sameDay(i.d,now)&&i.d>now).sort((a,b)=>a.d-b.d).slice(0,7);
+
+  const tl=document.getElementById("today-list");tl.innerHTML="";
+  if(!today.length) tl.appendChild(el(`<div class="empty">Nothing on the calendar today 🎉</div>`));
+  today.forEach(it=>{
+    const meta=it.meta||[it.timed?it.d.toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"}):"",it.loc].filter(Boolean).join(" · ");
+    const r=el(`<div class="row" style="--p:${people[it.p].c}"><div class="stripe"></div>
+      <div class="body"><div class="title">${esc(it.title)}</div><div class="meta">${esc(meta)}</div></div>
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">${chip(it.p)}${it.tag?`<span class="tag">${esc(it.tag)}</span>`:""}</div></div>`);
+    clickable(r,it); tl.appendChild(r);
+  });
+  document.getElementById("today-count").textContent=today.length+" thing"+(today.length===1?"":"s");
+
+  const upc=document.getElementById("upcoming");upc.innerHTML="";
+  if(!up.length) upc.appendChild(el(`<div class="empty">Clear ahead</div>`));
+  up.forEach(u=>{
+    const m=el(`<div class="mini"><span class="dot" style="--p:${people[u.p].c}"></span>
+      <span class="when">${u.d.toLocaleDateString(undefined,{month:"short",day:"numeric"})}</span>
+      <span class="what"><div class="t">${esc(u.title)}</div><div class="n">${esc(u.meta||u.loc||"")}</div></span></div>`);
+    clickable(m,u); upc.appendChild(m);
+  });
+}
+
+/* ---- month grid ---- */
+function renderMonth(items,vm){
+  document.getElementById("cal-title").textContent=vm.toLocaleDateString(undefined,{month:"long",year:"numeric"});
+  const now=new Date();
+  const first=new Date(vm.getFullYear(),vm.getMonth(),1);
+  const gridStart=new Date(first);gridStart.setDate(1-first.getDay());   // back to Sunday
+  const weeks=document.getElementById("weeks");weeks.innerHTML="";
+  for(let i=0;i<42;i++){
+    const cd=new Date(gridStart.getFullYear(),gridStart.getMonth(),gridStart.getDate()+i);
+    const out=cd.getMonth()!==vm.getMonth();
+    const isToday=sameDay(cd,now);
+    const day=items.filter(it=>sameDay(it.d,cd)).sort((a,b)=>(a.timed?1:0)-(b.timed?1:0)||a.d-b.d);
+    const cell=el(`<div class="cell${out?" out":""}${isToday?" today":""}"><span class="dnum">${cd.getDate()}</span></div>`);
+    const SHOWN=4;
+    day.slice(0,SHOWN).forEach(it=>{
+      const pre=it.timed?`<span class="pt">${esc(shortTime(it.d))}</span> `:"";
+      const pill=el(`<div class="pill" style="--p:${people[it.p].c}" title="${esc(it.title)}">${pre}${esc(it.title)}</div>`);
+      clickable(pill,it); cell.appendChild(pill);
+    });
+    if(day.length>SHOWN) cell.appendChild(el(`<div class="more">+${day.length-SHOWN} more</div>`));
+    weeks.appendChild(cell);
+  }
+}
+
+function renderAll(){ renderSummary(ITEMS); renderMonth(ITEMS,viewMonth); }
+renderAll();
+
+/* ---- tabs ---- */
+const tabBoard=document.getElementById("tab-board"),tabMonth=document.getElementById("tab-month");
+function show(view){
+  const month=view==="month";
+  document.getElementById("board-view").hidden=month;
+  document.getElementById("month-view").hidden=!month;
+  tabMonth.classList.toggle("active",month);tabBoard.classList.toggle("active",!month);
+}
+tabBoard.addEventListener("click",()=>show("board"));
+tabMonth.addEventListener("click",()=>show("month"));
+document.getElementById("cal-prev").addEventListener("click",()=>{viewMonth=new Date(viewMonth.getFullYear(),viewMonth.getMonth()-1,1);renderMonth(ITEMS,viewMonth);if(LIVE)loadLive();});
+document.getElementById("cal-next").addEventListener("click",()=>{viewMonth=new Date(viewMonth.getFullYear(),viewMonth.getMonth()+1,1);renderMonth(ITEMS,viewMonth);if(LIVE)loadLive();});
+document.getElementById("cal-today").addEventListener("click",()=>{viewMonth=new Date(new Date().getFullYear(),new Date().getMonth(),1);renderMonth(ITEMS,viewMonth);});
+
+/* ---- clock ---- */
+function tick(){const n=new Date();
+  document.getElementById("today").textContent=n.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});
+  document.getElementById("clock").textContent=n.toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"});}
+tick();setInterval(tick,15000);
+
+/* ---- live calendar via mcp ---- */
+const btn=document.getElementById("update"),liveEl=document.getElementById("live");
+const setLive=(t,c)=>{liveEl.textContent=t;liveEl.className="live"+(c?" "+c:"");};
+const errMsg=(code)=>({needs_reauth:"Reconnect Google Calendar in Settings → Connectors",
+  server_not_connected:"Allow Google Calendar for this page",not_in_manifest:"Allow Google Calendar for this page",
+  server_unavailable:"Calendar busy — tap Update again",rate_limited:"Calendar busy — tap Update again"}[code]||"Couldn't reach Google Calendar");
+function evStart(ev){const s=ev.start||{};if(s.dateTime)return{d:new Date(s.dateTime),allDay:false};
+  const [y,mo,da]=(s.date||"").slice(0,10).split("-").map(Number);return{d:new Date(y||1970,(mo||1)-1,da||1),allDay:true};}
+
+let mcp=null,LIVE=null;
+(async()=>{try{mcp=window.claude&&window.claude.use?await window.claude.use("mcp"):null;}catch(e){mcp=null;}
+  if(mcp&&btn)btn.hidden=false;})();
+
+async function loadLive(){
+  if(!mcp)return;
+  btn.classList.add("loading");btn.disabled=true;setLive("");
+  const now=new Date();
+  const gs=new Date(viewMonth.getFullYear(),viewMonth.getMonth(),1);gs.setDate(1-gs.getDay());          // month grid start
+  const startISO=new Date(Math.min(gs,new Date(now.getFullYear(),now.getMonth(),now.getDate()))).toISOString();
+  const ge=new Date(gs);ge.setDate(gs.getDate()+42);
+  const endISO=new Date(Math.max(ge, new Date(now.getTime()+60*864e5))).toISOString();
+  const settled=await Promise.allSettled(CAL.map(c=>
+    mcp.callTool("Google Calendar","list_events",{calendarId:c.id,startTime:startISO,endTime:endISO,orderBy:"startTime",pageSize:60})
+      .then(r=>({c,events:(r.payload&&r.payload.events)||[]}))));
+  const items=[];let errCode=null;
+  settled.forEach(s=>{if(s.status==="fulfilled"){s.value.events.forEach(ev=>{if(ev.status==="cancelled")return;
+    const {d,allDay}=evStart(ev);items.push({p:s.value.c.p,title:(ev.summary||"").replace(/^\s*\[[^\]]*\]\s*/,"").trim(),d,timed:!allDay,loc:ev.location||"",desc:(ev.description||"").split("—")[0].trim()});});}
+    else errCode=errCode||(s.reason&&s.reason.code)||"upstream_error";});
+  btn.classList.remove("loading");btn.disabled=false;
+  if(!items.length&&errCode){setLive(errMsg(errCode),"err");return;}
+  LIVE=items;ITEMS=items;renderAll();
+  setLive("Live · "+now.toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"})+(errCode?" · some unavailable":""),errCode?"":"ok");
+}
+btn&&btn.addEventListener("click",loadLive);
+</script>
