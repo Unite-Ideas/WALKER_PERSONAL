@@ -1,0 +1,43 @@
+name: Family Dashboard
+
+# Daily school-email -> calendar + digest run.
+# NOTE: GitHub only fires `schedule` from the repo's DEFAULT branch, so this
+# workflow must be merged to the default branch before the cron will run.
+# `workflow_dispatch` lets you run it by hand from the Actions tab on any branch.
+
+on:
+  schedule:
+    - cron: "0 11 * * *"   # 11:00 UTC = 6:00 AM Central (CDT); shifts 1h at DST
+  workflow_dispatch: {}
+
+concurrency:
+  group: family-dashboard
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write        # to commit the updated ledger back
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r backend/requirements.txt
+      - name: Run daily cycle
+        env:
+          GOOGLE_CLIENT_ID:     ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          ANTHROPIC_API_KEY:    ${{ secrets.ANTHROPIC_API_KEY }}
+          SLACK_WEBHOOK_URL:    ${{ secrets.SLACK_WEBHOOK_URL }}
+          DIGEST_EMAIL_TO:      ${{ secrets.DIGEST_EMAIL_TO }}
+        run: python backend/run.py
+      - name: Commit ledger updates
+        run: |
+          git config user.name  "family-dashboard-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add state/ledger.json
+          git diff --staged --quiet || git commit -m "dashboard: cycle $(date -u +%Y-%m-%d)"
+          git push
