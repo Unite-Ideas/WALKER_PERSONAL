@@ -88,8 +88,14 @@ Calendar connector and set `status: posted`, storing each
 Send one summary to **every channel** in `policy.yaml > digest.channels` (email
 via the Gmail connector; Slack via a DM to the `target` user ID). Two sections:
 **Posted** (what went on which calendar) and **Held — needs you** (what's
-waiting and why: low confidence, vague date, or unmatched child), each with its
-source quotes so it can be judged without opening the email.
+waiting and why: low confidence, vague date, or unmatched child).
+
+**Keep the digest strictly family-facing — only the actual school information.**
+Write it as a note a parent or grandparent would read: the events, dates, tests,
+words, and any parent action. NEVER include meta/system commentary — no mention
+of the pipeline, connectors, the 6 AM run, catch-ups, failures, "processed N
+emails", tokens, or how the sausage is made. If something is wrong with the
+automation itself, tell Sean in the chat/logs, not in the family digest.
 
 ### 7. Persist
 Update `state/ledger.json`: add processed message IDs, upsert items with their
