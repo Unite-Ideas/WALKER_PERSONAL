@@ -1,12 +1,10 @@
 # How cautious the dashboard is, and where it reports.
 
 ingest:
-  # Gmail search the reader runs each cycle (connector reads sean@uniteideas.com).
-  # School mail is addressed to the sean+school@uniteideas.com plus-address
-  # (auto-forward from sean.michael.walker, or a manual forward). No Gmail label
-  # needed — the plus-address is the signal. `deliveredto:` catches auto-forwards;
-  # `to:` catches manual forwards.
-  query: "(deliveredto:sean+school@uniteideas.com OR to:sean+school@uniteideas.com) newer_than:3d"
+  # The self-hosted backend authenticates AS sean.michael.walker@gmail.com and
+  # reads that inbox directly, where the school mail arrives — so we match on the
+  # school domain, no forwarding / plus-address needed.
+  query: "from:newcovenant.net newer_than:4d"
   # Messages already folded into the ledger are skipped by ID regardless.
 
 autopost:
