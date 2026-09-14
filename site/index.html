@@ -195,6 +195,11 @@
   .m-callout b{color:var(--brand);font-size:.95rem}
   .m-note{background:var(--warn-bg);color:var(--warn);border-radius:12px;padding:13px 15px;font-weight:600;line-height:1.4}
   .m-src{color:var(--faint);font-size:.85rem;font-style:italic}
+  .m-links{display:flex;flex-direction:column;gap:8px}
+  .m-link{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;color:var(--brand);
+    background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:11px 14px}
+  .m-link:hover{border-color:var(--brand);filter:brightness(1.02)}
+  .m-link:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
 </style>
 
 <div class="wrap">
@@ -380,8 +385,15 @@ const INFO={
     format:["Send an apple to school on or before Thursday 9/25."],
     source:"2nd Grade Weekly News (Mrs. Gillette)"},
   recorder:{what:"Mrs. Batson shared YouTube play-along videos for 4th-grade recorder practice (the book itself can't be shared, for copyright).",
-    format:["Videos: Recorder Rap B note, B Ostinati, Jumpin' BA, Good Day BAG Recorder, Hot Cross Buns.",
-      "The class plays as a team this fall; solos come in the spring."],
+    format:["The class plays as a team this fall; solos come in the spring.",
+      "Tap a video below to play along at home — the last two haven't been played in class yet."],
+    links:[
+      {label:"Recorder Rap B note",url:"https://www.youtube.com/watch?v=N1ZSkroA3Uw"},
+      {label:"B Ostinati",url:"https://www.youtube.com/watch?v=LfMM4AjnDMs"},
+      {label:"Jumpin' BA",url:"https://www.youtube.com/watch?v=_5FKGPvcGF0"},
+      {label:"Good Day BAG Recorder",url:"https://www.youtube.com/watch?v=qBBwe8dJIxk"},
+      {label:"Hot Cross Buns",url:"https://www.youtube.com/watch?v=WfRe-Hk10tI"},
+    ],
     note:"Optional home practice — no due date.",
     source:"Music (Mrs. Batson)"},
   fieldTrip:{what:"2nd grade's first field trip: Fantastic Caverns on Oct 29, with lunch at Ritter Springs Park.",
@@ -436,6 +448,7 @@ function openModal(item){
     if(info.words) body+=`<div class="m-sec"><h4>The words</h4><div class="words">${info.words.map(w=>`<span class="word">${esc(w)}</span>`).join("")}</div></div>`;
     if(info.ref) body+=`<div class="verse"><div class="ref">Memory Verse · ${esc(info.ref)}</div><div class="txt">“${esc(info.text)}”</div></div>`;
     if(info.format) body+=`<div class="m-sec"><h4>How it works</h4><ul>${info.format.map(f=>`<li>${esc(f)}</li>`).join("")}</ul></div>`;
+    if(info.links) body+=`<div class="m-sec"><h4>Play-along videos</h4><div class="m-links">${info.links.map(l=>`<a class="m-link" href="${esc(l.url)}" target="_blank" rel="noopener">▶ ${esc(l.label)}</a>`).join("")}</div></div>`;
     if(info.vs) body+=`<div class="m-callout"><b>Spelling vs. Vocabulary</b><span>${esc(info.vs)}</span></div>`;
     if(info.help) body+=`<div class="m-sec"><h4>How to help at home</h4><p>${esc(info.help)}</p></div>`;
     if(info.note) body+=`<div class="m-note">${esc(info.note)}</div>`;
