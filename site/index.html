@@ -299,18 +299,32 @@ const CAL=[
 // Known events from the last morning run (shown at rest; live Update replaces these).
 const D=(y,m,d,hh,mm)=>hh!=null?new Date(y,m-1,d,hh,mm):new Date(y,m-1,d);
 const bakedItems=[
+  // September — recent history + what's ahead (drives Today, Coming Up, Month)
+  {p:"hudson",title:"Math test — Chapter 1",meta:"",d:D(2026,9,2),timed:false},
+  {p:"hudson",title:"Spelling test — Ch. 2",meta:"must, puppy, under…",d:D(2026,9,4),timed:false},
+  {p:"hudson",title:"Memory verse test",meta:"James 5:16",d:D(2026,9,4),timed:false},
+  {p:"hudson",title:"Vision screening",meta:"JrK–3",d:D(2026,9,4),timed:false},
+  {p:"hudson",title:"Social Studies test",meta:"5 people + vocabulary",d:D(2026,9,8),timed:false},
   {p:"hudson",title:"Spelling test — Ch. 3",meta:"Double consonants + dictation",d:D(2026,9,11),timed:false},
   {p:"hudson",title:"Memory verse test",meta:"Exodus 4:12",d:D(2026,9,11),timed:false},
   {p:"hudson",title:"Vocabulary test",meta:"8 words · multiple choice",d:D(2026,9,11),timed:false},
-  {p:"sean",title:"Parents Coffee Meet-Up",meta:"8:00–9:00 AM · Roots Coffee Bar",d:D(2026,9,11,8,0),timed:true,tag:"Parents"},
-  {p:"hudson",title:"Field trip — Fantastic Caverns",meta:"Lunch at Ritter Springs",d:D(2026,10,29),timed:false},
+  {p:"sean",title:"Parents Coffee Meet-Up",meta:"8–9 AM · Roots Coffee Bar",d:D(2026,9,11,8,0),timed:true,tag:"Parents"},
+  {p:"hudson",title:"Grandparents Night — sing at Liberty Campus",meta:"6:25 PM · NCA Liberty Campus",d:D(2026,9,14,18,25),timed:true,loc:"NCA Liberty Campus",tag:"Sing"},
+  {p:"reston",title:"Region quiz — Northeast",meta:"Outline · capital · abbreviation",d:D(2026,9,14),timed:false},
+  {p:"hudson",title:"Math Chapter 2 Review — sign & return",meta:"Study guide home 9/15 · test 9/16",d:D(2026,9,16),timed:false,tag:"Sign"},
+  {p:"hudson",title:"Spelling test — Ch. 4 (k, ck)",meta:"k / ck words + dictation",d:D(2026,9,18),timed:false},
+  {p:"hudson",title:"Memory verse test — Exodus 15:2",meta:"Fill-in-the-blank",d:D(2026,9,18),timed:false},
+  {p:"hudson",title:"Butter making day",meta:"Send an allergy alternative if needed",d:D(2026,9,18),timed:false,tag:"Parent"},
+  {p:"hudson",title:"Bring an apple (Johnny Appleseed)",meta:"Send an apple by Thu 9/25",d:D(2026,9,25),timed:false,tag:"Bring"},
+  {p:"hudson",title:"Field trip — Fantastic Caverns",meta:"Lunch at Ritter Springs Park",d:D(2026,10,29),timed:false},
 ];
-const learning={p:"hudson",chapter:"Ch. 3 · Double Consonants",
-  words:["hill","grass","cliff","bless","pizza","stuff","hammer","kitten","hidden","ribbon","two","Monday"],
-  verse:{ref:"Exodus 4:12",text:"Now go; I will help you speak and will teach you what to say."}};
+const learning={p:"hudson",chapter:"Ch. 4 · k / ck",
+  words:["clock","quick","hike","check","smoke","strike","ticket","lake","backpack","backstroke","friend","baseball"],
+  verse:{ref:"Exodus 15:2",text:"The Lord is my strength and my defense; he has become my salvation. He is my God, and I will praise him, my father's God, and I will exalt him."}};
 const attention=[
   {p:"reston",t:"Book report",why:"Due date is inside the packet — need the date"},
-  {p:"hudson",t:"Social Studies test",why:"Confirm the date (first one, “Tuesday”)"},
+  {p:"sean",t:"Class Banker (parent volunteer)",why:"Optional · Fridays 2:30 — sign up if you want it"},
+  {p:"reston",t:"Recorder practice — play-along videos",why:"Optional home practice · no due date"},
 ];
 
 const el=(h)=>{const t=document.createElement("template");t.innerHTML=h.trim();return t.content.firstElementChild;};
@@ -319,33 +333,60 @@ const chip=(p,label)=>`<span class="chip" style="--p:${people[p].c}">${esc(label
 
 /* ---- context knowledge base, mined from the school emails ---- */
 const INFO={
-  spelling:{what:"Hudson writes the week's spelling words from memory. This week is Chapter 3 — words with double consonants.",
-    words:["hill","grass","cliff","bless","pizza","stuff","hammer","kitten","hidden","ribbon","two","Monday"],
+  spelling:{what:"Hudson writes the week's spelling words from memory. This week is Chapter 4 — words with the k and ck sounds.",
+    words:["clock","quick","hike","check","smoke","strike","ticket","lake","backpack","backstroke","friend","baseball"],
     format:["He writes each spelling word — spelling counts.",
       "Then a dictation sentence: Mrs. Gillette reads a short sentence (only words he's already been tested on + K–2 sight words). He must spell every word right and add a capital letter and punctuation."],
     vs:"Spelling test = can he WRITE the words correctly. The Vocabulary test is different — that one is multiple-choice about what reading words MEAN, no spelling required.",
     help:"Practice writing the 12 words, then dictate a simple sentence for him to write with a capital and a period.",
-    source:"2nd Grade Weekly News (Mrs. Gillette), Sept 7–11"},
+    source:"2nd Grade Weekly News (Mrs. Gillette)"},
   vocabulary:{what:"A reading-vocabulary test tied to the Wonders reading unit. It's about word MEANINGS, not spelling.",
     format:["8 words, multiple-choice.",
       "A vocabulary paper comes home each Monday or Tuesday with the 8 words and their definitions — that's the study sheet."],
     vs:"Different from the Spelling test: here he matches words to their meanings (multiple-choice) and does NOT have to spell them. Spelling = writing the words; Vocabulary = knowing the definitions.",
     help:"Go over the vocab paper that came home Mon/Tue — the 8 words and what each one means.",
     source:"2nd Grade Weekly News (Mrs. Gillette)"},
-  verse:{ref:"Exodus 4:12",text:"Now go; I will help you speak and will teach you what to say.",
+  verse:{ref:"Exodus 15:2",text:"The Lord is my strength and my defense; he has become my salvation. He is my God, and I will praise him, my father's God, and I will exalt him.",
     format:["Fill-in-the-blank — he writes the missing words of the verse.",
       "Spelling does NOT count on this one. Memory verse tests are always on Fridays."],
-    help:"Recite Exodus 4:12 together a few times; focus on the words, not the spelling.",
+    help:"Recite Exodus 15:2 together a few times through the week; focus on the words, not the spelling.",
     source:"2nd Grade Weekly News (Mrs. Gillette)"},
   socialStudies:{what:"Hudson's first Social Studies test.",
     format:["Focus: the 5 people and the vocabulary words.",
       "A study guide came home — review it, sign it, and return it for a grade (signed study guides are worth 10 points)."],
     help:"Work through the study guide with him, sign it, send it back the next day.",
-    note:"Date still needs confirming — the newsletter just said “Tuesday.”",
     source:"2nd Grade Weekly News (Mrs. Gillette)"},
-  fieldTrip:{what:"2nd grade's first field trip: Fantastic Caverns, with lunch at Ritter Springs Park.",
+  math:{what:"Hudson's Math Chapter 2 test is Wednesday 9/16.",
+    format:["The Chapter 2 Review / study guide comes home Tuesday 9/15.",
+      "Review it with him, sign the front (it's stamped “Sign and Return” / “Parent Signature”), and send it back the next day — signed study guides are worth 10 points."],
+    help:"Go through the review sheet together Tuesday night, sign it, and put it in his bag for Wednesday.",
+    source:"2nd Grade Weekly News (Mrs. Gillette)"},
+  grandparents:{what:"2nd grade sings at Grandparents Night at the Liberty Campus.",
+    format:["Grandparents' potluck dinner is at 6:00 PM.",
+      "Students must arrive by 6:25 PM and walk in to sing at 6:30 PM; done around 6:45 PM.",
+      "Parents watch from the balcony, then take students home after they sing."],
+    note:"Not mandatory. Hudson wears an NCA school shirt or a plain black t-shirt.",
+    source:"2nd Grade / Music (Mrs. Batson)"},
+  butter:{what:"To close the book study of “When I Was Young in the Mountains,” the class makes butter on Friday 9/18 and eats it on French bread.",
+    format:["No prep needed for most kids."],
+    note:"Parent action: if your child has allergies, send in an alternative food for them.",
+    source:"2nd Grade Weekly News (Mrs. Gillette)"},
+  region:{what:"Reston's first Region quiz — the Northeast region (4th grade).",
+    format:["Given a state's outline, he needs to know its name, its capital, and its postal abbreviation.",
+      "There's also an open-book / open-note content quiz the same day."],
+    help:"Drill the Northeast states — shape, capital, and 2-letter abbreviation.",
+    source:"4th Grade (Mrs. Flatness)"},
+  apple:{what:"The class studies Johnny Appleseed the week of Sept 22–25.",
+    format:["Send an apple to school on or before Thursday 9/25."],
+    source:"2nd Grade Weekly News (Mrs. Gillette)"},
+  recorder:{what:"Mrs. Batson shared YouTube play-along videos for 4th-grade recorder practice (the book itself can't be shared, for copyright).",
+    format:["Videos: Recorder Rap B note, B Ostinati, Jumpin' BA, Good Day BAG Recorder, Hot Cross Buns.",
+      "The class plays as a team this fall; solos come in the spring."],
+    note:"Optional home practice — no due date.",
+    source:"Music (Mrs. Batson)"},
+  fieldTrip:{what:"2nd grade's first field trip: Fantastic Caverns on Oct 29, with lunch at Ritter Springs Park.",
     format:["Only 12 parents per class can attend the caverns (insurance limit) — a sign-up will come later.",
-      "All parents are welcome to join for LUNCH, and for the last field trip (George Washington Carver)."],
+      "All parents are welcome to join for LUNCH, and for the later George Washington Carver trip."],
     help:"Watch for the parent sign-up if you'd like one of the 12 caverns spots.",
     source:"2nd Grade Weekly News (Mrs. Gillette)"},
   coffee:{what:"Informal parent meet-up for Reston's grade — a chance to connect with other 4th-grade parents.",
@@ -364,6 +405,12 @@ function matchInfo(t){t=(t||"").toLowerCase();
   if(t.includes("vocab"))return INFO.vocabulary;
   if(t.includes("verse"))return INFO.verse;
   if(t.includes("social studies"))return INFO.socialStudies;
+  if(t.includes("math"))return INFO.math;
+  if(t.includes("grandparent"))return INFO.grandparents;
+  if(t.includes("butter"))return INFO.butter;
+  if(t.includes("region")||t.includes("quiz"))return INFO.region;
+  if(t.includes("apple"))return INFO.apple;
+  if(t.includes("recorder"))return INFO.recorder;
   if(t.includes("field trip")||t.includes("cavern"))return INFO.fieldTrip;
   if(t.includes("coffee"))return INFO.coffee;
   if(t.includes("book report"))return INFO.bookReport;
