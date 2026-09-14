@@ -314,8 +314,8 @@ const bakedItems=[
   {p:"hudson",title:"Memory verse test",meta:"Exodus 4:12",d:D(2026,9,11),timed:false},
   {p:"hudson",title:"Vocabulary test",meta:"8 words · multiple choice",d:D(2026,9,11),timed:false},
   {p:"sean",title:"Parents Coffee Meet-Up",meta:"8–9 AM · Roots Coffee Bar",d:D(2026,9,11,8,0),timed:true,tag:"Parents"},
-  {p:"hudson",title:"Grandparents Night — sing at Liberty Campus",meta:"6:25 PM · NCA Liberty Campus",d:D(2026,9,14,18,25),timed:true,loc:"NCA Liberty Campus",tag:"Sing"},
   {p:"reston",title:"Region quiz — Northeast",meta:"Outline · capital · abbreviation",d:D(2026,9,14),timed:false},
+  {p:"reston",title:"Book report due — diorama",meta:"Dog-POV series book",d:D(2026,9,16),timed:false,tag:"Due"},
   {p:"hudson",title:"Math Chapter 2 Review — sign & return",meta:"Study guide home 9/15 · test 9/16",d:D(2026,9,16),timed:false,tag:"Sign"},
   {p:"hudson",title:"Spelling test — Ch. 4 (k, ck)",meta:"k / ck words + dictation",d:D(2026,9,18),timed:false},
   {p:"hudson",title:"Memory verse test — Exodus 15:2",meta:"Fill-in-the-blank",d:D(2026,9,18),timed:false},
@@ -327,9 +327,8 @@ const learning={p:"hudson",chapter:"Ch. 4 · k / ck",
   words:["clock","quick","hike","check","smoke","strike","ticket","lake","backpack","backstroke","friend","baseball"],
   verse:{ref:"Exodus 15:2",text:"The Lord is my strength and my defense; he has become my salvation. He is my God, and I will praise him, my father's God, and I will exalt him."}};
 const attention=[
-  {p:"reston",t:"Book report",why:"Due date is inside the packet — need the date"},
   {p:"sean",t:"Class Banker (parent volunteer)",why:"Optional · Fridays 2:30 — sign up if you want it"},
-  {p:"reston",t:"Recorder practice — play-along videos",why:"Optional home practice · no due date"},
+  {p:"reston",t:"Recorder practice — play-along videos",why:"Optional home practice · tap for the video links"},
 ];
 
 const el=(h)=>{const t=document.createElement("template");t.innerHTML=h.trim();return t.content.firstElementChild;};

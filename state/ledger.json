@@ -223,9 +223,9 @@
       ],
       "class": "4th Grade - Flatness",
       "title": "Book report",
-      "description": "Packet came home with date + instructions. MERGED from newsletter + 'Book Report Information' email. Due date lives in the packet \u2014 HELD.",
-      "due_date": null,
-      "status": "held",
+      "description": "Diorama project, due Wed 9/16. Book is part of a series, first-person from a dog\u2019s point of view. Finishing at home the night before.",
+      "due_date": "2026-09-16",
+      "status": "posted",
       "confidence": 0.6,
       "source_emails": [
         {
@@ -237,7 +237,12 @@
           "quote": "Book Club, Book Report, and Bible Book Report Information"
         }
       ],
-      "calendar_event_ids": {}
+      "calendar_event_ids": {
+        "Reston": "l7erjsefusufl5gt75gt6lebgs"
+      },
+      "event_dates": [
+        "2026-09-16"
+      ]
     },
     {
       "id": "reston-honor-choir-auditions-2026-fall",
@@ -312,18 +317,14 @@
       ],
       "class": "2nd Grade",
       "title": "Grandparents Night \u2014 sing at Liberty Campus",
-      "description": "2nd grade sings at Grandparents Night. Grandparent potluck dinner 6:00pm; students must arrive at Liberty Campus by 6:25pm and walk in to sing at 6:30pm. Parents sit in the balcony and take students home after singing (~6:45pm). Not mandatory. Students wear NCA school shirt or a black t-shirt.",
+      "description": "2nd grade sings at Grandparents Night. Grandparent potluck dinner 6:00pm; students must arrive at Liberty Campus by 6:25pm and walk in to sing at 6:30pm. Parents sit in the balcony and take students home after singing (~6:45pm). Not mandatory. Students wear NCA school shirt or a black t-shirt. \u2014 CANCELLED: Hudson opted out and family is out of town (2026-09-14).",
       "due_date": null,
       "event_dates": [
         "2026-09-14"
       ],
-      "status": "posted",
+      "status": "dismissed",
       "confidence": 0.95,
-      "calendar_event_ids": {
-        "Hudson": "jdlgvos8oq4dc16jau706r7bn4",
-        "Sean": "rqe7l303oi2vs3ndhc76q8d934",
-        "Jennifer": "8b5pob7ikt2729spg5q0i2gvro"
-      },
+      "calendar_event_ids": {},
       "source_message_id": "1a09ff78a92603df"
     },
     {
