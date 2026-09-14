@@ -1,251 +1,607 @@
 {
   "version": 1,
-  "updated": "2026-09-14T13:42:00Z",
-  "processed_message_ids": ["1a08c63ed0706b4c", "1a09ff794a1e7603", "1a0961ca52c55398", "1a092f1d77fed21d", "1a0923f3201b98d4", "1a09276bb68c1e35", "1a092815125760b4"],
+  "updated": "2026-09-14T19:56:59Z",
+  "processed_message_ids": [
+    "1a08c63ed0706b4c",
+    "1a0923f295fe9cab",
+    "1a0923f3201b98d4",
+    "1a09276b19834c1c",
+    "1a09276bb68c1e35",
+    "1a09281496915b74",
+    "1a092815125760b4",
+    "1a092f1ca1cf3a08",
+    "1a092f1d77fed21d",
+    "1a0961c98b13ce9a",
+    "1a0961ca52c55398",
+    "1a09ff78a92603df",
+    "1a09ff794a1e7603"
+  ],
   "items": [
     {
       "id": "hudson-spelling-2026-w37",
       "type": "spelling",
-      "people": ["hudson"],
+      "people": [
+        "hudson"
+      ],
       "class": "2nd Grade - Gillette",
-      "title": "Spelling test — Ch. 3 (Double Consonants)",
+      "title": "Spelling test \u2014 Ch. 3 (Double Consonants)",
       "description": "hill, grass, cliff, bless, pizza, stuff, hammer, kitten, hidden, ribbon, two, Monday; + dictation sentence",
       "due_date": "2026-09-11",
       "status": "posted",
       "confidence": 0.95,
-      "source_emails": [{"message_id": "1a08c63ed0706b4c", "quote": "Friday-Spelling Test (Ch. 3-Double Consonants)"}],
-      "calendar_event_ids": {"Hudson": "580269kjvppoj8ral9f7npdkrs"}
+      "source_emails": [
+        {
+          "message_id": "1a08c63ed0706b4c",
+          "quote": "Friday-Spelling Test (Ch. 3-Double Consonants)"
+        }
+      ],
+      "calendar_event_ids": {
+        "Hudson": "580269kjvppoj8ral9f7npdkrs"
+      }
     },
     {
       "id": "hudson-verse-2026-w37",
       "type": "memory-verse",
-      "people": ["hudson"],
+      "people": [
+        "hudson"
+      ],
       "class": "2nd Grade - Gillette",
-      "title": "Memory verse test — Exodus 4:12",
+      "title": "Memory verse test \u2014 Exodus 4:12",
       "due_date": "2026-09-11",
       "status": "posted",
       "confidence": 0.95,
-      "source_emails": [{"message_id": "1a08c63ed0706b4c", "quote": "Friday- we will have our memory verse test: Exodus 4:12"}],
-      "calendar_event_ids": {"Hudson": "dqa9qqpa74g1782aa321paksng"}
+      "source_emails": [
+        {
+          "message_id": "1a08c63ed0706b4c",
+          "quote": "Friday- we will have our memory verse test: Exodus 4:12"
+        }
+      ],
+      "calendar_event_ids": {
+        "Hudson": "dqa9qqpa74g1782aa321paksng"
+      }
     },
     {
       "id": "hudson-vocab-2026-w37",
       "type": "assignment",
-      "people": ["hudson"],
+      "people": [
+        "hudson"
+      ],
       "class": "2nd Grade - Gillette",
       "title": "Vocabulary test",
       "due_date": "2026-09-11",
       "status": "posted",
       "confidence": 0.9,
-      "source_emails": [{"message_id": "1a08c63ed0706b4c", "quote": "Friday-We will have a Vocabulary Test most Fridays"}],
-      "calendar_event_ids": {"Hudson": "53ds31hsj8gmnf5foq5ftvtgl4"}
+      "source_emails": [
+        {
+          "message_id": "1a08c63ed0706b4c",
+          "quote": "Friday-We will have a Vocabulary Test most Fridays"
+        }
+      ],
+      "calendar_event_ids": {
+        "Hudson": "53ds31hsj8gmnf5foq5ftvtgl4"
+      }
     },
     {
       "id": "hudson-socialstudies-2026-09",
       "type": "assignment",
-      "people": ["hudson"],
+      "people": [
+        "hudson"
+      ],
       "class": "2nd Grade - Gillette",
       "title": "Social Studies test (first)",
-      "description": "Focus: 5 people + vocabulary. Date INFERRED as Tue Sept 8 — needs confirmation.",
+      "description": "Focus: 5 people + vocabulary. Date INFERRED as Tue Sept 8 \u2014 needs confirmation.",
       "due_date": "2026-09-08",
       "status": "posted",
       "confidence": 0.5,
-      "source_emails": [{"message_id": "1a08c63ed0706b4c", "quote": "Tuesday is our first Social Studies Test"}],
-      "calendar_event_ids": {"Hudson": "q9658b8ohl10jipskh0vm3q0i4"}
+      "source_emails": [
+        {
+          "message_id": "1a08c63ed0706b4c",
+          "quote": "Tuesday is our first Social Studies Test"
+        }
+      ],
+      "calendar_event_ids": {
+        "Hudson": "q9658b8ohl10jipskh0vm3q0i4"
+      }
     },
     {
       "id": "hudson-fieldtrip-fantastic-caverns-2026-10",
       "type": "extracurricular",
-      "people": ["hudson"],
+      "people": [
+        "hudson"
+      ],
       "class": "2nd Grade - Gillette",
-      "title": "Field trip — Fantastic Caverns",
+      "title": "Field trip \u2014 Fantastic Caverns",
       "description": "Lunch at Ritter Springs Park. 12-parent cap; sign-up to come.",
-      "event_dates": ["2026-10-29"],
+      "event_dates": [
+        "2026-10-29"
+      ],
       "status": "posted",
       "confidence": 0.9,
-      "source_emails": [{"message_id": "1a08c63ed0706b4c", "quote": "Our first Field Trip is October 29 to Fantastic Caverns"}],
-      "calendar_event_ids": {"Hudson": "7mg2gnu81cbdb14pvcjm1427k4"}
+      "source_emails": [
+        {
+          "message_id": "1a08c63ed0706b4c",
+          "quote": "Our first Field Trip is October 29 to Fantastic Caverns"
+        }
+      ],
+      "calendar_event_ids": {
+        "Hudson": "7mg2gnu81cbdb14pvcjm1427k4"
+      }
     },
     {
       "id": "hudson-math-ch1-2026-09",
       "type": "assignment",
-      "people": ["hudson"],
+      "people": [
+        "hudson"
+      ],
       "class": "2nd Grade - Gillette",
-      "title": "Math test — Chapter 1",
+      "title": "Math test \u2014 Chapter 1",
       "due_date": "2026-09-02",
       "status": "posted",
       "confidence": 0.85,
-      "source_emails": [{"message_id": "1a08c63ed0706b4c", "quote": "Our first Math Test will be on Wednesday"}],
-      "calendar_event_ids": {"Hudson": "ateourvrraksgtlbgmbgsssrqg"}
+      "source_emails": [
+        {
+          "message_id": "1a08c63ed0706b4c",
+          "quote": "Our first Math Test will be on Wednesday"
+        }
+      ],
+      "calendar_event_ids": {
+        "Hudson": "ateourvrraksgtlbgmbgsssrqg"
+      }
     },
     {
       "id": "hudson-verse-2026-w36",
       "type": "memory-verse",
-      "people": ["hudson"],
+      "people": [
+        "hudson"
+      ],
       "class": "2nd Grade - Gillette",
-      "title": "Memory verse test — James 5:16",
+      "title": "Memory verse test \u2014 James 5:16",
       "due_date": "2026-09-04",
       "status": "posted",
       "confidence": 0.9,
-      "source_emails": [{"message_id": "1a08c63ed0706b4c", "quote": "Friday- we will have our memory verse test: James 5:16"}],
-      "calendar_event_ids": {"Hudson": "a9pi37t5v1mtq1si3d831qilms"}
+      "source_emails": [
+        {
+          "message_id": "1a08c63ed0706b4c",
+          "quote": "Friday- we will have our memory verse test: James 5:16"
+        }
+      ],
+      "calendar_event_ids": {
+        "Hudson": "a9pi37t5v1mtq1si3d831qilms"
+      }
     },
     {
       "id": "hudson-spelling-2026-w36",
       "type": "spelling",
-      "people": ["hudson"],
+      "people": [
+        "hudson"
+      ],
       "class": "2nd Grade - Gillette",
-      "title": "Spelling test — Ch. 2",
+      "title": "Spelling test \u2014 Ch. 2",
       "description": "must, puppy, under, contest, will, little, print, lost, block, this, spell, ever",
       "due_date": "2026-09-04",
       "status": "posted",
       "confidence": 0.9,
-      "source_emails": [{"message_id": "1a08c63ed0706b4c", "quote": "Friday-we will have a spelling test over Chapter 2"}],
-      "calendar_event_ids": {"Hudson": "gfb2bqefici0ks63dlm2sglqvo"}
+      "source_emails": [
+        {
+          "message_id": "1a08c63ed0706b4c",
+          "quote": "Friday-we will have a spelling test over Chapter 2"
+        }
+      ],
+      "calendar_event_ids": {
+        "Hudson": "gfb2bqefici0ks63dlm2sglqvo"
+      }
     },
     {
       "id": "nca-vision-screening-2026-09",
       "type": "notice",
-      "people": ["hudson"],
+      "people": [
+        "hudson"
+      ],
       "class": "New Covenant Academy (JrK-3)",
       "title": "Vision screening (JrK-3)",
-      "event_dates": ["2026-09-04"],
+      "event_dates": [
+        "2026-09-04"
+      ],
       "status": "posted",
       "confidence": 0.85,
-      "source_emails": [{"message_id": "1a08c63ed0706b4c", "quote": "next Friday, September 4th will be our annual Vision Screening"}],
-      "calendar_event_ids": {"Hudson": "okvr46ck6eiib8vth4i32ltnlc"}
+      "source_emails": [
+        {
+          "message_id": "1a08c63ed0706b4c",
+          "quote": "next Friday, September 4th will be our annual Vision Screening"
+        }
+      ],
+      "calendar_event_ids": {
+        "Hudson": "okvr46ck6eiib8vth4i32ltnlc"
+      }
     },
     {
       "id": "reston-coffee-meetup-2026-09",
       "type": "extracurricular",
-      "people": ["sean", "jen"],
+      "people": [
+        "sean",
+        "jen"
+      ],
       "class": "4th Grade - Flatness",
       "title": "Parents Coffee Meet-Up",
       "description": "All three 4th-grade classes; Roots Coffee Bar; after car line.",
-      "event_dates": ["2026-09-11"],
+      "event_dates": [
+        "2026-09-11"
+      ],
       "status": "posted",
       "confidence": 0.9,
-      "source_emails": [{"message_id": "1a08c63ed0706b4c", "quote": "September 11th at Roots Coffee Bar right after car line drop off (8am-9am)"}],
-      "calendar_event_ids": {"Sean": "uaq2q1l53aro015cv3idch4nlc"}
+      "source_emails": [
+        {
+          "message_id": "1a08c63ed0706b4c",
+          "quote": "September 11th at Roots Coffee Bar right after car line drop off (8am-9am)"
+        }
+      ],
+      "calendar_event_ids": {
+        "Sean": "uaq2q1l53aro015cv3idch4nlc"
+      }
     },
     {
       "id": "reston-book-report-2026-fall",
       "type": "project",
-      "people": ["reston"],
+      "people": [
+        "reston"
+      ],
       "class": "4th Grade - Flatness",
       "title": "Book report",
-      "description": "Packet came home with date + instructions. MERGED from newsletter + 'Book Report Information' email. Due date lives in the packet — HELD.",
+      "description": "Packet came home with date + instructions. MERGED from newsletter + 'Book Report Information' email. Due date lives in the packet \u2014 HELD.",
       "due_date": null,
       "status": "held",
       "confidence": 0.6,
       "source_emails": [
-        {"message_id": "1a08c63ed0706b4c", "quote": "Students brought home a packet about their book reports... the date the book report is to be given"},
-        {"message_id": "1a08c63ed0706b4c", "quote": "Book Club, Book Report, and Bible Book Report Information"}
+        {
+          "message_id": "1a08c63ed0706b4c",
+          "quote": "Students brought home a packet about their book reports... the date the book report is to be given"
+        },
+        {
+          "message_id": "1a08c63ed0706b4c",
+          "quote": "Book Club, Book Report, and Bible Book Report Information"
+        }
       ],
       "calendar_event_ids": {}
     },
     {
       "id": "reston-honor-choir-auditions-2026-fall",
       "type": "extracurricular",
-      "people": ["reston"],
+      "people": [
+        "reston"
+      ],
       "class": "Music - Batson (Jr K-4th)",
       "title": "Honor Choir auditions (optional)",
-      "description": "Optional; recorded at recess. DISMISSED — Reston not interested (confirmed with Sean 2026-09-10). Do not resurface.",
+      "description": "Optional; recorded at recess. DISMISSED \u2014 Reston not interested (confirmed with Sean 2026-09-10). Do not resurface.",
       "due_date": null,
       "status": "dismissed",
       "confidence": 0.5,
-      "source_emails": [{"message_id": "1a08c63ed0706b4c", "quote": "I will start recording students that want to audition starting next week"}],
+      "source_emails": [
+        {
+          "message_id": "1a08c63ed0706b4c",
+          "quote": "I will start recording students that want to audition starting next week"
+        }
+      ],
       "calendar_event_ids": {}
     },
     {
       "id": "reston-class-banker-2026-fall",
       "type": "extracurricular",
-      "people": ["sean", "jen"],
+      "people": [
+        "sean",
+        "jen"
+      ],
       "class": "4th Grade - Flatness",
       "title": "Class Banker (parent volunteer, optional)",
-      "description": "Recurring Fri 2:30 volunteer if signed up. HELD — optional, not committed.",
+      "description": "Recurring Fri 2:30 volunteer if signed up. HELD \u2014 optional, not committed.",
       "due_date": null,
       "status": "held",
       "confidence": 0.4,
-      "source_emails": [{"message_id": "1a08c63ed0706b4c", "quote": "The class banker would need to come on Friday afternoons at 2:30"}],
+      "source_emails": [
+        {
+          "message_id": "1a08c63ed0706b4c",
+          "quote": "The class banker would need to come on Friday afternoons at 2:30"
+        }
+      ],
       "calendar_event_ids": {}
     },
     {
       "id": "hudson-grandparents-night-2026-09",
       "type": "extracurricular",
-      "people": ["hudson"],
+      "people": [
+        "hudson"
+      ],
       "class": "Music - Batson (2nd grade)",
-      "title": "Grandparents Night — sing at Liberty Campus",
+      "title": "Grandparents Night \u2014 sing at Liberty Campus",
       "description": "Potluck 6pm; students arrive 6:25pm, sing 6:30pm, done ~6:45pm. Parents in balcony. NCA or black shirt. Not mandatory.",
-      "event_dates": ["2026-09-14"],
+      "event_dates": [
+        "2026-09-14"
+      ],
       "status": "posted",
       "confidence": 0.95,
-      "source_emails": [{"message_id": "1a09ff794a1e7603", "quote": "Grandparent's night at Liberty campus Monday, September 14 at 6:30pm"}],
-      "calendar_event_ids": {"Hudson": "lsgcvtfukjj8kdgffvc60ibml4"}
+      "source_emails": [
+        {
+          "message_id": "1a09ff794a1e7603",
+          "quote": "Grandparent's night at Liberty campus Monday, September 14 at 6:30pm"
+        }
+      ],
+      "calendar_event_ids": {
+        "Hudson": "lsgcvtfukjj8kdgffvc60ibml4"
+      }
     },
     {
       "id": "reston-region-quiz-northeast-2026-09",
       "type": "assignment",
-      "people": ["reston"],
+      "people": [
+        "reston"
+      ],
       "class": "4th Grade - Flatness",
-      "title": "Region quiz — Northeast",
+      "title": "Region quiz \u2014 Northeast",
       "description": "State outline -> name, capital, postal abbreviation; plus an open-book/open-note content quiz.",
       "due_date": "2026-09-14",
       "status": "posted",
       "confidence": 0.9,
-      "source_emails": [{"message_id": "1a092f1d77fed21d", "quote": "Our first region quizzes will be on Monday, September 14 ... states of the Northeast Region"}],
-      "calendar_event_ids": {"Reston": "f94hq92dsad15fc9jnjh1242bk"}
+      "source_emails": [
+        {
+          "message_id": "1a092f1d77fed21d",
+          "quote": "Our first region quizzes will be on Monday, September 14 ... states of the Northeast Region"
+        }
+      ],
+      "calendar_event_ids": {
+        "Reston": "f94hq92dsad15fc9jnjh1242bk"
+      }
     },
     {
       "id": "hudson-math-ch2-2026-09",
       "type": "assignment",
-      "people": ["hudson"],
+      "people": [
+        "hudson"
+      ],
       "class": "2nd Grade - Gillette",
-      "title": "Math test — Chapter 2",
+      "title": "Math test \u2014 Chapter 2",
       "description": "Ch. 2 review comes home Tue 9/15; sign & return next day for 10 pts.",
       "due_date": "2026-09-16",
       "status": "posted",
       "confidence": 0.9,
-      "source_emails": [{"message_id": "1a0961ca52c55398", "quote": "The Math test will be on Wednesday, 9/16"}],
-      "calendar_event_ids": {"Hudson": "d80k65vmc0i4arkvhr8ejn3qf8"}
+      "source_emails": [
+        {
+          "message_id": "1a0961ca52c55398",
+          "quote": "The Math test will be on Wednesday, 9/16"
+        }
+      ],
+      "calendar_event_ids": {
+        "Hudson": "d80k65vmc0i4arkvhr8ejn3qf8"
+      }
     },
     {
       "id": "hudson-spelling-2026-w38",
       "type": "spelling",
-      "people": ["hudson"],
+      "people": [
+        "hudson"
+      ],
       "class": "2nd Grade - Gillette",
-      "title": "Spelling test — Ch. 4 (k, ck)",
+      "title": "Spelling test \u2014 Ch. 4 (k, ck)",
       "description": "clock, quick, hike, check, smoke, strike, ticket, lake, backpack, backstroke, friend, baseball; + dictation sentence",
       "due_date": "2026-09-18",
       "status": "posted",
       "confidence": 0.95,
-      "source_emails": [{"message_id": "1a0961ca52c55398", "quote": "Friday-Spelling Test (Ch. 4-k, ck)"}],
-      "calendar_event_ids": {"Hudson": "vnqlv61ci77654i397m4ae82io"}
+      "source_emails": [
+        {
+          "message_id": "1a0961ca52c55398",
+          "quote": "Friday-Spelling Test (Ch. 4-k, ck)"
+        }
+      ],
+      "calendar_event_ids": {
+        "Hudson": "vnqlv61ci77654i397m4ae82io"
+      }
     },
     {
       "id": "hudson-verse-2026-w38",
       "type": "memory-verse",
-      "people": ["hudson"],
+      "people": [
+        "hudson"
+      ],
       "class": "2nd Grade - Gillette",
-      "title": "Memory verse test — Exodus 15:2",
+      "title": "Memory verse test \u2014 Exodus 15:2",
       "due_date": "2026-09-18",
       "status": "posted",
       "confidence": 0.95,
-      "source_emails": [{"message_id": "1a0961ca52c55398", "quote": "Friday- we will have our memory verse test: Exodus 15:2"}],
-      "calendar_event_ids": {"Hudson": "f3jm4mtgba8cg95pgc4tuoqedo"}
+      "source_emails": [
+        {
+          "message_id": "1a0961ca52c55398",
+          "quote": "Friday- we will have our memory verse test: Exodus 15:2"
+        }
+      ],
+      "calendar_event_ids": {
+        "Hudson": "f3jm4mtgba8cg95pgc4tuoqedo"
+      }
     },
     {
       "id": "hudson-apple-johnny-appleseed-2026-09",
       "type": "notice",
-      "people": ["hudson"],
+      "people": [
+        "hudson"
+      ],
       "class": "2nd Grade - Gillette",
       "title": "Bring an apple (Johnny Appleseed)",
       "description": "Johnny Appleseed study the week of 9/22-25; send an apple on or before Thu 9/25.",
       "due_date": "2026-09-25",
       "status": "posted",
       "confidence": 0.85,
-      "source_emails": [{"message_id": "1a0961ca52c55398", "quote": "Please send in an apple with your child on or before 9/25"}],
-      "calendar_event_ids": {"Hudson": "7uvu07uj5v3isqp3doefn1p7p4"}
+      "source_emails": [
+        {
+          "message_id": "1a0961ca52c55398",
+          "quote": "Please send in an apple with your child on or before 9/25"
+        }
+      ],
+      "calendar_event_ids": {
+        "Hudson": "7uvu07uj5v3isqp3doefn1p7p4"
+      }
+    },
+    {
+      "id": "hudson-grandparents-night-2026-09-details",
+      "type": "extracurricular",
+      "people": [
+        "hudson",
+        "sean",
+        "jen"
+      ],
+      "class": "2nd Grade",
+      "title": "Grandparents Night \u2014 sing at Liberty Campus",
+      "description": "2nd grade sings at Grandparents Night. Grandparent potluck dinner 6:00pm; students must arrive at Liberty Campus by 6:25pm and walk in to sing at 6:30pm. Parents sit in the balcony and take students home after singing (~6:45pm). Not mandatory. Students wear NCA school shirt or a black t-shirt.",
+      "due_date": null,
+      "event_dates": [
+        "2026-09-14"
+      ],
+      "status": "posted",
+      "confidence": 0.95,
+      "calendar_event_ids": {
+        "Hudson": "jdlgvos8oq4dc16jau706r7bn4",
+        "Sean": "rqe7l303oi2vs3ndhc76q8d934",
+        "Jennifer": "8b5pob7ikt2729spg5q0i2gvro"
+      },
+      "source_message_id": "1a09ff78a92603df"
+    },
+    {
+      "id": "hudson-butter-making-allergy-alt-2026-09-18",
+      "type": "notice",
+      "people": [
+        "hudson",
+        "sean",
+        "jen"
+      ],
+      "class": "2nd Grade",
+      "title": "Butter making day \u2014 send allergy alternative if needed",
+      "description": "To close the book study of 'When I Was Young in the Mountains,' the class will make butter Friday 9/18 and eat it on french bread. Parent action: if your child has allergies, send in an alternative food for them.",
+      "due_date": "2026-09-18",
+      "event_dates": [
+        "2026-09-18"
+      ],
+      "status": "posted",
+      "confidence": 0.85,
+      "calendar_event_ids": {
+        "Hudson": "24v3bgbo4ui8tqlj84me5h5d7k",
+        "Sean": "49751l9cvjef9ao40l7n6trc98",
+        "Jennifer": "580so0n7g8na399mb39242ogvg"
+      },
+      "source_message_id": "1a0961c98b13ce9a"
+    },
+    {
+      "id": "hudson-math-ch2-review-sign-return-2026-09",
+      "type": "assignment",
+      "people": [
+        "hudson",
+        "sean",
+        "jen"
+      ],
+      "class": "2nd Grade",
+      "title": "Math Chapter 2 Review \u2014 study, sign, and return",
+      "description": "Math Chapter 2 Review/Study Guide comes home Tuesday 9/15. Review/study it with your child, parent signs it, and return it to school the next day (9/16) for 10 points. Stamp on front page says 'Sign and Return' or 'Parent Signature'. Math Chapter 2 test is Wednesday 9/16.",
+      "due_date": "2026-09-16",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.9,
+      "calendar_event_ids": {
+        "Hudson": "cpaip265f1ks8dghme925e3kps",
+        "Sean": "46uqp6ehpg5ut2jgukblkhsds4",
+        "Jennifer": "4jc54tqnksh1jaml32b9c1dpok"
+      },
+      "source_message_id": "1a0961c98b13ce9a"
+    },
+    {
+      "id": "hudson-spelling-2026-w38",
+      "type": "spelling",
+      "people": [
+        "hudson"
+      ],
+      "class": "2nd Grade",
+      "title": "Spelling test \u2014 Ch. 4 (k, ck)",
+      "description": "Friday spelling test. Words: clock, quick, hike, check, smoke, strike, ticket, lake, backpack, backstroke, friend, baseball. Part of the test is writing a dictation sentence correctly (all words spelled correctly, capital letter and punctuation as needed).",
+      "due_date": "2026-09-18",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.95,
+      "calendar_event_ids": {
+        "Hudson": "0erd1be1poulug5nmv8k58vig8"
+      },
+      "source_message_id": "1a0961c98b13ce9a"
+    },
+    {
+      "id": "hudson-verse-2026-w38",
+      "type": "memory-verse",
+      "people": [
+        "hudson"
+      ],
+      "class": "2nd Grade",
+      "title": "Memory verse test \u2014 Exodus 15:2",
+      "description": "Friday memory verse test. 'The Lord is my strength and my defense; he has become my salvation. He is my God, and I will praise him, my father's God, and I will exalt him.' (Exodus 15:2)",
+      "due_date": "2026-09-18",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.95,
+      "calendar_event_ids": {
+        "Hudson": "dmkvailip9qk1ncdpr0lbct4so"
+      },
+      "source_message_id": "1a0961c98b13ce9a"
+    },
+    {
+      "id": "hudson-fieldtrip-fantastic-caverns-2026-10",
+      "type": "notice",
+      "people": [
+        "hudson",
+        "sean",
+        "jen"
+      ],
+      "class": "2nd Grade",
+      "title": "Field trip \u2014 Fantastic Caverns",
+      "description": "First 2nd grade field trip Oct 29 to Fantastic Caverns, with lunch at Ritter Springs Park. Only 12 parents per class may attend the caverns (insurance limit); a sign-up will be sent later. All parents may join for lunch, and all parents may attend the later George Washington Carver trip.",
+      "due_date": null,
+      "event_dates": [
+        "2026-10-29"
+      ],
+      "status": "posted",
+      "confidence": 0.9,
+      "calendar_event_ids": {
+        "Hudson": "cihrqv8bf34oiqeg97kaf3r6dg",
+        "Sean": "p1ld5h6v22nrtdgo27fgufqp34",
+        "Jennifer": "1f75lqg0jf7mh98aqe0mn3fl8g"
+      },
+      "source_message_id": "1a0961c98b13ce9a"
+    },
+    {
+      "id": "reston-region-quiz-northeast-2026-09",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Region quiz \u2014 Northeast",
+      "description": "First region quiz Monday 9/14: students must know each Northeast state by its outline, its capital, and its postal abbreviation. Students will also have an open book/open note content quiz the same day.",
+      "due_date": "2026-09-14",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.93,
+      "calendar_event_ids": {
+        "Reston": "55fgiqvsirjucpv0af2t1amkd8"
+      },
+      "source_message_id": "1a092f1ca1cf3a08"
+    },
+    {
+      "id": "reston-recorder-play-along-videos-2026-09",
+      "type": "notice",
+      "people": [
+        "reston",
+        "sean",
+        "jen"
+      ],
+      "class": "4th Grade",
+      "title": "Recorder play-along practice videos",
+      "description": "Music teacher Mrs. Batson shared YouTube play-along videos for 4th grade recorder practice (the book itself can't be shared due to copyright): Recorder Rap B note, B Ostinati, Jumpin' BA, Good Day BAG Recorder, Hot Cross Buns. Class plays as a team this fall; solos in the spring. No due date \u2014 optional home practice.",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.6,
+      "calendar_event_ids": null,
+      "source_message_id": "1a0923f295fe9cab"
     }
   ]
 }
