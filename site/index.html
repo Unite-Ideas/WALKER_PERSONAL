@@ -105,6 +105,21 @@
   .attn .why{color:var(--warn);font-weight:600;font-size:.92rem}
   .empty{padding:18px 4px;color:var(--muted);font-weight:600}
 
+  /* study up */
+  .study{margin-top:0}
+  .study .card-h h2{color:var(--brand)}
+  .studygrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+  .studycard{position:relative;display:flex;align-items:center;gap:13px;text-align:left;font:inherit;color:var(--ink);
+    border:1px solid var(--border);border-left:5px solid var(--p);border-radius:14px;background:var(--surface-2);
+    padding:14px 34px 14px 15px;cursor:pointer;transition:transform .12s ease,border-color .12s ease}
+  .studycard:hover{transform:translateY(-2px);border-color:var(--p)}
+  .studycard:focus-visible{outline:2px solid var(--p);outline-offset:2px}
+  .studycard::after{content:"›";position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--p);font-weight:800;font-size:1.4rem;line-height:1}
+  .studycard .sicon{font-size:1.7rem;flex:none;line-height:1}
+  .studycard .sbody{display:flex;flex-direction:column;gap:3px;min-width:0}
+  .studycard .stitle{font-weight:800;font-size:1.05rem;line-height:1.15}
+  .studycard .ssub{color:var(--muted);font-size:.85rem;font-weight:600;line-height:1.25}
+
   /* month calendar */
   .cal-head{display:flex;align-items:center;gap:12px;padding:4px 4px 16px}
   .cal-head h2{font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:800}
@@ -249,6 +264,10 @@
         </section>
       </div>
     </div>
+    <section class="card study">
+      <div class="card-h"><h2>Study Up</h2><span class="count" id="study-count"></span></div>
+      <div class="card-b"><div class="studygrid" id="study-list"></div></div>
+    </section>
   </div>
 
   <!-- MONTH VIEW -->
@@ -328,7 +347,48 @@ const learning={p:"hudson",chapter:"Ch. 4 · k / ck",
   verse:{ref:"Exodus 15:2",text:"The Lord is my strength and my defense; he has become my salvation. He is my God, and I will praise him, my father's God, and I will exalt him."}};
 const attention=[
   {p:"sean",t:"Class Banker (parent volunteer)",why:"Optional · Fridays 2:30 — sign up if you want it"},
-  {p:"reston",t:"Recorder practice — play-along videos",why:"Optional home practice · tap for the video links"},
+];
+
+// Study tools (published artifacts)
+const SQ="https://claude.ai/artifact/CWNS9wNFvtusQMAYbM2o6x";   // State Quest
+const VS="https://claude.ai/artifact/5Kfmy8XJzds7VZ8TQsuJMB";   // Memory Verse Practice
+const RECORDER_LINKS=[
+  {label:"Recorder Rap B note",url:"https://www.youtube.com/watch?v=N1ZSkroA3Uw"},
+  {label:"B Ostinati",url:"https://www.youtube.com/watch?v=LfMM4AjnDMs"},
+  {label:"Jumpin' BA",url:"https://www.youtube.com/watch?v=_5FKGPvcGF0"},
+  {label:"Good Day BAG Recorder",url:"https://www.youtube.com/watch?v=qBBwe8dJIxk"},
+  {label:"Hot Cross Buns",url:"https://www.youtube.com/watch?v=WfRe-Hk10tI"},
+];
+const studyItems=[
+  {p:"reston",icon:"🗺️",title:"Southeast states",sub:"Reston · quiz ~Mon Oct 12 · 12 states",
+    info:{what:"Reston's next region quiz is the Southeast — 12 states with their capitals and postal abbreviations, plus finding each on the map.",
+      format:["The class starts Southeast this week (~3 weeks to learn it).","Estimated quiz: Monday, Oct 12 — confirm with the newsletter."],
+      links:[{label:"Open State Quest — Southeast",url:SQ+"#se"}],source:"4th Grade (Mrs. Flatness)"}},
+  {p:"hudson",icon:"✏️",title:"Spelling test — Ch. 4 (k, ck)",sub:"Hudson · this Friday · 12 words + dictation"},
+  {p:"hudson",icon:"📖",title:"Memory verse — Exodus 15:2",sub:"Hudson · this Friday · fill-in-the-blank",
+    info:{ref:"Exodus 15:2",text:"The Lord is my strength and my defense; he has become my salvation. He is my God, and I will praise him, my father's God, and I will exalt him.",
+      format:["Fill-in-the-blank on Friday — spelling doesn't count.","Practice saying it and filling in the missing words."],
+      links:[{label:"Open Memory Verse Practice",url:VS+"#hudson"}],source:"2nd Grade (Mrs. Gillette)"}},
+  {p:"reston",icon:"🎵",title:"Recorder practice",sub:"Reston · optional · play-along videos",
+    info:{what:"Play-along videos Mrs. Batson shared for 4th-grade recorder practice (the book can't be shared, for copyright).",
+      format:["The class plays as a team this fall; solos come in the spring.","The last two haven't been played in class yet."],
+      links:RECORDER_LINKS,note:"Optional home practice — no due date.",source:"Music (Mrs. Batson)"}},
+  {p:"reston",icon:"🗺️",title:"Midwest states",sub:"Reston · quiz ~Mon Nov 2 · 12 states",
+    info:{what:"Midwest region — 12 states, capitals, postal abbreviations, and map locations.",
+      format:["Comes after the Southeast.","Estimated quiz: Monday, Nov 2 — confirm with the newsletter."],
+      links:[{label:"Open State Quest — Midwest",url:SQ+"#mw"}],source:"4th Grade (Mrs. Flatness)"}},
+  {p:"reston",icon:"🗺️",title:"Southwest states",sub:"Reston · quiz ~Mon Nov 23 · 4 states",
+    info:{what:"Southwest region — 4 states (Arizona, New Mexico, Oklahoma, Texas), capitals, abbreviations, and map locations.",
+      format:["Estimated quiz: Monday, Nov 23 (Thanksgiving week — may shift)."],
+      links:[{label:"Open State Quest — Southwest",url:SQ+"#sw"}],source:"4th Grade (Mrs. Flatness)"}},
+  {p:"reston",icon:"🗺️",title:"West states",sub:"Reston · quiz ~Mon Dec 14 · 11 states",
+    info:{what:"West region — 11 states, capitals, abbreviations, and map locations (includes Alaska & Hawaii insets).",
+      format:["Estimated quiz: Monday, Dec 14 — confirm with the newsletter."],
+      links:[{label:"Open State Quest — West",url:SQ+"#west"}],source:"4th Grade (Mrs. Flatness)"}},
+  {p:"reston",icon:"✅",title:"Northeast states",sub:"Reston · quizzed Sep 14 · review anytime",
+    info:{what:"Northeast region — already quizzed on Sep 14. Keep it fresh with a quick review.",
+      format:["11 states, their capitals, and postal abbreviations."],
+      links:[{label:"Open State Quest — Northeast",url:SQ+"#ne"}],source:"4th Grade (Mrs. Flatness)"}},
 ];
 
 const el=(h)=>{const t=document.createElement("template");t.innerHTML=h.trim();return t.content.firstElementChild;};
@@ -437,7 +497,7 @@ function clickable(node,item){
   node.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openModal(item);}});
 }
 function openModal(item){
-  const info=matchInfo(item.title);
+  const info=item.info||matchInfo(item.title);
   const p=people[item.p]||{name:"",sub:"",c:"var(--other)"};
   const dateStr=item.d?item.d.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"}):"";
   const meta=item.meta||[item.timed?shortTime(item.d):"",item.loc].filter(Boolean).join(" · ");
@@ -496,6 +556,18 @@ let viewMonth=new Date(new Date().getFullYear(),new Date().getMonth(),1);
     clickable(r,{p:a.p,title:a.t,meta:a.why}); at.appendChild(r);
   });
   document.getElementById("attn-count").textContent=attention.length;
+
+  const sl=document.getElementById("study-list");
+  studyItems.forEach(it=>{
+    const c=el(`<button class="studycard" style="--p:${people[it.p].c}">
+      <span class="sicon">${it.icon}</span>
+      <span class="sbody"><span class="stitle">${esc(it.title)}</span><span class="ssub">${esc(it.sub||"")}</span></span>
+    </button>`);
+    c.addEventListener("click",()=>openModal(it));
+    sl.appendChild(c);
+  });
+  document.getElementById("study-count").textContent=studyItems.length+" to practice";
+
   const lg=document.getElementById("legend");
   Object.values(people).forEach(v=>lg.appendChild(el(
     `<span class="who" style="--p:${v.c}"><span class="sw"></span>${esc(v.name)}${v.sub?` <small>${esc(v.sub)}</small>`:""}</span>`)));

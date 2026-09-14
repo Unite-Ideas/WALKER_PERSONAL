@@ -593,6 +593,11 @@ function finishFind(r){
 }
 
 /* ---------- boot ---------- */
+(function(){
+  const raw=((location.hash||"").replace("#","")||(new URLSearchParams(location.search).get("region")||"")).toLowerCase();
+  const map={ne:"ne",northeast:"ne",se:"se",southeast:"se",mw:"mw",midwest:"mw",sw:"sw",southwest:"sw",west:"west"};
+  if(map[raw]) curRegion=map[raw];
+})();
 applyRegionColor(curRegion);
 renderRegions();
 renderRing();

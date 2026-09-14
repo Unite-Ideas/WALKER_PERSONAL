@@ -1,0 +1,263 @@
+<title>Memory Verse Practice</title>
+<style>
+  :root{
+    --bg:#F6F3EC; --surface:#FFFFFF; --surface-2:#F0EADD; --ink:#2A2723; --muted:#7B7264; --faint:#A99E8B;
+    --border:#E7DECC; --border-strong:#D8CDB6;
+    --accent:#3E6E8E; --accent-2:#C79A3A; --good:#2F9E5B; --good-bg:#E7F5EC; --bad:#C6501F;
+    --shadow:0 1px 2px rgba(40,32,16,.05),0 10px 26px rgba(40,32,16,.07);
+    --radius:16px;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --bg:#161C21; --surface:#1F272E; --surface-2:#28323A; --ink:#ECE6DA; --muted:#A2AAB2; --faint:#6E7A84;
+    --border:#2E3A44; --border-strong:#3C4B57;
+    --accent:#68A6C8; --accent-2:#E0BB5C; --good:#4BC077; --good-bg:#1B3325; --bad:#F07A4A;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 30px rgba(0,0,0,.35);
+  }}
+  :root[data-theme="dark"]{
+    --bg:#161C21; --surface:#1F272E; --surface-2:#28323A; --ink:#ECE6DA; --muted:#A2AAB2; --faint:#6E7A84;
+    --border:#2E3A44; --border-strong:#3C4B57;
+    --accent:#68A6C8; --accent-2:#E0BB5C; --good:#4BC077; --good-bg:#1B3325; --bad:#F07A4A;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:"Nunito",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding-block:clamp(16px,3vw,32px);padding-left:16px;padding-right:16px;display:flex;flex-direction:column;gap:18px}
+  h1,h2{font-family:"Fredoka","Nunito",sans-serif;margin:0;font-weight:600;text-wrap:balance}
+  button,input{font:inherit}
+
+  .head{display:flex;align-items:center;gap:14px}
+  .badge{width:50px;height:50px;border-radius:14px;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:1.6rem;flex:none;box-shadow:var(--shadow)}
+  .titles{display:flex;flex-direction:column;gap:2px}
+  .eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .titles h1{font-size:clamp(1.6rem,4.2vw,2.2rem);font-weight:700;line-height:1}
+
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{border:2px solid var(--border-strong);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 14px;cursor:pointer;font-weight:800;font-size:.88rem;display:inline-flex;flex-direction:column;line-height:1.15}
+  .chip small{font-weight:700;color:var(--muted);font-size:.72rem}
+  .chip[aria-selected="true"]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--surface))}
+  .chip:focus-visible,.tbtn:focus-visible,.blank:focus-visible,.binput:focus-visible,.seg button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+  .panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(18px,3vw,30px);display:flex;flex-direction:column;gap:18px}
+  .refrow{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .ref{font-family:"Fredoka",sans-serif;font-weight:600;font-size:1.25rem;color:var(--accent)}
+  .who{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+
+  .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .seg{display:inline-flex;background:var(--surface-2);border:1px solid var(--border);border-radius:11px;padding:3px}
+  .seg button{border:0;background:transparent;color:var(--muted);font-weight:800;font-size:.84rem;padding:7px 12px;border-radius:8px;cursor:pointer}
+  .seg button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+  .tbtn{border:2px solid var(--border-strong);background:var(--surface);color:var(--ink);font-weight:800;font-size:.86rem;border-radius:11px;padding:8px 13px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+  .tbtn:hover{border-color:var(--accent)}
+  .tbtn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .spacer{flex:1}
+  .count{font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;font-size:.9rem}
+
+  .verse{font-size:clamp(1.25rem,3.2vw,1.7rem);line-height:2.1;font-weight:600;letter-spacing:.01em}
+  .w{white-space:pre}
+  .blank{display:inline-flex;align-items:center;justify-content:center;min-width:2.4em;border:0;border-bottom:3px solid var(--accent);
+    background:color-mix(in srgb,var(--accent) 8%,transparent);color:transparent;cursor:pointer;border-radius:5px 5px 0 0;
+    font:inherit;font-weight:800;padding:0 .25em;line-height:1.5;vertical-align:baseline;transition:background .12s}
+  .blank:hover{background:color-mix(in srgb,var(--accent) 20%,transparent)}
+  .blank.shown{color:var(--good);border-bottom-color:var(--good);background:var(--good-bg);cursor:default}
+  .binput{min-width:3em;width:var(--w,4em);border:0;border-bottom:3px solid var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);
+    color:var(--ink);font:inherit;font-weight:800;text-align:center;padding:0 .2em;border-radius:5px 5px 0 0;line-height:1.5}
+  .binput:focus{outline:none;background:color-mix(in srgb,var(--accent) 16%,transparent)}
+  .binput.ok{color:var(--good);border-bottom-color:var(--good);background:var(--good-bg)}
+  .binput.almost{border-bottom-color:var(--accent-2);background:color-mix(in srgb,var(--accent-2) 14%,transparent)}
+
+  .hint{color:var(--muted);font-weight:700;font-size:.9rem;line-height:1.5}
+  .done-msg{color:var(--good);font-weight:800;font-size:1.05rem}
+  .foot{text-align:center;color:var(--faint);font-size:.8rem;line-height:1.5}
+  .note{font-size:.85rem;color:var(--muted);background:var(--surface-2);border:1px dashed var(--border-strong);border-radius:12px;padding:11px 14px;line-height:1.5}
+</style>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap">
+
+<div class="wrap">
+  <header class="head">
+    <div class="badge">📖</div>
+    <div class="titles">
+      <span class="eyebrow">New Covenant Academy</span>
+      <h1>Memory Verse Practice</h1>
+    </div>
+  </header>
+
+  <div class="chips" id="verse-chips" role="tablist" aria-label="Choose a verse"></div>
+
+  <section class="panel">
+    <div class="refrow">
+      <span class="ref" id="ref">—</span>
+      <span class="who" id="who"></span>
+    </div>
+
+    <div class="controls">
+      <div class="seg" role="tablist" aria-label="Difficulty">
+        <button data-diff="0.25" role="tab">Easy</button>
+        <button data-diff="0.45" role="tab" aria-selected="true">Medium</button>
+        <button data-diff="0.7" role="tab">Hard</button>
+      </div>
+      <div class="seg" role="tablist" aria-label="Mode">
+        <button data-mode="reveal" role="tab" aria-selected="true">Tap to reveal</button>
+        <button data-mode="type" role="tab">Type it</button>
+      </div>
+      <span class="spacer"></span>
+      <span class="count" id="count"></span>
+    </div>
+
+    <div class="verse" id="verse" aria-live="polite"></div>
+
+    <div class="controls">
+      <button class="tbtn primary" id="scramble">🔀 New blanks</button>
+      <button class="tbtn" id="reveal">👁 Reveal all</button>
+      <button class="tbtn" id="reset">↺ Clear</button>
+      <span class="spacer"></span>
+      <span class="done-msg" id="donemsg" hidden>✓ Verse complete!</span>
+    </div>
+
+    <p class="hint" id="hint">Say the verse out loud. Tap each blank to check the missing word — spelling doesn't count.</p>
+  </section>
+
+  <p class="note">Tip: start on <b>Easy</b> and work up to <b>Hard</b> as it gets easier. Tap <b>🔀 New blanks</b> to blank different words each time. In <b>Type it</b> mode, small spelling slips still count as correct.</p>
+  <p class="foot">Memory verses are tested on Fridays · fill-in-the-blank · spelling doesn't count.</p>
+</div>
+
+<script>
+const VERSES=[
+  {who:"Hudson · this week",tag:"hudson",ref:"Exodus 15:2",text:"The Lord is my strength and my defense; he has become my salvation. He is my God, and I will praise him, my father's God, and I will exalt him."},
+  {who:"Reston · this week",tag:"reston",ref:"2 Timothy 2:15",text:"Do your best to present yourself to God as one approved, a worker who does not need to be ashamed and who correctly handles the word of truth."},
+  {who:"Hudson · earlier",tag:"hudson",ref:"Exodus 4:12",text:"Now go; I will help you speak and will teach you what to say."},
+  {who:"Hudson · earlier",tag:"hudson",ref:"James 5:16",text:"Therefore confess your sins to each other and pray for each other so that you may be healed. The prayer of a righteous person is powerful and effective."},
+];
+
+const $=(s,r=document)=>r.querySelector(s);
+const esc=(s)=>(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let vIdx=0, diff=0.45, mode="reveal", tokens=[], blanks=new Set();
+
+/* split into tokens; each: {lead, core, trail, isWord} */
+function tokenize(text){
+  return text.split(/(\s+)/).map(chunk=>{
+    if(/^\s+$/.test(chunk)) return {space:chunk};
+    const m=chunk.match(/^([^A-Za-z']*)([A-Za-z][A-Za-z']*)?([^A-Za-z']*)$/);
+    if(!m||!m[2]) return {lead:chunk,core:"",trail:"",isWord:false};
+    return {lead:m[1]||"",core:m[2],trail:m[3]||"",isWord:true};
+  });
+}
+function wordIdxs(){return tokens.map((t,i)=>t.isWord?i:-1).filter(i=>i>=0);}
+function pickBlanks(){
+  const idxs=wordIdxs();
+  const n=Math.max(1,Math.round(idxs.length*diff));
+  const shuffled=idxs.slice();
+  for(let i=shuffled.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];}
+  blanks=new Set(shuffled.slice(0,n));
+}
+
+/* lenient compare — spelling doesn't count */
+const norm=s=>(s||"").toLowerCase().replace(/[^a-z']/g,"");
+function lev(a,b){
+  const m=a.length,n=b.length;if(!m)return n;if(!n)return m;
+  const d=Array.from({length:m+1},(_,i)=>[i,...Array(n).fill(0)]);
+  for(let j=0;j<=n;j++)d[0][j]=j;
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)
+    d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  return d[m][n];
+}
+function closeEnough(typed,answer){
+  const t=norm(typed),a=norm(answer);
+  if(!t)return false;
+  if(t===a)return true;
+  return lev(t,a)<=Math.max(1,Math.floor(a.length/4));
+}
+
+function render(){
+  const v=VERSES[vIdx];
+  $("#ref").textContent=v.ref;
+  $("#who").textContent=v.who;
+  const box=$("#verse");box.innerHTML="";
+  tokens.forEach((t,i)=>{
+    if(t.space){box.appendChild(document.createTextNode(t.space));return;}
+    if(t.isWord && blanks.has(i)){
+      if(t.lead) box.appendChild(document.createTextNode(t.lead));
+      if(mode==="reveal"){
+        const b=document.createElement("button");
+        b.className="blank";b.type="button";b.dataset.i=i;
+        b.style.minWidth=Math.max(2.2,t.core.length*0.62)+"em";
+        b.setAttribute("aria-label","blank, tap to reveal");
+        b.textContent=" ";
+        b.addEventListener("click",()=>{b.textContent=t.core;b.classList.add("shown");updateCount();});
+        box.appendChild(b);
+      }else{
+        const inp=document.createElement("input");
+        inp.className="binput";inp.dataset.i=i;inp.setAttribute("autocomplete","off");
+        inp.setAttribute("aria-label","type the missing word");
+        inp.style.setProperty("--w",Math.max(3,t.core.length*0.82)+"em");
+        inp.addEventListener("input",()=>{
+          const ok=closeEnough(inp.value,t.core);
+          inp.classList.toggle("ok",ok);
+          inp.classList.toggle("almost",!ok && norm(inp.value).length>=Math.max(2,t.core.length-2) && lev(norm(inp.value),norm(t.core))<=Math.max(2,Math.floor(t.core.length/3)));
+          updateCount();
+        });
+        box.appendChild(inp);
+      }
+      if(t.trail) box.appendChild(document.createTextNode(t.trail));
+    }else{
+      const span=document.createElement("span");span.className="w";span.textContent=(t.lead||"")+(t.core||"")+(t.trail||"");
+      box.appendChild(span);
+    }
+  });
+  updateCount();
+}
+function updateCount(){
+  const total=blanks.size;
+  let done=0;
+  if(mode==="reveal") done=$("#verse").querySelectorAll(".blank.shown").length;
+  else done=$("#verse").querySelectorAll(".binput.ok").length;
+  $("#count").textContent=done+" / "+total+" words";
+  $("#donemsg").hidden = !(total>0 && done===total);
+}
+
+function newRound(){pickBlanks();render();}
+function loadVerse(i){vIdx=i;tokens=tokenize(VERSES[i].text);newRound();
+  document.querySelectorAll("#verse-chips .chip").forEach((c,ci)=>c.setAttribute("aria-selected",ci===i));}
+
+/* chips */
+(function(){
+  const box=$("#verse-chips");
+  VERSES.forEach((v,i)=>{
+    const c=document.createElement("button");c.className="chip";c.setAttribute("role","tab");
+    c.innerHTML=`${esc(v.ref)}<small>${esc(v.who)}</small>`;
+    c.addEventListener("click",()=>loadVerse(i));
+    box.appendChild(c);
+  });
+})();
+
+/* difficulty + mode segments */
+document.querySelectorAll("[data-diff]").forEach(b=>b.addEventListener("click",()=>{
+  diff=parseFloat(b.dataset.diff);
+  document.querySelectorAll("[data-diff]").forEach(x=>x.setAttribute("aria-selected",x===b));
+  newRound();
+}));
+document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>{
+  mode=b.dataset.mode;
+  document.querySelectorAll("[data-mode]").forEach(x=>x.setAttribute("aria-selected",x===b));
+  $("#hint").textContent = mode==="reveal"
+    ? "Say the verse out loud. Tap each blank to check the missing word — spelling doesn't count."
+    : "Type each missing word. Close spelling still counts — say the whole verse as you go.";
+  render();
+}));
+
+$("#scramble").addEventListener("click",newRound);
+$("#reveal").addEventListener("click",()=>{
+  if(mode==="reveal"){$("#verse").querySelectorAll(".blank").forEach(b=>{b.textContent=tokens[+b.dataset.i].core;b.classList.add("shown");});}
+  else{$("#verse").querySelectorAll(".binput").forEach(inp=>{inp.value=tokens[+inp.dataset.i].core;inp.classList.add("ok");inp.classList.remove("almost");});}
+  updateCount();
+});
+$("#reset").addEventListener("click",render);
+
+/* deep-link: #hudson / #reston picks that child's current verse */
+(function(){
+  const h=(location.hash||"").replace("#","").toLowerCase();
+  if(h){const i=VERSES.findIndex(v=>v.tag===h);if(i>=0){loadVerse(i);return;}}
+  loadVerse(0);
+})();
+</script>
