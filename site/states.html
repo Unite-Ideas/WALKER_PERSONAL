@@ -1,0 +1,572 @@
+<title>Reston's State Quest</title>
+<style>
+  :root{
+    --bg:#FBF7EF; --surface:#FFFFFF; --surface-2:#F6EFE0;
+    --ink:#2A2620; --muted:#7C7263; --faint:#A79C89;
+    --border:#EAE1CE; --border-strong:#DDD1B8;
+    --navy:#24506B;
+    --ne:#2E9E96; --se:#E4703A; --mw:#4E9A51; --sw:#D99A1E; --west:#7E5AA2;
+    --good:#2F9E5B; --good-bg:#E7F5EC;
+    --bad:#C6501F; --bad-bg:#FBEADF;
+    --accent:var(--region,#24506B);
+    --shadow:0 1px 2px rgba(40,32,16,.05),0 10px 26px rgba(40,32,16,.07);
+    --shadow-lg:0 24px 60px rgba(40,32,16,.18);
+    --radius:16px;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --bg:#151E26; --surface:#1E2A34; --surface-2:#26333E;
+    --ink:#EDE7DA; --muted:#A2AAB2; --faint:#6F7B85;
+    --border:#2E3D48; --border-strong:#3C4E5B;
+    --navy:#7FB4D2;
+    --ne:#38C0B6; --se:#F5895A; --mw:#68C06C; --sw:#EFBB44; --west:#A67FCB;
+    --good:#4BC077; --good-bg:#1B3325;
+    --bad:#F07A4A; --bad-bg:#3A2018;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 30px rgba(0,0,0,.35);
+    --shadow-lg:0 24px 60px rgba(0,0,0,.5);
+  }}
+  :root[data-theme="dark"]{
+    --bg:#151E26; --surface:#1E2A34; --surface-2:#26333E;
+    --ink:#EDE7DA; --muted:#A2AAB2; --faint:#6F7B85;
+    --border:#2E3D48; --border-strong:#3C4E5B;
+    --navy:#7FB4D2;
+    --ne:#38C0B6; --se:#F5895A; --mw:#68C06C; --sw:#EFBB44; --west:#A67FCB;
+    --good:#4BC077; --good-bg:#1B3325;
+    --bad:#F07A4A; --bad-bg:#3A2018;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 30px rgba(0,0,0,.35);
+    --shadow-lg:0 24px 60px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);
+    font-family:"Nunito",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding-block:clamp(16px,3vw,32px);padding-left:16px;padding-right:16px;
+    display:flex;flex-direction:column;gap:20px}
+  h1,h2,h3{font-family:"Fredoka","Nunito",sans-serif;margin:0;font-weight:600;text-wrap:balance}
+  button{font:inherit}
+
+  /* ---- header ---- */
+  .head{display:flex;align-items:center;gap:16px 20px;flex-wrap:wrap}
+  .badge-map{width:52px;height:52px;border-radius:14px;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:1.7rem;flex:none;box-shadow:var(--shadow)}
+  .titles{display:flex;flex-direction:column;gap:2px;flex:1;min-width:180px}
+  .eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .titles h1{font-size:clamp(1.7rem,4.5vw,2.5rem);font-weight:700;line-height:1}
+  .ring{display:flex;align-items:center;gap:10px}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .lbl{font-size:.8rem;font-weight:700;color:var(--muted);line-height:1.2}
+  .ring .lbl b{display:block;font-family:"Fredoka",sans-serif;font-size:1.15rem;color:var(--ink)}
+
+  /* ---- region chips ---- */
+  .regions{display:flex;gap:8px;flex-wrap:wrap}
+  .rchip{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--border-strong);background:var(--surface);
+    color:var(--ink);border-radius:999px;padding:7px 14px 7px 11px;cursor:pointer;font-weight:800;font-size:.9rem;
+    transition:transform .1s ease}
+  .rchip:hover{transform:translateY(-1px)}
+  .rchip .dot{width:12px;height:12px;border-radius:99px;background:var(--rc);flex:none}
+  .rchip[aria-selected="true"]{border-color:var(--rc);background:color-mix(in srgb,var(--rc) 14%,var(--surface))}
+  .rchip .st{font-size:.72rem;font-weight:800;color:var(--muted)}
+  .rchip.done .st{color:var(--good)}
+  .rchip:focus-visible,.tab:focus-visible,.opt:focus-visible,.tile:focus-visible,.mini:focus-visible,.fc:focus-visible,.btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+  /* ---- tabs ---- */
+  .tabs{display:flex;gap:4px;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:4px;align-self:flex-start;flex-wrap:wrap}
+  .tab{border:0;background:transparent;color:var(--muted);font-weight:800;padding:9px 16px;border-radius:10px;cursor:pointer;font-size:.92rem}
+  .tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+
+  .panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(16px,2.5vw,26px)}
+  .note{font-size:.82rem;color:var(--muted);line-height:1.5;background:var(--surface-2);border:1px dashed var(--border-strong);border-radius:12px;padding:11px 14px}
+  .note b{color:var(--ink)}
+
+  /* ---- LEARN grid ---- */
+  .learn-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+  .learn-top h2{font-size:1.3rem}
+  .learn-top .cnt{color:var(--muted);font-weight:800;font-size:.9rem}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+  .scard{border:1px solid var(--border);border-left:5px solid var(--accent);border-radius:13px;background:var(--surface-2);
+    padding:13px 15px;display:flex;flex-direction:column;gap:6px;position:relative}
+  .scard .nm{font-family:"Fredoka",sans-serif;font-size:1.2rem;font-weight:600;line-height:1.05}
+  .scard .cap{font-size:.95rem;color:var(--muted);font-weight:700}
+  .scard .cap b{color:var(--ink)}
+  .scard .abbr{position:absolute;top:11px;right:12px;font-family:"Fredoka",sans-serif;font-weight:600;font-size:.85rem;
+    letter-spacing:.04em;color:#fff;background:var(--accent);border-radius:7px;padding:3px 8px}
+  .scard.mastered::after{content:"★";position:absolute;bottom:10px;right:12px;color:var(--sw);font-size:1rem}
+
+  /* ---- FLASHCARDS ---- */
+  .fcwrap{display:flex;flex-direction:column;align-items:center;gap:18px}
+  .fcstage{perspective:1200px;width:min(100%,420px)}
+  .fc{width:100%;aspect-ratio:3/2;position:relative;cursor:pointer;border:0;background:transparent;padding:0}
+  .fcface{position:absolute;inset:0;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+    backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:var(--shadow);border:1px solid var(--border);padding:20px;text-align:center}
+  .fcfront{background:var(--surface);color:var(--ink)}
+  .fcfront .nm{font-family:"Fredoka",sans-serif;font-size:clamp(1.8rem,6vw,2.6rem);font-weight:600;line-height:1.05}
+  .fcfront .hint{font-size:.82rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .fcback{background:var(--accent);color:#fff;transform:rotateY(180deg)}
+  .fcback .k{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+  .fcback .cap{font-family:"Fredoka",sans-serif;font-size:clamp(1.5rem,5vw,2.1rem);font-weight:600;line-height:1.1}
+  .fcback .ab{font-family:"Fredoka",sans-serif;font-size:1.4rem;font-weight:600;letter-spacing:.14em;border:2px solid rgba(255,255,255,.5);border-radius:9px;padding:2px 12px;margin-top:4px}
+  .fc.flip .fcfront{transform:rotateY(180deg)}
+  .fc .fcface{transition:transform .5s cubic-bezier(.3,.8,.3,1)}
+  .fc.flip .fcback{transform:rotateY(360deg)}
+  .fc:not(.flip) .fcback{transform:rotateY(180deg)}
+  .fc.flip .fcfront{transform:rotateY(180deg)}
+  @media (prefers-reduced-motion:reduce){.fc .fcface{transition:none}}
+  .fcctl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+  .pos{font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;min-width:64px;text-align:center}
+
+  .btn{border:2px solid var(--border-strong);background:var(--surface);color:var(--ink);font-weight:800;border-radius:11px;padding:9px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+  .btn:hover{border-color:var(--accent)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.primary:hover{filter:brightness(1.07)}
+
+  /* ---- QUIZ ---- */
+  .quiz{display:flex;flex-direction:column;gap:18px}
+  .qbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .prog{flex:1;min-width:140px;height:10px;border-radius:99px;background:var(--surface-2);overflow:hidden;border:1px solid var(--border)}
+  .prog i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s ease}
+  .stat{font-weight:800;font-size:.9rem;color:var(--muted);display:flex;gap:5px;align-items:center}
+  .stat b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .streak{color:var(--sw)}
+  .qcard{text-align:center;display:flex;flex-direction:column;gap:6px;padding:8px 0 4px}
+  .qkind{font-size:.74rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  .qq{font-family:"Fredoka",sans-serif;font-size:clamp(1.5rem,4.5vw,2.1rem);font-weight:600;line-height:1.12}
+  .qq .big{color:var(--accent)}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:480px){.opts{grid-template-columns:1fr}}
+  .opt{border:2px solid var(--border-strong);background:var(--surface-2);color:var(--ink);border-radius:13px;padding:15px;cursor:pointer;font-weight:800;font-size:1.05rem;text-align:center;transition:transform .08s ease}
+  .opt:hover:not(:disabled){transform:translateY(-2px);border-color:var(--accent)}
+  .opt:disabled{cursor:default}
+  .opt.correct{background:var(--good-bg);border-color:var(--good);color:var(--good)}
+  .opt.wrong{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+  .feedback{min-height:26px;text-align:center;font-weight:800}
+  .feedback.ok{color:var(--good)}
+  .feedback.no{color:var(--bad)}
+
+  /* ---- MAP ---- */
+  .maptop{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+  .prompt{font-family:"Fredoka",sans-serif;font-weight:600;font-size:1.15rem}
+  .prompt .big{color:var(--accent)}
+  .gridmap{display:grid;gap:8px;justify-content:center;margin:0 auto}
+  .tile{aspect-ratio:1;border:2px solid var(--border-strong);background:var(--surface-2);border-radius:11px;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-family:"Fredoka",sans-serif;font-weight:600;color:var(--ink);min-width:0;padding:2px}
+  .tile .ta{font-size:clamp(.8rem,2.4vw,1.1rem);letter-spacing:.03em}
+  .tile .tc{font-size:.6rem;font-weight:700;color:var(--muted);line-height:1;text-align:center;overflow:hidden;text-overflow:ellipsis;max-width:100%;white-space:nowrap}
+  .tile.play{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--surface))}
+  .tile.correct{background:var(--good);border-color:var(--good);color:#fff}
+  .tile.wrong{background:var(--bad);border-color:var(--bad);color:#fff;animation:shake .4s}
+  .tile.dim{opacity:.4}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  @media (prefers-reduced-motion:reduce){.tile.wrong{animation:none}}
+  .maphint{margin-top:14px;text-align:center;color:var(--muted);font-weight:700;font-size:.9rem}
+
+  /* ---- end screen ---- */
+  .done{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;padding:12px 0}
+  .done .stars{font-size:2.4rem;letter-spacing:6px}
+  .done h2{font-size:1.8rem}
+  .done .score{font-family:"Fredoka",sans-serif;font-size:1.2rem;color:var(--muted)}
+  .done .score b{color:var(--ink)}
+
+  .foot{text-align:center;color:var(--faint);font-size:.8rem;line-height:1.5}
+</style>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap">
+
+<div class="wrap">
+  <header class="head">
+    <div class="badge-map">🗺️</div>
+    <div class="titles">
+      <span class="eyebrow" id="eyebrow">4th Grade Geography · NCA</span>
+      <h1>Reston's State Quest</h1>
+    </div>
+    <div class="ring">
+      <svg width="52" height="52" viewBox="0 0 52 52">
+        <circle cx="26" cy="26" r="22" fill="none" stroke="var(--border)" stroke-width="7"/>
+        <circle id="ring-fg" cx="26" cy="26" r="22" fill="none" stroke="var(--accent)" stroke-width="7" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="138.2"/>
+      </svg>
+      <div class="lbl"><b id="ring-num">0/0</b>mastered</div>
+    </div>
+  </header>
+
+  <div class="regions" id="regions" role="tablist" aria-label="Region"></div>
+
+  <div class="tabs" role="tablist" aria-label="Study mode">
+    <button class="tab" role="tab" data-mode="learn" aria-selected="true">📖 Learn</button>
+    <button class="tab" role="tab" data-mode="cards" aria-selected="false">🃏 Flashcards</button>
+    <button class="tab" role="tab" data-mode="quiz" aria-selected="false">❓ Quiz</button>
+    <button class="tab" role="tab" data-mode="map" aria-selected="false">📍 Find It</button>
+  </div>
+
+  <section class="panel" id="stage"></section>
+
+  <p class="foot">
+    Tested each region: <b>find the state on the map · its capital · its postal abbreviation</b>.
+    Progress saves on this device. Region lists follow the standard 5-region model — if Mrs. Flatness's map groups a state differently, tell Dad and he'll fix it.
+  </p>
+</div>
+
+<script>
+/* =========================================================================
+   DATA — the 5 U.S. regions. pos:[row,col] places the state on its region's
+   study map (a simplified grid, roughly geographic — not a real outline).
+   ========================================================================= */
+const REGIONS={
+  ne:{name:"Northeast",color:"var(--ne)",done:true,states:[
+    {a:"ME",n:"Maine",c:"Augusta",pos:[0,4]},
+    {a:"VT",n:"Vermont",c:"Montpelier",pos:[0,2]},
+    {a:"NH",n:"New Hampshire",c:"Concord",pos:[0,3]},
+    {a:"NY",n:"New York",c:"Albany",pos:[1,1]},
+    {a:"MA",n:"Massachusetts",c:"Boston",pos:[1,3]},
+    {a:"RI",n:"Rhode Island",c:"Providence",pos:[1,4]},
+    {a:"CT",n:"Connecticut",c:"Hartford",pos:[2,3]},
+    {a:"PA",n:"Pennsylvania",c:"Harrisburg",pos:[2,1]},
+    {a:"NJ",n:"New Jersey",c:"Trenton",pos:[2,2]},
+    {a:"MD",n:"Maryland",c:"Annapolis",pos:[3,1]},
+    {a:"DE",n:"Delaware",c:"Dover",pos:[3,2]},
+  ]},
+  se:{name:"Southeast",color:"var(--se)",current:true,states:[
+    {a:"KY",n:"Kentucky",c:"Frankfort",pos:[0,2]},
+    {a:"WV",n:"West Virginia",c:"Charleston",pos:[0,3]},
+    {a:"VA",n:"Virginia",c:"Richmond",pos:[0,4]},
+    {a:"AR",n:"Arkansas",c:"Little Rock",pos:[1,0]},
+    {a:"TN",n:"Tennessee",c:"Nashville",pos:[1,2]},
+    {a:"NC",n:"North Carolina",c:"Raleigh",pos:[1,4]},
+    {a:"MS",n:"Mississippi",c:"Jackson",pos:[2,1]},
+    {a:"AL",n:"Alabama",c:"Montgomery",pos:[2,2]},
+    {a:"GA",n:"Georgia",c:"Atlanta",pos:[2,3]},
+    {a:"SC",n:"South Carolina",c:"Columbia",pos:[2,4]},
+    {a:"LA",n:"Louisiana",c:"Baton Rouge",pos:[3,1]},
+    {a:"FL",n:"Florida",c:"Tallahassee",pos:[3,3]},
+  ]},
+  mw:{name:"Midwest",color:"var(--mw)",states:[
+    {a:"ND",n:"North Dakota",c:"Bismarck",pos:[0,1]},
+    {a:"MN",n:"Minnesota",c:"St. Paul",pos:[0,2]},
+    {a:"WI",n:"Wisconsin",c:"Madison",pos:[0,3]},
+    {a:"MI",n:"Michigan",c:"Lansing",pos:[0,5]},
+    {a:"SD",n:"South Dakota",c:"Pierre",pos:[1,1]},
+    {a:"IA",n:"Iowa",c:"Des Moines",pos:[1,2]},
+    {a:"IL",n:"Illinois",c:"Springfield",pos:[1,3]},
+    {a:"IN",n:"Indiana",c:"Indianapolis",pos:[1,4]},
+    {a:"OH",n:"Ohio",c:"Columbus",pos:[1,5]},
+    {a:"NE",n:"Nebraska",c:"Lincoln",pos:[2,1]},
+    {a:"MO",n:"Missouri",c:"Jefferson City",pos:[2,2]},
+    {a:"KS",n:"Kansas",c:"Topeka",pos:[3,1]},
+  ]},
+  sw:{name:"Southwest",color:"var(--sw)",states:[
+    {a:"OK",n:"Oklahoma",c:"Oklahoma City",pos:[0,2]},
+    {a:"AZ",n:"Arizona",c:"Phoenix",pos:[1,0]},
+    {a:"NM",n:"New Mexico",c:"Santa Fe",pos:[1,1]},
+    {a:"TX",n:"Texas",c:"Austin",pos:[1,2]},
+  ]},
+  west:{name:"West",color:"var(--west)",states:[
+    {a:"WA",n:"Washington",c:"Olympia",pos:[0,1]},
+    {a:"MT",n:"Montana",c:"Helena",pos:[0,3]},
+    {a:"OR",n:"Oregon",c:"Salem",pos:[1,1]},
+    {a:"ID",n:"Idaho",c:"Boise",pos:[1,2]},
+    {a:"WY",n:"Wyoming",c:"Cheyenne",pos:[1,3]},
+    {a:"CA",n:"California",c:"Sacramento",pos:[2,0]},
+    {a:"NV",n:"Nevada",c:"Carson City",pos:[2,1]},
+    {a:"UT",n:"Utah",c:"Salt Lake City",pos:[2,2]},
+    {a:"CO",n:"Colorado",c:"Denver",pos:[2,3]},
+    {a:"AK",n:"Alaska",c:"Juneau",pos:[3,0]},
+    {a:"HI",n:"Hawaii",c:"Honolulu",pos:[3,1]},
+  ]},
+};
+const ORDER=["ne","se","mw","sw","west"];
+const MASTERY_GOAL=3; // correct answers to "master" a state
+
+/* ---------- persistence (per device) ---------- */
+function loadStore(){try{return JSON.parse(localStorage.getItem("stateQuest")||"{}");}catch(e){return {};}}
+function saveStore(s){try{localStorage.setItem("stateQuest",JSON.stringify(s));}catch(e){}}
+let store=loadStore();
+function scoreFor(rk,a){return (store[rk]&&store[rk][a])||0;}
+function bump(rk,a){store[rk]=store[rk]||{};store[rk][a]=Math.min(MASTERY_GOAL,(store[rk][a]||0)+1);saveStore(store);}
+
+/* ---------- state ---------- */
+let curRegion="se", curMode="learn";
+const $=(s,r=document)=>r.querySelector(s);
+const esc=(s)=>(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const shuffle=(arr)=>{const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const setAccent=(rk)=>document.documentElement.style.setProperty("--region",getComputedStyle(document.documentElement).getPropertyValue(REGIONS[rk].color.replace("var(","").replace(")","").trim())||"#24506B");
+
+function applyRegionColor(rk){
+  // resolve region color to a concrete value for --region
+  const probe=document.createElement("span");probe.style.color=REGIONS[rk].color;document.body.appendChild(probe);
+  const val=getComputedStyle(probe).color;probe.remove();
+  document.documentElement.style.setProperty("--region",val);
+}
+
+/* ---------- header: region chips + ring ---------- */
+function renderRegions(){
+  const box=$("#regions");box.innerHTML="";
+  ORDER.forEach(rk=>{
+    const r=REGIONS[rk];
+    const mastered=r.states.filter(s=>scoreFor(rk,s.a)>=MASTERY_GOAL).length;
+    const all=mastered===r.states.length;
+    const status=r.current?"◀ up next":r.done?"done in class":"";
+    const chip=document.createElement("button");
+    chip.className="rchip"+(all?" done":"");
+    chip.setAttribute("role","tab");
+    chip.setAttribute("aria-selected",rk===curRegion);
+    chip.style.setProperty("--rc",getComputedStyle(document.documentElement).getPropertyValue("--"+rk));
+    chip.innerHTML=`<span class="dot"></span><span>${r.name}</span><span class="st">${all?"★ "+mastered+"/"+r.states.length:(status||mastered+"/"+r.states.length)}</span>`;
+    chip.addEventListener("click",()=>{curRegion=rk;applyRegionColor(rk);renderRegions();renderRing();render();});
+    box.appendChild(chip);
+  });
+}
+function renderRing(){
+  const r=REGIONS[curRegion];
+  const mastered=r.states.filter(s=>scoreFor(curRegion,s.a)>=MASTERY_GOAL).length;
+  const frac=r.states.length?mastered/r.states.length:0;
+  const C=2*Math.PI*22;
+  $("#ring-fg").style.strokeDasharray=C;
+  $("#ring-fg").style.strokeDashoffset=C*(1-frac);
+  $("#ring-num").textContent=mastered+"/"+r.states.length;
+  $("#eyebrow").textContent="4th Grade Geography · "+r.name;
+}
+
+/* ---------- tabs ---------- */
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
+  curMode=t.dataset.mode;
+  document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===t));
+  render();
+}));
+
+/* ======================= RENDER PER MODE ======================= */
+function render(){
+  const r=REGIONS[curRegion];
+  if(curMode==="learn") renderLearn(r);
+  else if(curMode==="cards") renderCards(r);
+  else if(curMode==="quiz") renderQuiz(r);
+  else renderMap(r);
+}
+
+/* ---- LEARN ---- */
+function renderLearn(r){
+  const mastered=r.states.filter(s=>scoreFor(curRegion,s.a)>=MASTERY_GOAL).length;
+  const cards=r.states.map(s=>{
+    const m=scoreFor(curRegion,s.a)>=MASTERY_GOAL?" mastered":"";
+    return `<div class="scard${m}">
+      <span class="abbr">${s.a}</span>
+      <span class="nm">${esc(s.n)}</span>
+      <span class="cap">Capital: <b>${esc(s.c)}</b></span>
+    </div>`;
+  }).join("");
+  $("#stage").innerHTML=`
+    <div class="learn-top">
+      <h2>${r.name} — ${r.states.length} states</h2>
+      <span class="cnt">★ ${mastered} mastered</span>
+    </div>
+    <div class="note">Learn each state's <b>name</b>, its <b>capital</b>, and its <b>postal abbreviation</b> (the 2 letters). Then try Flashcards, Quiz, and Find It. ${r.current?"<b>This is the region Reston is on now.</b>":r.done?"Already quizzed in class — keep it fresh!":""}</div>
+    <div class="cards" style="margin-top:16px">${cards}</div>`;
+}
+
+/* ---- FLASHCARDS ---- */
+let fcDeck=[],fcIdx=0,fcFlip=false;
+function renderCards(r){
+  fcDeck=shuffle(r.states);fcIdx=0;fcFlip=false;
+  $("#stage").innerHTML=`
+    <div class="fcwrap">
+      <div class="fcstage">
+        <button class="fc" id="fc" aria-label="Flashcard, tap to flip">
+          <div class="fcface fcfront"><span class="hint">State</span><span class="nm" id="fc-front"></span></div>
+          <div class="fcface fcback"><span class="k">Capital</span><span class="cap" id="fc-cap"></span><span class="ab" id="fc-ab"></span></div>
+        </button>
+      </div>
+      <div class="fcctl">
+        <button class="btn" id="fc-prev">‹ Back</button>
+        <span class="pos" id="fc-pos"></span>
+        <button class="btn primary" id="fc-next">Next ›</button>
+      </div>
+      <div class="fcctl">
+        <button class="btn" id="fc-flip">↻ Flip</button>
+        <button class="btn" id="fc-shuffle">🔀 Shuffle</button>
+      </div>
+    </div>`;
+  const fc=$("#fc");
+  const paint=()=>{
+    const s=fcDeck[fcIdx];
+    $("#fc-front").textContent=s.n;
+    $("#fc-cap").textContent=s.c;
+    $("#fc-ab").textContent=s.a;
+    $("#fc-pos").textContent=(fcIdx+1)+" / "+fcDeck.length;
+    fcFlip=false;fc.classList.remove("flip");
+  };
+  const doFlip=()=>{fcFlip=!fcFlip;fc.classList.toggle("flip",fcFlip);};
+  fc.addEventListener("click",doFlip);
+  $("#fc-flip").addEventListener("click",doFlip);
+  $("#fc-next").addEventListener("click",()=>{fcIdx=(fcIdx+1)%fcDeck.length;paint();});
+  $("#fc-prev").addEventListener("click",()=>{fcIdx=(fcIdx-1+fcDeck.length)%fcDeck.length;paint();});
+  $("#fc-shuffle").addEventListener("click",()=>{fcDeck=shuffle(r.states);fcIdx=0;paint();});
+  paint();
+}
+
+/* ---- QUIZ ---- */
+let quizQs=[],qi=0,qScore=0,qStreak=0,qBest=0;
+function buildQuestions(r){
+  const st=shuffle(r.states);
+  return st.map((s,i)=>{
+    const kind=["capital","abbr","state"][i%3];
+    let q,answer,pool;
+    if(kind==="capital"){
+      q=`What is the capital of <span class="big">${esc(s.n)}</span>?`;answer=s.c;
+      pool=shuffle(r.states.filter(x=>x.a!==s.a)).slice(0,3).map(x=>x.c);
+    }else if(kind==="abbr"){
+      q=`What is the postal abbreviation for <span class="big">${esc(s.n)}</span>?`;answer=s.a;
+      pool=shuffle(r.states.filter(x=>x.a!==s.a)).slice(0,3).map(x=>x.a);
+    }else{
+      q=`<span class="big">${esc(s.c)}</span> is the capital of which state?`;answer=s.n;
+      pool=shuffle(r.states.filter(x=>x.a!==s.a)).slice(0,3).map(x=>x.n);
+    }
+    return {kind,q,answer,options:shuffle(pool.concat(answer)),abbr:s.a,label:kind==="capital"?"Capital":kind==="abbr"?"Abbreviation":"Name the state"};
+  });
+}
+function renderQuiz(r){
+  quizQs=buildQuestions(r);qi=0;qScore=0;qStreak=0;qBest=0;
+  $("#stage").innerHTML=`
+    <div class="quiz">
+      <div class="qbar">
+        <span class="stat">Q <b id="q-n">1</b>/<b>${quizQs.length}</b></span>
+        <div class="prog"><i id="q-prog"></i></div>
+        <span class="stat">✓ <b id="q-score">0</b></span>
+        <span class="stat streak">🔥 <b id="q-streak">0</b></span>
+      </div>
+      <div class="qcard"><span class="qkind" id="q-kind"></span><div class="qq" id="q-q"></div></div>
+      <div class="opts" id="q-opts"></div>
+      <div class="feedback" id="q-fb"></div>
+    </div>`;
+  paintQ(r);
+}
+function paintQ(r){
+  const q=quizQs[qi];
+  $("#q-n").textContent=qi+1;
+  $("#q-kind").textContent=q.label;
+  $("#q-q").innerHTML=q.q;
+  $("#q-prog").style.width=Math.round(qi/quizQs.length*100)+"%";
+  $("#q-fb").textContent="";$("#q-fb").className="feedback";
+  const box=$("#q-opts");box.innerHTML="";
+  q.options.forEach(opt=>{
+    const b=document.createElement("button");b.className="opt";b.textContent=opt;
+    b.addEventListener("click",()=>answer(r,b,opt,q));
+    box.appendChild(b);
+  });
+}
+function answer(r,btn,opt,q){
+  const opts=$("#q-opts").querySelectorAll(".opt");
+  opts.forEach(o=>{o.disabled=true;if(o.textContent===q.answer)o.classList.add("correct");});
+  const fb=$("#q-fb");
+  if(opt===q.answer){
+    btn.classList.add("correct");qScore++;qStreak++;qBest=Math.max(qBest,qStreak);bump(curRegion,q.abbr);
+    fb.textContent=["Nice!","Yes!","Correct! ⭐","Great!","You got it!"][Math.floor(Math.random()*5)];fb.className="feedback ok";
+  }else{
+    btn.classList.add("wrong");qStreak=0;
+    fb.textContent="Answer: "+q.answer;fb.className="feedback no";
+  }
+  $("#q-score").textContent=qScore;$("#q-streak").textContent=qStreak;
+  renderRing();renderRegions();
+  setTimeout(()=>{
+    qi++;
+    if(qi>=quizQs.length){quizDone(r);}else{paintQ(r);}
+  },1100);
+}
+function quizDone(r){
+  const pct=Math.round(qScore/quizQs.length*100);
+  const stars=pct>=90?"⭐⭐⭐":pct>=70?"⭐⭐":pct>=50?"⭐":"✨";
+  const msg=pct>=90?"Geography champion!":pct>=70?"Great work!":pct>=50?"Good start — keep going!":"Practice makes perfect!";
+  $("#q-prog")&&($("#q-prog").style.width="100%");
+  $("#stage").innerHTML=`
+    <div class="done">
+      <div class="stars">${stars}</div>
+      <h2>${msg}</h2>
+      <div class="score">You got <b>${qScore}</b> of <b>${quizQs.length}</b> — best streak <b>${qBest}</b> 🔥</div>
+      <div class="fcctl">
+        <button class="btn primary" id="again">Play again</button>
+        <button class="btn" id="tolearn">Review states</button>
+      </div>
+    </div>`;
+  $("#again").addEventListener("click",()=>renderQuiz(r));
+  $("#tolearn").addEventListener("click",()=>{curMode="learn";document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x.dataset.mode==="learn"));render();});
+}
+
+/* ---- MAP / FIND IT ---- */
+let mapMode="explore",mapQueue=[],mapTarget=null,mapScore=0,mapTotal=0;
+function gridDims(r){
+  let mr=0,mc=0;r.states.forEach(s=>{mr=Math.max(mr,s.pos[0]);mc=Math.max(mc,s.pos[1]);});
+  return {rows:mr+1,cols:mc+1};
+}
+function renderMap(r){
+  const {rows,cols}=gridDims(r);
+  $("#stage").innerHTML=`
+    <div class="maptop">
+      <div class="prompt" id="m-prompt">Explore the ${r.name}</div>
+      <button class="btn primary" id="m-toggle">▶ Start Find It</button>
+    </div>
+    <div class="gridmap" id="m-grid" style="grid-template-columns:repeat(${cols},minmax(48px,86px));max-width:${cols*94}px"></div>
+    <div class="maphint" id="m-hint">These tiles sit roughly where the states are. Tap one to see its capital.</div>`;
+  mapMode="explore";
+  paintMap(r);
+  $("#m-toggle").addEventListener("click",()=>{
+    if(mapMode==="explore"){startFind(r);}else{mapMode="explore";$("#m-toggle").textContent="▶ Start Find It";$("#m-prompt").textContent="Explore the "+r.name;$("#m-hint").textContent="These tiles sit roughly where the states are. Tap one to see its capital.";paintMap(r);}
+  });
+}
+function paintMap(r){
+  const grid=$("#m-grid");grid.innerHTML="";
+  const {rows,cols}=gridDims(r);
+  const byPos={};r.states.forEach(s=>byPos[s.pos[0]+","+s.pos[1]]=s);
+  for(let row=0;row<rows;row++)for(let col=0;col<cols;col++){
+    const s=byPos[row+","+col];
+    if(!s){const sp=document.createElement("div");sp.style.gridRow=(row+1);sp.style.gridColumn=(col+1);grid.appendChild(sp);continue;}
+    const t=document.createElement("button");
+    t.className="tile"+(scoreFor(curRegion,s.a)>=MASTERY_GOAL?"":"");
+    t.style.gridRow=(row+1);t.style.gridColumn=(col+1);
+    if(mapMode==="explore"){
+      t.innerHTML=`<span class="ta">${s.a}</span><span class="tc">${esc(s.c)}</span>`;
+      t.addEventListener("click",()=>{$("#m-hint").innerHTML=`<b style="color:var(--accent)">${esc(s.n)}</b> — capital <b>${esc(s.c)}</b> · abbreviation <b>${s.a}</b>`;});
+    }else{
+      t.classList.add("play");
+      t.innerHTML=`<span class="ta">?</span>`;
+      t.dataset.a=s.a;
+      t.addEventListener("click",()=>guessTile(r,t,s));
+    }
+    grid.appendChild(t);
+  }
+}
+function startFind(r){
+  mapMode="find";mapQueue=shuffle(r.states);mapScore=0;mapTotal=0;
+  $("#m-toggle").textContent="✕ Stop";
+  paintMap(r);
+  nextFind(r);
+}
+function nextFind(r){
+  if(!mapQueue.length){
+    const pct=Math.round(mapScore/Math.max(1,mapTotal)*100);
+    const stars=pct>=90?"⭐⭐⭐":pct>=70?"⭐⭐":pct>=50?"⭐":"✨";
+    $("#stage").innerHTML=`<div class="done"><div class="stars">${stars}</div><h2>Map complete!</h2>
+      <div class="score">You found <b>${mapScore}</b> of <b>${mapTotal}</b> on the first try</div>
+      <div class="fcctl"><button class="btn primary" id="m-again">Play again</button><button class="btn" id="m-explore">Back to map</button></div></div>`;
+    $("#m-again").addEventListener("click",()=>renderMap(r)||startFind(r));
+    $("#m-explore").addEventListener("click",()=>renderMap(r));
+    return;
+  }
+  mapTarget=mapQueue.shift();mapTotal++;mapTargetMissed=false;
+  $("#m-prompt").innerHTML=`Find: <span class="big">${esc(mapTarget.n)}</span>`;
+  $("#m-hint").textContent="Tap the tile where this state belongs.";
+}
+let mapTargetMissed=false;
+function guessTile(r,t,s){
+  if(mapMode!=="find"||!mapTarget)return;
+  if(s.a===mapTarget.a){
+    t.classList.remove("wrong");t.classList.add("correct");
+    t.innerHTML=`<span class="ta">${s.a}</span>`;
+    if(!mapTargetMissed){mapScore++;bump(curRegion,s.a);renderRing();renderRegions();}
+    setTimeout(()=>nextFind(r),650);
+  }else{
+    t.classList.add("wrong");mapTargetMissed=true;
+    setTimeout(()=>t.classList.remove("wrong"),400);
+  }
+}
+
+/* ---------- boot ---------- */
+applyRegionColor(curRegion);
+renderRegions();
+renderRing();
+render();
+</script>
