@@ -12,6 +12,7 @@ Run:  python backend/run.py
 import base64
 import json
 import os
+import re
 import sys
 from datetime import datetime, timezone, timedelta
 from email.mime.text import MIMEText
@@ -140,6 +141,17 @@ def parse_emails(client, emails, family, ledger, today):
 
 
 # ---------- routing + calendar ----------
+def _primary_date(item):
+    return (item.get("event_dates") or [item.get("due_date")] or [None])[0]
+
+
+def _dupe_sig(item):
+    """A people-independent signature so the same event posted twice (even with a
+    different people-list, e.g. 'hudson' vs 'hudson,sean,jen') is caught."""
+    title = re.sub(r"[^a-z0-9]+", " ", (item.get("title") or "").lower()).strip()
+    return (_primary_date(item), title)
+
+
 def target_calendars(item, calendars, people_cfg):
     """Map an item's people to calendar names present in calendars.yaml."""
     names = []
@@ -224,12 +236,21 @@ def main():
     emails = fetch_new_emails(gmail, query, processed)
     print(f"Found {len(emails)} new school email(s).")
 
-    posted, held = [], []
+    # Signatures of items already in the ledger — a deterministic backstop so a
+    # re-read email can never double-post, regardless of the model's own dedup.
+    seen_sigs = {_dupe_sig(i) for i in ledger["items"] if i.get("status") in ("posted", "held")}
+
+    posted, held, skipped = [], [], 0
     if emails:
         client = Anthropic()  # ANTHROPIC_API_KEY from env
         items = parse_emails(client, emails, family, ledger, today)
         gate = policy["autopost"]
         for it in items:
+            sig = _dupe_sig(it)
+            if sig in seen_sigs:
+                skipped += 1
+                continue
+            seen_sigs.add(sig)
             date = (it.get("event_dates") or [it.get("due_date")])[0]
             eligible = (
                 it.get("confidence", 0) >= gate["min_confidence"]
@@ -261,7 +282,7 @@ def main():
     send_slack(digest)
     send_email(gmail, digest)
     save_ledger(ledger)
-    print(f"Done. Posted {len(posted)}, held {len(held)}.")
+    print(f"Done. Posted {len(posted)}, held {len(held)}, skipped {skipped} duplicate(s).")
     print(digest)
 
 
