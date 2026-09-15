@@ -7,7 +7,8 @@ name: Family Dashboard
 
 on:
   schedule:
-    - cron: "0 11 * * *"   # 11:00 UTC = 6:00 AM Central (CDT); shifts 1h at DST
+    # Off the top of the hour on purpose: GitHub delays/drops :00 crons under load.
+    - cron: "17 11 * * *"   # 11:17 UTC = 6:17 AM Central (CDT); becomes 5:17 CST after DST ends Nov 1
   workflow_dispatch: {}
 
 concurrency:
