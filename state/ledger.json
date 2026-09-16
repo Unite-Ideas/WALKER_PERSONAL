@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-14T19:56:59Z",
+  "updated": "2026-09-16T15:26:01Z",
   "processed_message_ids": [
     "1a08c63ed0706b4c",
     "1a0923f295fe9cab",
@@ -14,7 +14,8 @@
     "1a0961c98b13ce9a",
     "1a0961ca52c55398",
     "1a09ff78a92603df",
-    "1a09ff794a1e7603"
+    "1a09ff794a1e7603",
+    "1a0a55c15de7ca6e"
   ],
   "items": [
     {
@@ -468,6 +469,26 @@
       "confidence": 0.6,
       "calendar_event_ids": null,
       "source_message_id": "1a0923f295fe9cab"
+    },
+    {
+      "id": "hudson-vision-screening-results-2026-09",
+      "type": "notice",
+      "people": [
+        "hudson",
+        "jen",
+        "sean"
+      ],
+      "class": "2nd Grade",
+      "title": "Vision screening results sent home",
+      "description": "Nurse Renee: JrK-3 (and new 4th grade student) vision screening results went home 9/15 in backpack/folder \u2014 check Hudson's backpack. Parents of abnormal results were contacted by phone. Questions: nurse@newcovenant.net, 417.887.9848 x411.",
+      "due_date": null,
+      "event_dates": [
+        "2026-09-15"
+      ],
+      "status": "held",
+      "confidence": 0.62,
+      "calendar_event_ids": null,
+      "source_message_id": "1a0a55c15de7ca6e"
     }
   ]
 }
