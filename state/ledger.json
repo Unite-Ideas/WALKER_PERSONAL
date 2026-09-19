@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-18T14:58:46Z",
+  "updated": "2026-09-19T14:24:30Z",
   "processed_message_ids": [
     "1a08c63ed0706b4c",
     "1a0923f295fe9cab",
@@ -15,7 +15,10 @@
     "1a0961ca52c55398",
     "1a09ff78a92603df",
     "1a09ff794a1e7603",
-    "1a0a55c15de7ca6e"
+    "1a0a55c15de7ca6e",
+    "1a0b618ca01fdd4a",
+    "1a0b61e0ee633feb",
+    "1a0b660b1fda88d0"
   ],
   "items": [
     {
@@ -489,6 +492,137 @@
       "confidence": 0.62,
       "calendar_event_ids": null,
       "source_message_id": "1a0a55c15de7ca6e"
+    },
+    {
+      "id": "nca-no-school-pd-day-2026-09-21",
+      "type": "notice",
+      "people": [
+        "hudson",
+        "reston"
+      ],
+      "class": "New Covenant Academy",
+      "title": "No school \u2014 Teacher Professional Development Day",
+      "description": "No school Monday, September 21. Teachers have a Professional Development Day.",
+      "due_date": null,
+      "event_dates": [
+        "2026-09-21"
+      ],
+      "status": "posted",
+      "confidence": 0.95,
+      "calendar_event_ids": {
+        "Hudson": "1srtfcvmi79s44aiag4io93bk8",
+        "Reston": "2uoo6b3c55gk2q1u4s1173rheo"
+      },
+      "source_message_id": "1a0b618ca01fdd4a"
+    },
+    {
+      "id": "hudson-verse-2026-w39",
+      "type": "memory-verse",
+      "people": [
+        "hudson"
+      ],
+      "class": "2nd Grade",
+      "title": "Memory verse test \u2014 Exodus 19:5",
+      "description": "Friday memory verse test: \"Now if you obey me fully and keep my covenant, then out of all nations you will be my treasured possession. Although the whole earth is mine.\"",
+      "due_date": "2026-09-25",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.97,
+      "calendar_event_ids": {
+        "Hudson": "jmivjl7ofrarnrh5g82d0e7cb8"
+      },
+      "source_message_id": "1a0b618ca01fdd4a"
+    },
+    {
+      "id": "hudson-spelling-2026-w39",
+      "type": "spelling",
+      "people": [
+        "hudson"
+      ],
+      "class": "2nd Grade",
+      "title": "Spelling test \u2014 Ch. 5 (hard and soft c, g)",
+      "description": "Friday spelling test. Words: age, center, city, space, giant, gym, gone, cycle, garden, circle, square, oval",
+      "due_date": "2026-09-25",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.97,
+      "calendar_event_ids": {
+        "Hudson": "t66780bfj54irqjs8qc1o1dns4"
+      },
+      "source_message_id": "1a0b618ca01fdd4a"
+    },
+    {
+      "id": "nca-warrior-picture-day-2026-10-20",
+      "type": "notice",
+      "people": [
+        "hudson",
+        "reston"
+      ],
+      "class": "New Covenant Academy \u2014 Warrior Campus",
+      "title": "Warrior Campus Picture Day",
+      "description": "Tuesday, October 20, 7:30\u201312:00ish. Individual pictures in the gym on the stage; class (group) pictures on the bleachers (JrK\u20134th only). Order at jostenpix.com, event code FE116426. Questions: 1-877-515-1447.",
+      "due_date": null,
+      "event_dates": [
+        "2026-10-20"
+      ],
+      "status": "posted",
+      "confidence": 0.9,
+      "calendar_event_ids": {
+        "Hudson": "5tau1kpic5rhd0ou0k7n8882tc",
+        "Reston": "2223730f0s9lheho68ai9fudco"
+      },
+      "source_message_id": "1a0b618ca01fdd4a"
+    },
+    {
+      "id": "nca-annual-banquet-reservation-2026",
+      "type": "notice",
+      "people": [
+        "sean",
+        "jen"
+      ],
+      "class": "New Covenant Academy",
+      "title": "Reserve seats for NCA annual banquet",
+      "description": "Head of School note: if you have not yet reserved your seat for the annual banquet, do so via the FundEasy registration link. No date given in this email.",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.6,
+      "calendar_event_ids": null,
+      "source_message_id": "1a0b660b1fda88d0"
+    },
+    {
+      "id": "nca-family-survey-october-2026",
+      "type": "notice",
+      "people": [
+        "sean",
+        "jen"
+      ],
+      "class": "New Covenant Academy",
+      "title": "Annual family survey coming in October",
+      "description": "NCA will send the annual family feedback survey sometime in October; watch for it and respond.",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.55,
+      "calendar_event_ids": null,
+      "source_message_id": "1a0b660b1fda88d0"
+    },
+    {
+      "id": "nca-quarterly-connection-meeting-rsvp-2026-fall",
+      "type": "notice",
+      "people": [
+        "sean",
+        "jen"
+      ],
+      "class": "New Covenant Academy",
+      "title": "Quarterly connection meeting with Head of School (optional RSVP)",
+      "description": "Head of School hosts a quarterly meeting to share updates from monthly board meetings. RSVP via the Google Form link if interested. No date listed.",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.5,
+      "calendar_event_ids": null,
+      "source_message_id": "1a0b660b1fda88d0"
     }
   ]
 }
