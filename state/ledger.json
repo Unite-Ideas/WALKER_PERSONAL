@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-19T14:24:30Z",
+  "updated": "2026-09-20T14:41:46Z",
   "processed_message_ids": [
     "1a08c63ed0706b4c",
     "1a0923f295fe9cab",
@@ -18,7 +18,8 @@
     "1a0a55c15de7ca6e",
     "1a0b618ca01fdd4a",
     "1a0b61e0ee633feb",
-    "1a0b660b1fda88d0"
+    "1a0b660b1fda88d0",
+    "1a0bb845531b8309"
   ],
   "items": [
     {
@@ -623,6 +624,48 @@
       "confidence": 0.5,
       "calendar_event_ids": null,
       "source_message_id": "1a0b660b1fda88d0"
+    },
+    {
+      "id": "reston-nwea-testing-2026-fall",
+      "type": "notice",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "NWEA testing week",
+      "description": "NWEA testing for Mrs. Flatness's 4th grade class takes place the week of September 28 - October 2.",
+      "due_date": null,
+      "event_dates": [
+        "2026-09-28",
+        "2026-09-29",
+        "2026-09-30",
+        "2026-10-01",
+        "2026-10-02"
+      ],
+      "status": "posted",
+      "confidence": 0.93,
+      "calendar_event_ids": {
+        "Reston": "7skv090gh9r6p2q63a7ntsiuhk"
+      },
+      "source_message_id": "1a0bb845531b8309"
+    },
+    {
+      "id": "reston-parent-teacher-conference-signup-2026-10",
+      "type": "notice",
+      "people": [
+        "sean",
+        "jen",
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Parent-teacher conference sign-up (link coming)",
+      "description": "Mrs. Flatness will send a sign-up link next week (week of Sept 21) for October parent-teacher conferences. Watch for the link and reserve a slot.",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.85,
+      "calendar_event_ids": null,
+      "source_message_id": "1a0bb845531b8309"
     }
   ]
 }
