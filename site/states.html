@@ -162,6 +162,35 @@
   .inlbl{font-size:.72rem;font-weight:800;color:var(--muted)}
   .maphint{margin-top:14px;text-align:center;color:var(--muted);font-weight:700;font-size:.9rem;min-height:22px}
 
+  /* ---- MATCH (drag capitals & abbreviations) ---- */
+  .matchtop{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .matchtop .prompt{font-family:"Fredoka",sans-serif;font-weight:600;font-size:1.15rem}
+  .matchtop .prompt .big{color:var(--accent)}
+  .matchtop .count{font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;font-size:.9rem}
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:10px}
+  .mstate{border:1px solid var(--border);border-radius:12px;background:var(--surface-2);padding:10px 8px;display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center}
+  .mstate.hover{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+  .mname{font-family:"Fredoka",sans-serif;font-weight:600;font-size:1rem;line-height:1.1}
+  .mslot{width:100%;min-height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.92rem;padding:4px 6px;border:2px solid transparent}
+  .mslot .ph{color:var(--faint);font-weight:700;font-size:.72rem;font-style:italic}
+  .mslot.active{border-color:var(--accent);border-style:dashed;background:color-mix(in srgb,var(--accent) 8%,transparent)}
+  .mslot.filled{background:var(--good);color:#fff;border-color:transparent}
+  .mslot.filled.abb{letter-spacing:.06em}
+  .mslot.justfilled{animation:pop .35s}
+  @keyframes pop{0%{transform:scale(.7)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+  .traywrap{position:sticky;bottom:0;margin-top:16px;padding-top:8px;background:linear-gradient(transparent,var(--surface) 35%)}
+  .tray{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;padding:13px;border:1px solid var(--border);border-radius:14px;background:var(--surface-2);min-height:58px}
+  .token{touch-action:none;user-select:none;-webkit-user-select:none;font-family:"Nunito",sans-serif;font-weight:800;font-size:.95rem;
+    border:2px solid var(--accent);background:var(--surface);color:var(--ink);border-radius:999px;padding:9px 15px;cursor:grab}
+  .token:hover{background:color-mix(in srgb,var(--accent) 12%,var(--surface))}
+  .token:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  .token.sel{background:var(--accent);color:#fff;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 35%,transparent)}
+  .token.dragging{opacity:.3}
+  .token.ghost{position:fixed;left:0;top:0;transform:translate(-50%,-50%);pointer-events:none;z-index:100;box-shadow:var(--shadow-lg);cursor:grabbing}
+  .token.shake{animation:tshake .4s}
+  @keyframes tshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  @media (prefers-reduced-motion:reduce){.token.shake,.mslot.justfilled{animation:none}}
+
   /* ---- end screen ---- */
   .done{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;padding:12px 0}
   .done .stars{font-size:2.4rem;letter-spacing:6px}
@@ -197,6 +226,7 @@
     <button class="tab" role="tab" data-mode="learn" aria-selected="true">📖 Learn</button>
     <button class="tab" role="tab" data-mode="cards" aria-selected="false">🃏 Flashcards</button>
     <button class="tab" role="tab" data-mode="quiz" aria-selected="false">❓ Quiz</button>
+    <button class="tab" role="tab" data-mode="match" aria-selected="false">🧩 Match</button>
     <button class="tab" role="tab" data-mode="map" aria-selected="false">📍 Find It</button>
   </div>
 
@@ -343,6 +373,7 @@ function render(){
   if(curMode==="learn") renderLearn(r);
   else if(curMode==="cards") renderCards(r);
   else if(curMode==="quiz") renderQuiz(r);
+  else if(curMode==="match") renderMatch(r);
   else renderMap(r);
 }
 
@@ -590,6 +621,104 @@ function finishFind(r){
     <div class="fcctl"><button class="btn primary" id="m-again">Play again</button><button class="btn" id="m-explore">Explore map</button></div></div>`;
   $("#m-again").addEventListener("click",()=>{renderMap(r);startFind(r);});
   $("#m-explore").addEventListener("click",()=>renderMap(r));
+}
+
+/* ---- MATCH — drag capitals & abbreviations onto states (mirrors the real test) ---- */
+let mRound=1, mSolvedCap=new Set(), mSolvedAbb=new Set(), mMiss=0, mSel=null;
+function renderMatch(r){
+  mRound=1;mSolvedCap=new Set();mSolvedAbb=new Set();mMiss=0;mSel=null;
+  $("#stage").innerHTML=`
+    <div class="matchtop"><div class="prompt" id="mt-prompt"></div><span class="count" id="mt-count"></span></div>
+    <div class="mgrid" id="mt-grid"></div>
+    <div class="traywrap"><div class="tray" id="mt-tray"></div></div>
+    <p class="maphint">Drag a token onto the matching state — or tap a token, then tap the state.</p>`;
+  drawMatch(r);
+}
+function drawMatch(r){
+  const grid=$("#mt-grid");grid.innerHTML="";
+  r.states.forEach(s=>{
+    const capF=mSolvedCap.has(s.a), abbF=mSolvedAbb.has(s.a);
+    const card=document.createElement("div");card.className="mstate";card.dataset.abbr=s.a;
+    card.innerHTML=`<div class="mname">${esc(s.n)}</div>
+      <div class="mslot cap ${capF?'filled':''} ${(mRound===1&&!capF)?'active':''}">${capF?esc(s.c):'<span class="ph">capital</span>'}</div>
+      <div class="mslot abb ${abbF?'filled':''} ${(mRound===2&&!abbF)?'active':''}">${abbF?esc(s.a):'<span class="ph">abbr</span>'}</div>`;
+    card.addEventListener("click",()=>{if(mSel)tryPlace(r,card,mSel);});
+    grid.appendChild(card);
+  });
+  const solved=mRound===1?mSolvedCap:mSolvedAbb;
+  const toks=shuffle(r.states.filter(s=>!solved.has(s.a)).map(s=>({a:s.a,val:mRound===1?s.c:s.a})));
+  const tray=$("#mt-tray");tray.innerHTML="";
+  toks.forEach(t=>{
+    const el=document.createElement("button");el.className="token";el.type="button";el.dataset.abbr=t.a;el.textContent=t.val;
+    attachDrag(el,r);tray.appendChild(el);
+  });
+  $("#mt-prompt").innerHTML=mRound===1?'Round 1 of 2 · <span class="big">Capitals</span>':'Round 2 of 2 · <span class="big">Abbreviations</span>';
+  updateMatchCount(r);
+}
+function updateMatchCount(r){
+  const n=(mRound===1?mSolvedCap:mSolvedAbb).size;
+  $("#mt-count").textContent=n+" / "+r.states.length+(mMiss?"  ·  "+mMiss+" miss"+(mMiss===1?"":"es"):"");
+}
+function selectToken(tok){
+  if(mSel===tok){mSel.classList.remove("sel");mSel=null;return;}
+  if(mSel)mSel.classList.remove("sel");
+  mSel=tok;tok.classList.add("sel");
+}
+function tryPlace(r,card,tok){
+  const slot=card.querySelector(".mslot.active");
+  if(!slot){bounce(tok);return;}
+  if(card.dataset.abbr===tok.dataset.abbr){
+    const s=r.states.find(x=>x.a===card.dataset.abbr);
+    slot.classList.remove("active");slot.classList.add("filled","justfilled");
+    slot.textContent=(mRound===1?s.c:s.a);
+    (mRound===1?mSolvedCap:mSolvedAbb).add(s.a);
+    bump(curRegion,s.a);renderRing();renderRegions();
+    if(mSel===tok){mSel.classList.remove("sel");mSel=null;}
+    tok.remove();
+    setTimeout(()=>slot.classList.remove("justfilled"),380);
+    updateMatchCount(r);checkRound(r);
+  }else{
+    mMiss++;updateMatchCount(r);bounce(tok);
+  }
+}
+function bounce(tok){if(!tok)return;tok.classList.add("shake");setTimeout(()=>tok.classList.remove("shake"),400);}
+function checkRound(r){
+  const solved=mRound===1?mSolvedCap:mSolvedAbb;
+  if(solved.size!==r.states.length)return;
+  if(mRound===1){mRound=2;mSel=null;setTimeout(()=>drawMatch(r),450);}
+  else finishMatch(r);
+}
+function finishMatch(r){
+  const stars=mMiss===0?"⭐⭐⭐":mMiss<=3?"⭐⭐":mMiss<=8?"⭐":"✨";
+  $("#stage").innerHTML=`<div class="done"><div class="stars">${stars}</div><h2>Matched!</h2>
+    <div class="score">All ${r.states.length} capitals and abbreviations placed${mMiss?` · ${mMiss} miss`+(mMiss===1?"":"es"):" · perfect, no misses!"}</div>
+    <div class="fcctl"><button class="btn primary" id="mt-again">Play again</button></div></div>`;
+  $("#mt-again").addEventListener("click",()=>renderMatch(r));
+}
+function cardUnder(x,y){const el=document.elementFromPoint(x,y);return el?el.closest(".mstate"):null;}
+function clearHover(){document.querySelectorAll(".mstate.hover").forEach(c=>c.classList.remove("hover"));}
+function attachDrag(tok,r){
+  tok.addEventListener("pointerdown",e=>{
+    e.preventDefault();
+    const sx=e.clientX,sy=e.clientY;let dragging=false,ghost=null;
+    try{tok.setPointerCapture(e.pointerId);}catch(_){}
+    const move=ev=>{
+      const dx=ev.clientX-sx,dy=ev.clientY-sy;
+      if(!dragging&&Math.hypot(dx,dy)>6){dragging=true;ghost=tok.cloneNode(true);ghost.className="token ghost";document.body.appendChild(ghost);tok.classList.add("dragging");}
+      if(dragging){ghost.style.left=ev.clientX+"px";ghost.style.top=ev.clientY+"px";clearHover();const c=cardUnder(ev.clientX,ev.clientY);if(c&&c.querySelector(".mslot.active"))c.classList.add("hover");}
+    };
+    const up=ev=>{
+      tok.removeEventListener("pointermove",move);tok.removeEventListener("pointerup",up);tok.removeEventListener("pointercancel",up);
+      try{tok.releasePointerCapture(e.pointerId);}catch(_){}
+      clearHover();tok.classList.remove("dragging");
+      if(ghost){ghost.remove();ghost=null;}
+      if(dragging){const c=cardUnder(ev.clientX,ev.clientY);if(c)tryPlace(r,c,tok);}
+      else selectToken(tok);
+    };
+    tok.addEventListener("pointermove",move);
+    tok.addEventListener("pointerup",up);
+    tok.addEventListener("pointercancel",up);
+  });
 }
 
 /* ---------- boot ---------- */
