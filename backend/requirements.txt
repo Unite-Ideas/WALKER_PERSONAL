@@ -4,3 +4,4 @@ google-auth-oauthlib>=1.2
 anthropic>=0.40
 pyyaml>=6.0
 requests>=2.32
+reportlab>=4.0
