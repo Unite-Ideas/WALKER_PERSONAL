@@ -82,6 +82,37 @@ def _extract_body(payload):
     return "\n".join(t for t in texts if t)
 
 
+# The teachers put the real dates (quizzes, book reports, region tests) inside a
+# linked Google Doc, not the email body. Follow those links and fold the doc text
+# into the body so the parser can see the dates. Works only for link-shareable docs
+# (the class newsletters are), via the public text export — no extra OAuth scope.
+DOC_RE = re.compile(r"docs\.google\.com/document/d/([A-Za-z0-9_-]{20,})")
+
+
+def _fetch_doc_text(doc_id):
+    url = "https://docs.google.com/document/d/%s/export?format=txt" % doc_id
+    try:
+        r = requests.get(url, timeout=20)
+        if r.status_code == 200 and r.text and "<html" not in r.text[:300].lower():
+            return r.text
+    except Exception as e:
+        print("  ! couldn't fetch linked doc %s: %s" % (doc_id, e))
+    return ""
+
+
+def _enrich_with_linked_docs(body):
+    seen, extra = set(), []
+    for m in DOC_RE.finditer(body or ""):
+        did = m.group(1)
+        if did in seen:
+            continue
+        seen.add(did)
+        txt = _fetch_doc_text(did)
+        if txt:
+            extra.append("\n\n[Linked newsletter doc]:\n" + txt[:8000])
+    return "".join(extra)
+
+
 def fetch_new_emails(gmail, query, processed_ids):
     resp = gmail.users().messages().list(userId="me", q=query, maxResults=25).execute()
     out = []
@@ -91,12 +122,14 @@ def fetch_new_emails(gmail, query, processed_ids):
             continue
         full = gmail.users().messages().get(userId="me", id=mid, format="full").execute()
         headers = {h["name"].lower(): h["value"] for h in full["payload"].get("headers", [])}
+        body = _extract_body(full["payload"])[:12000]
+        body += _enrich_with_linked_docs(body)   # fold in any linked Google-Doc newsletters
         out.append({
             "id": mid,
             "from": headers.get("from", ""),
             "subject": headers.get("subject", ""),
             "date": headers.get("date", ""),
-            "body": _extract_body(full["payload"])[:12000],
+            "body": body[:20000],
         })
     return out
 
