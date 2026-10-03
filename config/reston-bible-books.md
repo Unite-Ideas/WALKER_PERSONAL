@@ -34,6 +34,6 @@ a **different** book of the Bible, so use this to avoid repeats.
 > so this is 23 unique books.
 
 ## Used so far (so we don't repeat)
-- Report #1: (unknown — Sean to confirm)
-- Report #2: (unknown — Sean to confirm)
-- Report #3 (due Fri 10/9): (to choose)
+- **Jude** (on the suggested list)
+- **Esther** (not on the list, but allowed)
+- Report #3 (due Fri 10/9): to choose — must be a different book than the two above.
