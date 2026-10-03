@@ -36,4 +36,4 @@ a **different** book of the Bible, so use this to avoid repeats.
 ## Used so far (so we don't repeat)
 - **Jude** (on the suggested list)
 - **Esther** (not on the list, but allowed)
-- Report #3 (due Fri 10/9): to choose — must be a different book than the two above.
+- Report #3 (due Fri 10/9): **Jonah**
