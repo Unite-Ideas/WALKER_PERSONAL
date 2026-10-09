@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-21T17:02:13Z",
+  "updated": "2026-10-09T22:15:37Z",
   "processed_message_ids": [
     "1a08c63ed0706b4c",
     "1a0923f295fe9cab",
@@ -19,7 +19,13 @@
     "1a0b618ca01fdd4a",
     "1a0b61e0ee633feb",
     "1a0b660b1fda88d0",
-    "1a0bb845531b8309"
+    "1a0bb845531b8309",
+    "1a10eda0b6fb3410",
+    "1a112b80d9842bad",
+    "1a117920849e2e30",
+    "1a117922bec2d229",
+    "1a11cf44412b94f9",
+    "1a1222aeacc64b6b"
   ],
   "items": [
     {
@@ -666,6 +672,127 @@
       "confidence": 0.85,
       "calendar_event_ids": null,
       "source_message_id": "1a0bb845531b8309"
+    },
+    {
+      "id": "nca-teacher-appreciation-meal-signup-2026-10-15",
+      "type": "notice",
+      "people": [
+        "sean",
+        "jen"
+      ],
+      "class": "New Covenant Academy (all campuses)",
+      "title": "Sign up to provide faculty meal before Parent/Teacher Conferences",
+      "description": "Hospitality Team is asking families to help provide a meal for faculty before Parent/Teacher Conferences on Oct 15. Sign up via SignUpGenius: https://www.signupgenius.com/go/5080E4DA8AD2FA64-51770962-teacher#/ . Every $15 spent on items counts toward one PIP hour, plus one PIP hour per hour served.",
+      "due_date": "2026-10-15",
+      "event_dates": [
+        "2026-10-15"
+      ],
+      "status": "posted",
+      "confidence": 0.9,
+      "calendar_event_ids": {
+        "Sean": "o561ssfiuqt8c8kldh6ng98h60",
+        "Jennifer": "s77k23h76602kterkltpkc9n8s"
+      },
+      "source_message_id": "1a11cf44412b94f9"
+    },
+    {
+      "id": "nca-parent-teacher-conferences-2026-10-15",
+      "type": "notice",
+      "people": [
+        "hudson",
+        "reston",
+        "sean",
+        "jen"
+      ],
+      "class": "New Covenant Academy",
+      "title": "Parent/Teacher Conferences",
+      "description": "Faculty hold Parent/Teacher Conferences on Thursday, Oct 15 (date confirmed in Hospitality Team meal request). Conference sign-up link was previously announced as coming.",
+      "due_date": null,
+      "event_dates": [
+        "2026-10-15"
+      ],
+      "status": "held",
+      "confidence": 0.75,
+      "calendar_event_ids": null,
+      "source_message_id": "1a11cf44412b94f9"
+    },
+    {
+      "id": "reston-quarter-end-assignments-due-2026-10-09",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "All assignments due \u2014 end of first quarter",
+      "description": "Mrs. Flatness: Friday, Oct 9 is the end of the first quarter. All assignments must be turned in by Friday so they can be graded over the weekend.",
+      "due_date": "2026-10-09",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.93,
+      "calendar_event_ids": {
+        "Reston": "ih07j70iksa070utb3n7245fjo"
+      },
+      "source_message_id": "1a117922bec2d229"
+    },
+    {
+      "id": "reston-math-ch3-test-2026-10-09",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Math test \u2014 Chapter 3",
+      "description": "Chapter 3 math test Friday, Oct 9, along with the regular weekly assessments, before the afternoon movie.",
+      "due_date": "2026-10-09",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.9,
+      "calendar_event_ids": {
+        "Reston": "rmd84aijf6g2si51mjrqe054i8"
+      },
+      "source_message_id": "1a117922bec2d229"
+    },
+    {
+      "id": "reston-cozy-movie-snack-day-2026-10-09",
+      "type": "notice",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Cozy Movie and Snack Day",
+      "description": "Friday afternoon celebration for end of quarter and finishing Bound for Oregon \u2014 watching Little House on the Prairie (episode 1). Students may wear comfy, cozy clothes and bring a blanket, a stuffed animal, and a snack to share with the class.",
+      "due_date": null,
+      "event_dates": [
+        "2026-10-09"
+      ],
+      "status": "posted",
+      "confidence": 0.92,
+      "calendar_event_ids": {
+        "Reston": "lnq44d78he57pts49f4cbb6750"
+      },
+      "source_message_id": "1a117922bec2d229"
+    },
+    {
+      "id": "nca-intramural-cross-country-meet-2026-10-10",
+      "type": "extracurricular",
+      "people": [
+        "hudson",
+        "reston"
+      ],
+      "class": "New Covenant Academy Athletics",
+      "title": "NCA Intramural Cross-Country Meet",
+      "description": "Saturday, Oct 10 at the NCA Warrior Campus, open to Jr. K\u20134th grade. WEAR NEON. Race times: 1st\u20132nd Boys 9:50 AM (1 mile, Hudson); 3rd\u20134th Boys 10:35 AM (1.5 miles, Reston). Arrive at least 20 minutes before the race to check in and warm up. Course starts on the HS Soccer Practice Field; each lap ~1/2 mile. Cost $15 per runner; registration deadline was Thursday, Oct 8 (register: https://forms.gle/yZXpBcomr7ihTWpAA, pay: https://square.link/u/OdmDajMI, or cash/check to New Covenant Academy, memo 'Intramural Cross Country'). Runners recognized during Chapel on Wednesday, Oct 14.",
+      "due_date": null,
+      "event_dates": [
+        "2026-10-10"
+      ],
+      "status": "posted",
+      "confidence": 0.88,
+      "calendar_event_ids": {
+        "Hudson": "j2rf2qo035ruhf55ni165p81d0",
+        "Reston": "s848ud4ao68dggmtuml370ofbc"
+      },
+      "source_message_id": "1a112b80d9842bad"
     }
   ]
 }
