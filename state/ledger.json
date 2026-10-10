@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-09T22:15:37Z",
+  "updated": "2026-10-10T16:15:21Z",
   "processed_message_ids": [
     "1a08c63ed0706b4c",
     "1a0923f295fe9cab",
@@ -25,7 +25,9 @@
     "1a117920849e2e30",
     "1a117922bec2d229",
     "1a11cf44412b94f9",
-    "1a1222aeacc64b6b"
+    "1a1222aeacc64b6b",
+    "1a12384eb8175161",
+    "1a12644d76657d37"
   ],
   "items": [
     {
@@ -793,6 +795,486 @@
         "Reston": "s848ud4ao68dggmtuml370ofbc"
       },
       "source_message_id": "1a112b80d9842bad"
+    },
+    {
+      "id": "reston-wonders-test-2026-10-15",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Wonders comprehension test \u2014 U2W3 \"Buffalo are Back\"",
+      "description": "Reading test Thursday (moved up due to no school Friday). Genre: Narrative Nonfiction; skill: Main Idea and Key Details; strategy: Summarize.",
+      "due_date": "2026-10-15",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.92,
+      "calendar_event_ids": {
+        "Reston": "et8ph69mrc6gmqgr23ej4ou0gk"
+      },
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "reston-spelling-2026-10-15",
+      "type": "spelling",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Spelling test",
+      "description": "Weekly spelling test, given Thursday this week (no school Friday 10/16).",
+      "due_date": "2026-10-15",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.9,
+      "calendar_event_ids": {
+        "Reston": "sg5lap4h0j87urfaucc4ged2k0"
+      },
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "reston-vocab-2026-10-15",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Vocabulary test",
+      "description": "Weekly vocabulary test on Thursday.",
+      "due_date": "2026-10-15",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.9,
+      "calendar_event_ids": {
+        "Reston": "f935h8vdod2l37ourtnjbj0v78"
+      },
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "reston-grammar-test-2026-10-15",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Grammar test \u2014 Unit One Review",
+      "description": "Grammar test Thursday; class is doing Unit One Review this week.",
+      "due_date": "2026-10-15",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.85,
+      "calendar_event_ids": {
+        "Reston": "m3g7g57mpk0qsaqaeb3oe09b6g"
+      },
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "reston-verse-2026-w42",
+      "type": "memory-verse",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Memory verse test \u2014 Matthew 3:16-17",
+      "description": "\"As soon as Jesus was baptized, he went up out of the water. At that moment heaven was opened, and he saw the Spirit of God descending like a dove and alighting on him. 17 And a voice from heaven said, 'This is my Son, whom I love; with him I am well pleased.'\" Matthew 3:16-17. Long verse \u2014 teacher shared a YouTube version set to music to help memorization.",
+      "due_date": "2026-10-15",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.93,
+      "calendar_event_ids": {
+        "Reston": "0duccc430n49qve0oe8qq1s120"
+      },
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "reston-bible-book-report-1-q2-2026-10-30",
+      "type": "project",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Bible Book Report #1 (Quarter 2)",
+      "description": "Students complete 3 Bible book reports each quarter; the first of Quarter 2 is due Friday, October 30.",
+      "due_date": "2026-10-30",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.92,
+      "calendar_event_ids": {
+        "Reston": "8t9u157ae8mk73vebu4cgebrbg"
+      },
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "nca-fall-break-no-school-2026-10",
+      "type": "notice",
+      "people": [
+        "hudson",
+        "reston"
+      ],
+      "class": "School-wide",
+      "title": "No school \u2014 Fall Break (Oct 16 & Oct 19)",
+      "description": "No school Friday, October 16 (Parent/Teacher Conferences) or Monday, October 19 for Fall Break.",
+      "due_date": null,
+      "event_dates": [
+        "2026-10-16",
+        "2026-10-19"
+      ],
+      "status": "posted",
+      "confidence": 0.95,
+      "calendar_event_ids": {
+        "Hudson": "qc6oohqn5ifab52p47hebc6mt0",
+        "Reston": "3fdql5q06uf3lv8qtgr5fc1h5k"
+      },
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "reston-book-study-mr-poppers-penguins-2026-q2",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Book study \u2014 Mr. Popper's Penguins (bring book every Wednesday)",
+      "description": "Quarter 2 book study. Reading schedule is on the blue paper in the student binder \u2014 follow the schedule and do NOT read ahead. Student must bring the book to school every Wednesday.",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.88,
+      "calendar_event_ids": null,
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "reston-weekly-text-questions-essay-friday-2026",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Weekly Text Questions w/ Essential Question paragraph",
+      "description": "Recurring reading assignment due every Friday.",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.8,
+      "calendar_event_ids": null,
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "reston-midwest-region-unit-2026-fall",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Midwest Region unit \u2014 maps, states, capitals, postal abbreviations",
+      "description": "Three weeks to memorize Midwest states, capitals, and postal abbreviations; testing on Midwest Region MAPS (locate state, capital, postal code). Learning/skills packet with vocabulary and text-dependent questions must be completed.",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.8,
+      "calendar_event_ids": null,
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "nca-annual-banquet-2026-10-23",
+      "type": "notice",
+      "people": [
+        "sean",
+        "jen"
+      ],
+      "class": "School-wide",
+      "title": "NCA Annual Banquet",
+      "description": "Annual Banquet listed on the 4th grade upcoming dates for October 23. (Seat reservations were mentioned in an earlier email.)",
+      "due_date": null,
+      "event_dates": [
+        "2026-10-23"
+      ],
+      "status": "posted",
+      "confidence": 0.85,
+      "calendar_event_ids": {
+        "Sean": "5a9tm16tcu2jm0v8ccvdg0mpug",
+        "Jennifer": "b58nju0jtfldho85hg53guf4cg"
+      },
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "nca-early-release-2026-10-30",
+      "type": "notice",
+      "people": [
+        "hudson",
+        "reston"
+      ],
+      "class": "School-wide",
+      "title": "Early Release Day",
+      "description": "Early release on October 30 per 4th grade newsletter upcoming dates.",
+      "due_date": null,
+      "event_dates": [
+        "2026-10-30"
+      ],
+      "status": "posted",
+      "confidence": 0.85,
+      "calendar_event_ids": {
+        "Hudson": "njg298lfesnkri583jesofopf4",
+        "Reston": "u2o1pgdhva9gik74rujaokdh3c"
+      },
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "reston-dogwood-canyon-field-trip-2026-11-13",
+      "type": "notice",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Field trip \u2014 Dogwood Canyon",
+      "description": "4th grade field trip to Dogwood Canyon on November 13 (from upcoming dates list).",
+      "due_date": null,
+      "event_dates": [
+        "2026-11-13"
+      ],
+      "status": "posted",
+      "confidence": 0.85,
+      "calendar_event_ids": {
+        "Reston": "73b0um36h8f35oor5i7qt576mo"
+      },
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "nca-thanksgiving-break-2026",
+      "type": "notice",
+      "people": [
+        "hudson",
+        "reston"
+      ],
+      "class": "School-wide",
+      "title": "Thanksgiving Break",
+      "description": "No school November 23\u201329 for Thanksgiving Break.",
+      "due_date": null,
+      "event_dates": [
+        "2026-11-23",
+        "2026-11-24",
+        "2026-11-25",
+        "2026-11-26",
+        "2026-11-27"
+      ],
+      "status": "posted",
+      "confidence": 0.85,
+      "calendar_event_ids": {
+        "Hudson": "f055rbffcemn6guseq75j4p9vk",
+        "Reston": "qgmifsd5e8bnaecs8ugtblodhk"
+      },
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "nca-end-2nd-quarter-2026-12-18",
+      "type": "notice",
+      "people": [
+        "hudson",
+        "reston"
+      ],
+      "class": "School-wide",
+      "title": "End of 2nd Quarter",
+      "description": "December 18 is the last day of the second quarter.",
+      "due_date": null,
+      "event_dates": [
+        "2026-12-18"
+      ],
+      "status": "posted",
+      "confidence": 0.85,
+      "calendar_event_ids": {
+        "Hudson": "09oei7hd8rrcm9qdl4pn3rq0tk",
+        "Reston": "64cm9l0e6lqls92dfr709cpklk"
+      },
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "nca-christmas-break-2026",
+      "type": "notice",
+      "people": [
+        "hudson",
+        "reston"
+      ],
+      "class": "School-wide",
+      "title": "Christmas Break",
+      "description": "No school December 19 through January 4; first day of 3rd quarter is January 5.",
+      "due_date": null,
+      "event_dates": [
+        "2026-12-19",
+        "2027-01-04"
+      ],
+      "status": "posted",
+      "confidence": 0.85,
+      "calendar_event_ids": {
+        "Hudson": "fg9m0dkk7s7v719mfh1u9d2974",
+        "Reston": "n90n3t76d7dv95pbut8hun7us8"
+      },
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "nca-first-day-3rd-quarter-2027-01-05",
+      "type": "notice",
+      "people": [
+        "hudson",
+        "reston"
+      ],
+      "class": "School-wide",
+      "title": "First day of 3rd Quarter",
+      "description": "School resumes January 5 for the third quarter.",
+      "due_date": null,
+      "event_dates": [
+        "2027-01-05"
+      ],
+      "status": "posted",
+      "confidence": 0.85,
+      "calendar_event_ids": {
+        "Hudson": "j75m4lk3ser7m17g4iufip0nl8",
+        "Reston": "ntdf8l35p79b9s5rl6g1gq8s44"
+      },
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "reston-homestead-experience-trip-signup-2026-10",
+      "type": "notice",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Homestead Experience morning trips \u2014 sign-ups coming (space limited)",
+      "description": "Morning-only Homestead Experience trips scheduled in October; sign-ups coming soon and space is limited. Listed date: Wright \u2014 Oct 22.",
+      "due_date": null,
+      "event_dates": [
+        "2026-10-22"
+      ],
+      "status": "held",
+      "confidence": 0.6,
+      "calendar_event_ids": null,
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "reston-pioneer-day-shark-tank-2026-fall",
+      "type": "notice",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Fall semester events \u2014 Pioneer Day and Shark Tank Day",
+      "description": "Two 4th grade fall semester events announced; more information coming.",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.7,
+      "calendar_event_ids": null,
+      "source_message_id": "1a12644d76657d37"
+    },
+    {
+      "id": "hudson-spelling-2026-w42",
+      "type": "spelling",
+      "people": [
+        "hudson"
+      ],
+      "class": "2nd Grade",
+      "title": "Spelling test \u2014 Ch. 8 (long i)",
+      "description": "Test moved to Thursday 10/15 (no school Friday). Words: why, fire, wild, Bible, try, bright, mind, life, Friday, skylight, mild, kind, story, could.",
+      "due_date": "2026-10-15",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.95,
+      "calendar_event_ids": {
+        "Hudson": "kndab0mkp889kpd863cl3blkqc"
+      },
+      "source_message_id": "1a12384eb8175161"
+    },
+    {
+      "id": "hudson-verse-2026-w42",
+      "type": "memory-verse",
+      "people": [
+        "hudson"
+      ],
+      "class": "2nd Grade",
+      "title": "Memory verse test \u2014 1 John 3:22",
+      "description": "Test Thursday 10/15: \"And receive from him anything we ask, because we keep his commands and do what pleases him.\"",
+      "due_date": "2026-10-15",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.95,
+      "calendar_event_ids": {
+        "Hudson": "hdhllssmif47oca7npoob2t6ds"
+      },
+      "source_message_id": "1a12384eb8175161"
+    },
+    {
+      "id": "hudson-fieldtrip-chaperone-payment-2026-10-26",
+      "type": "notice",
+      "people": [
+        "sean",
+        "jen"
+      ],
+      "class": "2nd Grade",
+      "title": "Chaperone admission payment \u2014 $24 due (Fantastic Caverns field trip)",
+      "description": "If you are one of the 12 parent chaperones, send $24 (check made out to NCA) by 10/26 for your own admission; NCA covers the student fee.",
+      "due_date": "2026-10-26",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.8,
+      "calendar_event_ids": {
+        "Sean": "ev5mrs2piqpimlup14bdf01kjg",
+        "Jennifer": "n0k4uqi5pidpeguaegegcnm1io"
+      },
+      "source_message_id": "1a12384eb8175161"
+    },
+    {
+      "id": "hudson-chapel-dress-code-no-shorts-2026",
+      "type": "notice",
+      "people": [
+        "hudson"
+      ],
+      "class": "2nd Grade",
+      "title": "Chapel dress code \u2014 no shorts on Wednesdays",
+      "description": "Starting 2nd and 3rd quarters, boys must wear nice pants with collared shirts on Wednesdays for Chapel (no shorts).",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.85,
+      "calendar_event_ids": null,
+      "source_message_id": "1a12384eb8175161"
+    },
+    {
+      "id": "hudson-chrysanthemum-name-meaning-2026-10",
+      "type": "assignment",
+      "people": [
+        "hudson",
+        "sean",
+        "jen"
+      ],
+      "class": "2nd Grade",
+      "title": "Talk with your 2nd grader about the meaning of their name",
+      "description": "Class reads Chrysanthemum next week for grammar; parents should discuss the meaning and importance of their child's name over the weekend so students can write about it.",
+      "due_date": "2026-10-11",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.8,
+      "calendar_event_ids": {
+        "Hudson": "ir3qu6agmcsj0od10hi5q5veho",
+        "Sean": "rfksghrsdlm5knmihelrodjcu4",
+        "Jennifer": "09pgo45s2c03vh83kml91qj6po"
+      },
+      "source_message_id": "1a12384eb8175161"
+    },
+    {
+      "id": "hudson-xtramath-home-practice-2026-fall",
+      "type": "notice",
+      "people": [
+        "hudson"
+      ],
+      "class": "2nd Grade",
+      "title": "XtraMath math fact practice at home",
+      "description": "Students logged into XtraMath at school and brought home login instructions. 2nd grade \"homework\" is reviewing work that comes home and practicing math facts/concepts.",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.75,
+      "calendar_event_ids": null,
+      "source_message_id": "1a12384eb8175161"
     }
   ]
 }
