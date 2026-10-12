@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-11T16:38:40Z",
+  "updated": "2026-10-12T20:17:47Z",
   "processed_message_ids": [
     "1a08c63ed0706b4c",
     "1a0923f295fe9cab",
@@ -27,7 +27,8 @@
     "1a11cf44412b94f9",
     "1a1222aeacc64b6b",
     "1a12384eb8175161",
-    "1a12644d76657d37"
+    "1a12644d76657d37",
+    "1a13167458667984"
   ],
   "items": [
     {
@@ -1275,6 +1276,220 @@
       "confidence": 0.75,
       "calendar_event_ids": null,
       "source_message_id": "1a12384eb8175161"
+    },
+    {
+      "id": "reston-assignment-checklist-weekly-2026-q2",
+      "type": "notice",
+      "people": [
+        "reston",
+        "sean",
+        "jen"
+      ],
+      "class": "4th Grade",
+      "title": "New weekly assignment checklist (Mondays) \u2014 late work now loses points",
+      "description": "Mrs. Flatness 2nd quarter update: students receive a new assignment tracking checklist each Monday with due dates and check-off boxes. Grace period is over \u2014 late work will be deducted points. Check RenWeb and the pink missing-assignment slips attached to worksheets.",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.9,
+      "calendar_event_ids": null,
+      "source_message_id": "1a13167458667984"
+    },
+    {
+      "id": "reston-bible-book-report-requirements-2026-q2",
+      "type": "notice",
+      "people": [
+        "reston",
+        "sean",
+        "jen"
+      ],
+      "class": "4th Grade",
+      "title": "Bible book report requirements updated \u2014 book must have 5+ chapters",
+      "description": "Quarter 2 change: Bible book reports must use a book of the Bible with 5 or more chapters, and the report content must be specific to the book (not general statements like \"It is a letter\" or \"It has __ chapters\").",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.85,
+      "calendar_event_ids": null,
+      "source_message_id": "1a13167458667984"
+    },
+    {
+      "id": "reston-chapel-dress-pants-2026-q2",
+      "type": "notice",
+      "people": [
+        "reston",
+        "sean",
+        "jen"
+      ],
+      "class": "4th Grade",
+      "title": "Chapel dress code \u2014 boys wear dress pants on Wednesdays",
+      "description": "Starting 2nd quarter, 4th grade boys must wear dress pants (not shorts) to Wednesday chapel. Dress shorts resume in 4th quarter. Girls continue wearing shorts under dresses.",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.9,
+      "calendar_event_ids": null,
+      "source_message_id": "1a13167458667984"
+    },
+    {
+      "id": "reston-speeding-ticket-policy-2026-q2",
+      "type": "notice",
+      "people": [
+        "reston",
+        "sean",
+        "jen"
+      ],
+      "class": "4th Grade",
+      "title": "\"Speeding ticket\" policy for rushed work",
+      "description": "Students who rush, make careless mistakes, or don't answer in complete sentences receive a \"speeding ticket\" and must correct the work at recess before it is graded.",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.85,
+      "calendar_event_ids": null,
+      "source_message_id": "1a13167458667984"
+    },
+    {
+      "id": "reston-math-hw-4-1-2026-10-13",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Math homework 4.1 (pages 155-156)",
+      "description": "Week 8 checklist (10/12-10/16), Monday: Math Homework 4.1 pages 155-156.",
+      "due_date": "2026-10-13",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.9,
+      "calendar_event_ids": {
+        "Reston": "2t2njfo85kmrkg8m4qdogvpis0"
+      },
+      "source_message_id": "1a13167458667984"
+    },
+    {
+      "id": "reston-math-hw-4-2-2026-10-14",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Math homework 4.2 (pages 161-162)",
+      "description": "Week 8 checklist, Tuesday: Math Homework 4.2 p. 161-162 if not completed in class.",
+      "due_date": "2026-10-14",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.9,
+      "calendar_event_ids": {
+        "Reston": "mbed9ao96tdfahoojfs1ru1l40"
+      },
+      "source_message_id": "1a13167458667984"
+    },
+    {
+      "id": "reston-reading-text-questions-buffalo-2026-10-15",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Text Questions \u2014 \"The Buffalo are Back\" + Spelling 2.3 practice page",
+      "description": "Week 8 checklist, Tuesday: U2W3 Spelling 2.3 practice page and \"The Buffalo are Back\" text questions, due 10/15 if not completed in class.",
+      "due_date": "2026-10-15",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.85,
+      "calendar_event_ids": {
+        "Reston": "q9nd621uvsdudgp0b1dd6v4dks"
+      },
+      "source_message_id": "1a13167458667984"
+    },
+    {
+      "id": "reston-math-hw-area-model-2026-10-20",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Math homework \u2014 two-digit x two-digit area model practice",
+      "description": "Week 8 checklist, Wednesday: two digit x two digit area model practice, due 10/20 if not completed in class.",
+      "due_date": "2026-10-20",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.85,
+      "calendar_event_ids": {
+        "Reston": "lea7up7nuckasnpnrajja9ep18"
+      },
+      "source_message_id": "1a13167458667984"
+    },
+    {
+      "id": "reston-math-hw-4-3-2026-10-20",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Math homework 4.3 (pages 167-168)",
+      "description": "Week 8 checklist, Thursday: Math Homework 4.3 pages 167-168, due 10/20 if not completed in class.",
+      "due_date": "2026-10-20",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.85,
+      "calendar_event_ids": {
+        "Reston": "i4gj83upbtac91v42hkoik57gg"
+      },
+      "source_message_id": "1a13167458667984"
+    },
+    {
+      "id": "reston-ss-midwest-vocab-text-questions-2026-10-20",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Social Studies \u2014 Midwest vocabulary and text questions",
+      "description": "Week 8 checklist, Wednesday: Intro to Shark Tank; Midwest Vocabulary and Text Questions due 10/20 if not completed in class.",
+      "due_date": "2026-10-20",
+      "event_dates": [],
+      "status": "posted",
+      "confidence": 0.85,
+      "calendar_event_ids": {
+        "Reston": "j2av4sloef8bqrao95cooloaco"
+      },
+      "source_message_id": "1a13167458667984"
+    },
+    {
+      "id": "reston-book-club-intro-2026-10-14",
+      "type": "notice",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Book Club introduction \u2014 new folder and reading plan",
+      "description": "Week 8 checklist, Wednesday 10/14: Book Club introduction with new folder and reading plan (ties to Mr. Popper's Penguins book study).",
+      "due_date": null,
+      "event_dates": [
+        "2026-10-14"
+      ],
+      "status": "held",
+      "confidence": 0.6,
+      "calendar_event_ids": null,
+      "source_message_id": "1a13167458667984"
+    },
+    {
+      "id": "reston-informational-writing-research-prewrite-2026-10",
+      "type": "assignment",
+      "people": [
+        "reston"
+      ],
+      "class": "4th Grade",
+      "title": "Informational writing \u2014 choose research topic and prewrite",
+      "description": "Week 8: setting up informational writing notebooks, choosing a research topic and prewrite (homework if not completed in class), then determining subtopics of research. No firm due date given.",
+      "due_date": null,
+      "event_dates": [],
+      "status": "held",
+      "confidence": 0.6,
+      "calendar_event_ids": null,
+      "source_message_id": "1a13167458667984"
     }
   ]
 }
