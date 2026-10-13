@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-12T20:17:47Z",
+  "updated": "2026-10-13T18:17:03Z",
   "processed_message_ids": [
     "1a08c63ed0706b4c",
     "1a0923f295fe9cab",
@@ -28,7 +28,8 @@
     "1a1222aeacc64b6b",
     "1a12384eb8175161",
     "1a12644d76657d37",
-    "1a13167458667984"
+    "1a13167458667984",
+    "1a135c8a24b8ba74"
   ],
   "items": [
     {
@@ -1490,6 +1491,26 @@
       "confidence": 0.6,
       "calendar_event_ids": null,
       "source_message_id": "1a13167458667984"
+    },
+    {
+      "id": "reston-lunch-conflict-followup-2026-10-13",
+      "type": "notice",
+      "people": [
+        "reston",
+        "sean",
+        "jen"
+      ],
+      "class": "4th Grade",
+      "title": "Follow-up: Mrs. Flatness addressed lunch/arm-grabbing issue with classmate",
+      "description": "Mrs. Flatness responded to Sean and Jen's note about a classmate taking Reston's lunch food and grabbing/slapping his arm during Chapel, gym, and music. She spoke with the student, who admitted the behavior and promised to apologize to Reston on Tue 10/13. She does not expect further issues. Parent action: check in with Reston this evening to confirm the apology happened and that things have improved; contact Mrs. Flatness if not.",
+      "due_date": null,
+      "event_dates": [
+        "2026-10-13"
+      ],
+      "status": "held",
+      "confidence": 0.72,
+      "calendar_event_ids": null,
+      "source_message_id": "1a135c8a24b8ba74"
     }
   ]
 }
