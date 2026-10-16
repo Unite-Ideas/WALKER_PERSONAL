@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-15T15:35:21Z",
+  "updated": "2026-10-16T15:22:20Z",
   "processed_message_ids": [
     "1a08c63ed0706b4c",
     "1a0923f295fe9cab",
@@ -29,7 +29,8 @@
     "1a12384eb8175161",
     "1a12644d76657d37",
     "1a13167458667984",
-    "1a135c8a24b8ba74"
+    "1a135c8a24b8ba74",
+    "1a1409b14f1191df"
   ],
   "items": [
     {
@@ -1511,6 +1512,28 @@
       "confidence": 0.72,
       "calendar_event_ids": null,
       "source_message_id": "1a135c8a24b8ba74"
+    },
+    {
+      "id": "nca-annual-banquet-reservation-2026",
+      "type": "notice",
+      "people": [
+        "sean",
+        "jen"
+      ],
+      "class": "New Covenant Academy (school-wide)",
+      "title": "Reserve seats for NCA annual banquet",
+      "description": "Reminder: banquet seats are filling quickly; once capacity is reached registration closes and a waitlist opens. Reserve at events.newcovenant.net (secure.fundeasy.com/ministrysync/event/home.php?e=33045). Guest speaker: Kevin Sorbo (Hercules). Dress code: Western Chic (optional). Banquet is 2026-10-23.",
+      "due_date": null,
+      "event_dates": [
+        "2026-10-23"
+      ],
+      "status": "posted",
+      "confidence": 0.93,
+      "calendar_event_ids": {
+        "Sean": "efo6f45tl56ccd4ke152orvirg",
+        "Jennifer": "ouh00nv0ojbrs5deujdu1p5s4k"
+      },
+      "source_message_id": "1a1409b14f1191df"
     }
   ]
 }
